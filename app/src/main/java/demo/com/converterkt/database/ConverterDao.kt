@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import demo.com.converterkt.pojo.Valute
+import demo.com.converterkt.pojo.ValuteInfo
 
 @Dao
 interface ConverterDao {
@@ -15,4 +16,12 @@ interface ConverterDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertValutes(valutes:List<Valute>?)
+
+
+    @Query("SELECT * FROM valuteInfo")
+    fun getAllValuteInfo() : LiveData<List<ValuteInfo>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertValuteInfos(valuteInfo:List<ValuteInfo?>)
+
 }

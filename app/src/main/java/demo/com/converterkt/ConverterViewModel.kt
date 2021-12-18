@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import demo.com.converterkt.api.ApiFactory
 import demo.com.converterkt.database.AppDatabase
+import demo.com.converterkt.pojo.ValuteInfo
 import demo.com.converterkt.utils.getCurrentTime
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,6 +19,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     private val db = AppDatabase.getInstance(application)
     private var compositeDisposable = CompositeDisposable()
     val valutesList = db.converterDao().getAllValutes()
+    val allValuteInfo = db.converterDao().getAllValuteInfo()
     val currDate = getCurrentTime()
 
     init {
@@ -36,7 +38,30 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
             .subscribe({
                 Log.d("TEST_OF_LOADING_DATA",it.toString())
                 try {
-                    db.converterDao().insertValutes(it.valType?.get(1)?.valute)
+                    var valutes = it.valType?.get(1)?.valute
+                    db.converterDao().insertValutes(valutes)
+
+                    valutes.let {
+//
+                        var valuteInfo = ArrayList<ValuteInfo>()
+                        if (it != null) {
+                            for (valute in it){
+//                                var value = valute.value
+//                                var nominal = valute.nominal
+//                                valute.value = 0.0
+//                                valute.nominal = "0.0"
+                                valuteInfo.add(ValuteInfo(date = currDate, valute = valute, nominal = valute.nominal.toDouble(), value = valute.value))
+                            }
+
+                            db.converterDao().insertValuteInfos(valuteInfo)
+
+                        }
+                    }
+
+
+
+
+
                 } catch (e:Throwable){
                     Log.d("TEST_OF_LOADING_DATA",e.toString())
                 }

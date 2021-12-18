@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
             Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
         })
 
+        viewModel.allValuteInfo.observe(this, Observer {
+            Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
+        })
+
     }
 
 
