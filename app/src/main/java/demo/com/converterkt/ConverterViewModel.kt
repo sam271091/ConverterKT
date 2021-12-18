@@ -42,14 +42,11 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
                     db.converterDao().insertValutes(valutes)
 
                     valutes.let {
-//
+
                         var valuteInfo = ArrayList<ValuteInfo>()
                         if (it != null) {
                             for (valute in it){
-//                                var value = valute.value
-//                                var nominal = valute.nominal
-//                                valute.value = 0.0
-//                                valute.nominal = "0.0"
+
                                 valuteInfo.add(ValuteInfo(date = currDate, valute = valute, nominal = valute.nominal.toDouble(), value = valute.value))
                             }
 
