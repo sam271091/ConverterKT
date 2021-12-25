@@ -30,6 +30,7 @@
 
         <TextView
             android:id="@+id/tvValue"
+            style="@style/LabelStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="32dp"
@@ -37,54 +38,60 @@
             android:text="1.7000"
             android:textSize="20sp"
             android:textStyle="bold"
-            style="@style/LabelStyle"
             app:layout_constraintBottom_toTopOf="@+id/tvNominal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.986"
-            app:layout_constraintStart_toEndOf="@+id/ivFlag"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvCode"
+            style="@style/LabelStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="28dp"
             android:text="USD"
             android:textSize="20sp"
             android:textStyle="bold"
-            style="@style/LabelStyle"
             app:layout_constraintBottom_toTopOf="@+id/tvValuteFullName"
-            app:layout_constraintEnd_toStartOf="@+id/tvValue"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toEndOf="@+id/ivFlag"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvNominal"
+            style="@style/LabelStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="36dp"
             android:text="1.0000"
             android:textSize="16sp"
-            style="@style/LabelStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toEndOf="@+id/ivFlag" />
+            app:layout_constraintStart_toStartOf="@+id/guideline" />
 
         <TextView
             android:id="@+id/tvValuteFullName"
+            style="@style/LabelStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="68dp"
             android:text="US  dollar"
             android:textSize="16sp"
-            style="@style/LabelStyle"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tvNominal"
-            app:layout_constraintHorizontal_bias="0.311"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintHorizontal_bias="0.207"
             app:layout_constraintStart_toEndOf="@+id/ivFlag" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            app:layout_constraintGuide_percent="0.7"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
