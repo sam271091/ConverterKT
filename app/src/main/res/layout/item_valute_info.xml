@@ -4,11 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="@color/colorPurple"
+    app:cardCornerRadius="10dp"
     android:layout_margin="4dp"
+    android:paddingBottom="4dp"
     app:cardUseCompatPadding="true"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp">
@@ -33,6 +37,7 @@
             android:text="1.7000"
             android:textSize="20sp"
             android:textStyle="bold"
+            style="@style/LabelStyle"
             app:layout_constraintBottom_toTopOf="@+id/tvNominal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.986"
@@ -47,6 +52,7 @@
             android:text="USD"
             android:textSize="20sp"
             android:textStyle="bold"
+            style="@style/LabelStyle"
             app:layout_constraintBottom_toTopOf="@+id/tvValuteFullName"
             app:layout_constraintEnd_toStartOf="@+id/tvValue"
             app:layout_constraintHorizontal_bias="0.16"
@@ -60,7 +66,7 @@
             android:layout_marginEnd="36dp"
             android:text="1.0000"
             android:textSize="16sp"
-
+            style="@style/LabelStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.95"
@@ -73,6 +79,7 @@
             android:layout_marginEnd="68dp"
             android:text="US  dollar"
             android:textSize="16sp"
+            style="@style/LabelStyle"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvNominal"
