@@ -1,5 +1,6 @@
 package demo.com.converterkt
 
+import android.content.ClipData.newIntent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,6 +30,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
+
+    fun onClick(view: android.view.View) {
+        val intent = ValuteListActivity.newIntent(this)
+        startActivity(intent)
+    }
 
 
 }
