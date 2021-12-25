@@ -8,6 +8,7 @@
     tools:context=".ValuteListActivity">
 
     <View
+        android:id="@+id/topView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/main_table_background"/>
@@ -23,4 +24,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_height="46dp"
+        android:background="@drawable/oval_shape"
+        app:layout_constraintBottom_toTopOf="@+id/valuteRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/topView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

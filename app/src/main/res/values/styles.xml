@@ -5,4 +5,5 @@
         <item name="android:textColor">@color/labelTextColor</item>
 <!--        <item name="android:textSize">@dimen/text_size_labels</item>-->
     </style>"
+
 </resources>
