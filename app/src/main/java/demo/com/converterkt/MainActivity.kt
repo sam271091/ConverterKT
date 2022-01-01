@@ -3,20 +3,25 @@ package demo.com.converterkt
 import android.app.Activity
 import android.content.ClipData.newIntent
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.squareup.picasso.Picasso
 import demo.com.converterkt.api.ApiFactory
 import demo.com.converterkt.pojo.Valute
 import demo.com.converterkt.pojo.ValuteInfo
 import demo.com.converterkt.utils.getCurrentTime
+import demo.com.converterkt.utils.getValuteFlagPath
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -84,7 +89,15 @@ class MainActivity : AppCompatActivity() {
 
 
       fun setValutePresentation(valuteInfo:ValuteInfo?){
+
+          var img : ImageView = ImageView(this)
+
+          Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(img)
+
           chosenField.text = "${valuteInfo?.valute?.code}  ${valuteInfo?.valute?.name}"
+
+
+          chosenField.setCompoundDrawables(img.drawable,null,null,null)
       }
 
 
