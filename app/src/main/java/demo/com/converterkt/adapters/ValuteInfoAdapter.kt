@@ -44,6 +44,8 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
         }
     }
 
+
+
     override fun getItemCount(): Int {
         return valuteInfoList.size
     }
