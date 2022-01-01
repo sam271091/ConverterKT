@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
+import java.io.Serializable
 
 @Root(name = "Valute",strict = false)
 @Entity(tableName = "valute")
@@ -23,5 +24,5 @@ data class Valute @JvmOverloads constructor(
     @Ignore
     var value : Double = 0.0
 
-) {
+):Serializable {
 }

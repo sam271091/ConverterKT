@@ -18,7 +18,8 @@ interface ConverterDao {
     fun insertValutes(valutes:List<Valute>?)
 
 
-    @Query("SELECT * FROM valuteInfo")
+
+    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo GROUP by valute)")
     fun getAllValuteInfo() : LiveData<List<ValuteInfo>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

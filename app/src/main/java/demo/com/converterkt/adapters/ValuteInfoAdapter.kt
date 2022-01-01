@@ -21,6 +21,8 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
         notifyDataSetChanged()
     }
 
+    var onValuteInfoClickListener : OnValuteInfoClickListener? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteInfoViewHolder {
         val View = LayoutInflater.from(parent.context).inflate(R.layout.item_valute_info,parent,false)
@@ -39,6 +41,9 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
                 tvValue.text = valuteInfo.value.toString()
                 tvNominal.text = valuteInfo.nominal.toString()
                 Picasso.get().load(getValuteFlagPath(valuteInfo.valute)).into(ivFlag)
+                itemView.setOnClickListener {
+                    onValuteInfoClickListener?.onClick(this)
+                }
             }
 
         }
@@ -56,5 +61,9 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
         val tvValuteFullName = itemView.tvValuteFullName
         val tvValue = itemView.tvValue
         val tvNominal = itemView.tvNominal
+    }
+
+    interface OnValuteInfoClickListener{
+        fun onClick(valuteInfo:ValuteInfo)
     }
 }

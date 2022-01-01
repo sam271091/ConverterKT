@@ -22,6 +22,8 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val allValuteInfo = db.converterDao().getAllValuteInfo()
     val currDate = getCurrentTime()
 
+
+
     init {
         loadData()
     }

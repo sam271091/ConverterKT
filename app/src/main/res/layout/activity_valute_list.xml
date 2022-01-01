@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="85dp"
+        android:layout_marginBottom="30dp"
         android:paddingTop="20dp"
         android:background="@color/colorPurple"
         app:layout_constraintBottom_toBottomOf="parent"
