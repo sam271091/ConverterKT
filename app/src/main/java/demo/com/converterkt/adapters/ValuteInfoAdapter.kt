@@ -10,6 +10,7 @@ import demo.com.converterkt.R
 import demo.com.converterkt.pojo.ValuteInfo
 import demo.com.converterkt.utils.getValuteFlagPath
 import kotlinx.android.synthetic.main.item_valute_info.view.*
+import java.text.DecimalFormat
 
 
 class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.ValuteInfoViewHolder>() {
@@ -23,6 +24,7 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
 
     var onValuteInfoClickListener : OnValuteInfoClickListener? = null
 
+    var precision =  DecimalFormat("#,##0.0000")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteInfoViewHolder {
         val View = LayoutInflater.from(parent.context).inflate(R.layout.item_valute_info,parent,false)
@@ -38,8 +40,8 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
             with(valuteInfo){
                 tvCode.text = valuteInfo.valute?.code
                 tvValuteFullName.text = valuteInfo.valute?.name
-                tvValue.text = valuteInfo.value.toString()
-                tvNominal.text = valuteInfo.nominal.toString()
+                tvValue.text = precision.format(valuteInfo.value)
+                tvNominal.text = precision.format(valuteInfo.nominal)
                 Picasso.get().load(getValuteFlagPath(valuteInfo.valute)).into(ivFlag)
                 itemView.setOnClickListener {
                     onValuteInfoClickListener?.onClick(this)

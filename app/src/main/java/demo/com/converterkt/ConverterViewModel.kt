@@ -4,9 +4,12 @@ import android.app.Application
 
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import demo.com.converterkt.api.ApiFactory
 import demo.com.converterkt.database.AppDatabase
+import demo.com.converterkt.pojo.Valute
 import demo.com.converterkt.pojo.ValuteInfo
+import demo.com.converterkt.utils.getAZN
 import demo.com.converterkt.utils.getCurrentTime
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -21,11 +24,18 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val valutesList = db.converterDao().getAllValutes()
     val allValuteInfo = db.converterDao().getAllValuteInfo()
     val currDate = getCurrentTime()
+    var valutes : (filter:String) -> LiveData<List<Valute>> = {db.converterDao().getFilteredValutes(it)}
+
 
 
 
     init {
         loadData()
+    }
+
+    fun getFilteredList(filter:ArrayList<Valute>): LiveData<List<ValuteInfo>> {
+
+        return db.converterDao().getAllValuteInfoFiltered(filter)
     }
 
      fun loadData(){
@@ -41,12 +51,15 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
                 Log.d("TEST_OF_LOADING_DATA",it.toString())
                 try {
                     var valutes = it.valType?.get(1)?.valute
+
                     db.converterDao().insertValutes(valutes)
 
                     valutes.let {
 
                         var valuteInfo = ArrayList<ValuteInfo>()
                         if (it != null) {
+                            valuteInfo.add(ValuteInfo(date = currDate,valute = getAZN(), nominal = 1.0, value = 1.0))
+
                             for (valute in it){
 
                                 valuteInfo.add(ValuteInfo(date = currDate, valute = valute, nominal = valute.nominal.toDouble(), value = valute.value))

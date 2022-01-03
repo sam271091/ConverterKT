@@ -17,9 +17,10 @@
         android:id="@+id/valuteRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="20dp"
         android:paddingTop="20dp"
+        android:paddingBottom="50dp"
         android:background="@color/colorPurple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,11 +28,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
+        android:id="@+id/searchBox"
         android:layout_width="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="45dp"
         android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/oval_shape"
         app:layout_constraintBottom_toTopOf="@+id/valuteRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
