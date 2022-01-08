@@ -1,32 +1,21 @@
 package demo.com.converterkt
 
-import android.app.Activity
-import android.content.ClipData.newIntent
+
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
-import demo.com.converterkt.api.ApiFactory
-import demo.com.converterkt.pojo.Valute
 import demo.com.converterkt.pojo.ValuteInfo
 import demo.com.converterkt.utils.getAZN
 import demo.com.converterkt.utils.getCurrentTime
 import demo.com.converterkt.utils.getValuteFlagPath
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DecimalFormat
 
@@ -51,13 +40,13 @@ class MainActivity : AppCompatActivity() {
         chosenImage = imageValute1
 
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
-        viewModel.valutesList.observe(this, Observer {
-            Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
-        })
-
-        viewModel.allValuteInfo.observe(this, Observer {
-            Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
-        })
+//        viewModel.valutesList.observe(this, Observer {
+//            Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
+//        })
+//
+//        viewModel.allValuteInfo.observe(this, Observer {
+//            Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
+//        })
 
 
         tvValute1.setOnClickListener(View.OnClickListener {
@@ -80,7 +69,7 @@ class MainActivity : AppCompatActivity() {
          resultLauncher = registerForActivityResult(MySecondActivityContract()) { result ->
 
              if (result != null){
-                 var valuteInfo = result
+                 val valuteInfo = result
 
                  if (chosenField ==tvValute1){
                      firstValute = valuteInfo
@@ -107,12 +96,12 @@ class MainActivity : AppCompatActivity() {
 
 
     fun calculateResult(){
-        var sumValue = editTextSum.text.toString()
+        val sumValue = editTextSum.text.toString()
 
         var Res = 0.0
 
        if (!sumValue.equals("")){
-           var sumDouble : Double? = sumValue.toDouble()
+           val sumDouble : Double = sumValue.toDouble()
 
            var valuteInfoForCalc: ValuteInfo? = null
 
@@ -129,13 +118,13 @@ class MainActivity : AppCompatActivity() {
 
 
            valuteInfoForCalc.let {
-               var value = it?.value
-               var nominal = it?.nominal
-               if (value != null && nominal != null && sumDouble != null){
+               val value = it?.value
+               val nominal = it?.nominal
+               if (value != null && nominal != null ){
                    if (crossCal){
 
-                       var secvalue = secondValute?.value
-                       var secnominal = secondValute?.nominal
+                       val secvalue = secondValute?.value
+                       val secnominal = secondValute?.nominal
 
                        if (secvalue != null && secnominal != null){
                            Res =  (sumDouble * value/nominal)  / secvalue*secnominal
@@ -177,7 +166,7 @@ class MainActivity : AppCompatActivity() {
     fun onClickSwitcher(view: android.view.View) {
 //        openValuteInfoListChooser()
 
-        var intermediateValute = firstValute
+        val intermediateValute = firstValute
         firstValute = secondValute
         chosenImage = imageValute1
         chosenField = tvValute1
