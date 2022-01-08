@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/custom_color_background"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/main_table_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <EditText
+            android:id="@+id/editTextSum"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/oval_shape"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35" />
+
+        <ImageView
+            android:id="@+id/imageValute1"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextSum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.288"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imageValute2"
+            android:layout_width="wrap_content"
+            android:layout_height="64dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextSum"
+            app:layout_constraintEnd_toStartOf="@id/tvValute2"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="56dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="20dp"
+            android:onClick="onClickSwitcher"
+            app:layout_constraintBottom_toTopOf="@id/editTextSum"
+            app:layout_constraintEnd_toStartOf="@id/imageValute2"
+            app:layout_constraintStart_toEndOf="@id/tvValute1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.654"
+            app:srcCompat="@drawable/switch_valute" />
+
+        <TextView
+            android:id="@+id/tvValute2"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16sp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/oval_shape"
+            android:clickable="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Select valute"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/editTextSum"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageValute2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvValute1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="16sp"
+            android:background="@drawable/oval_shape"
+            android:clickable="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Select valute"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/editTextSum"
+            app:layout_constraintEnd_toStartOf="@id/imageView3"
+            app:layout_constraintStart_toEndOf="@id/imageValute1"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="390dp"
+            android:layout_height="33dp"
+            android:background="@drawable/oval_shape"
+            android:paddingStart="10dp"
+            android:text="Result"
+            android:textSize="20sp"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSum"
+            app:layout_constraintVertical_bias="0.203" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
