@@ -29,6 +29,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
+            android:onClick="onClickSwitcher"
             app:layout_constraintTop_toBottomOf="@+id/tvValute1"
             app:srcCompat="@drawable/switch_valute" />
 

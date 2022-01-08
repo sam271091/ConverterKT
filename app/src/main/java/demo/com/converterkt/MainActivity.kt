@@ -28,6 +28,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     var secondValute : ValuteInfo? = ValuteInfo(getCurrentTime(), getAZN())
     lateinit var chosenField : TextView
     lateinit var chosenImage : ImageView
+
+    private var precision =  DecimalFormat("#,##0.0000")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,6 +89,8 @@ class MainActivity : AppCompatActivity() {
                      secondValute = valuteInfo
                      setValutePresentation(secondValute)
                  }
+
+                 calculateResult()
              }
 
 
@@ -111,10 +116,15 @@ class MainActivity : AppCompatActivity() {
 
            var valuteInfoForCalc: ValuteInfo? = null
 
+           var crossCal = false
            if (firstValute?.valute?.code.equals(getAZN().code) ){
                valuteInfoForCalc = secondValute
            } else if (secondValute?.valute?.code.equals(getAZN().code)){
                 valuteInfoForCalc = firstValute
+           } else if (!firstValute?.valute?.code.equals(getAZN().code) &&
+                   !secondValute?.valute?.code.equals(getAZN().code)){
+               valuteInfoForCalc = firstValute
+               crossCal = true
            }
 
 
@@ -122,7 +132,19 @@ class MainActivity : AppCompatActivity() {
                var value = it?.value
                var nominal = it?.nominal
                if (value != null && nominal != null && sumDouble != null){
-                   if (valuteInfoForCalc == firstValute ){
+                   if (crossCal){
+
+                       var secvalue = secondValute?.value
+                       var secnominal = secondValute?.nominal
+
+                       if (secvalue != null && secnominal != null){
+                           Res =  (sumDouble * value/nominal)  / secvalue*secnominal
+                       } else {
+                           Res = 0.0
+                       }
+
+                   }
+                   else if (valuteInfoForCalc == firstValute ){
                        Res =  sumDouble * value/nominal
                    } else if (valuteInfoForCalc == secondValute) {
                        Res =  sumDouble / value*nominal
@@ -134,7 +156,7 @@ class MainActivity : AppCompatActivity() {
        }
 
 
-        tvResult.text = Res.toString()
+        tvResult.text = precision.format(Res)
 
     }
 
@@ -152,8 +174,21 @@ class MainActivity : AppCompatActivity() {
       }
 
 
-    fun onClick(view: android.view.View) {
-        openValuteInfoListChooser()
+    fun onClickSwitcher(view: android.view.View) {
+//        openValuteInfoListChooser()
+
+        var intermediateValute = firstValute
+        firstValute = secondValute
+        chosenImage = imageValute1
+        chosenField = tvValute1
+        setValutePresentation(firstValute)
+        secondValute = intermediateValute
+        chosenImage = imageValute2
+        chosenField = tvValute2
+        setValutePresentation(secondValute)
+        calculateResult()
+
+
     }
 
     fun openValuteInfoListChooser(){

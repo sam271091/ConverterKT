@@ -24,12 +24,12 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
 
     var onValuteInfoClickListener : OnValuteInfoClickListener? = null
 
-    var precision =  DecimalFormat("#,##0.0000")
+    private var precision =  DecimalFormat("#,##0.0000")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ValuteInfoViewHolder {
-        val View = LayoutInflater.from(parent.context).inflate(R.layout.item_valute_info,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_valute_info,parent,false)
 
-        return ValuteInfoViewHolder(View)
+        return ValuteInfoViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ValuteInfoViewHolder, position: Int) {
