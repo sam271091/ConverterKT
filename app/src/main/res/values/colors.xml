@@ -9,5 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="custom_color_background">#9B27B6</color>
     <color name="colorPurple">#8A2BE2</color>
-    <color name="labelTextColor">#f5f0f0</color>
+    <color name="labelTextColor">#808080</color>
 </resources>
