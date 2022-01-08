@@ -2,7 +2,7 @@
 <resources>
     <style name="LabelStyle">
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:textColor">@color/labelTextColor</item>
+<!--        <item name="android:textColor">@color/labelTextColor</item>-->
 <!--        <item name="android:textSize">@dimen/text_size_labels</item>-->
     </style>"
 
