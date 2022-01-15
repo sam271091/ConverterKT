@@ -18,6 +18,7 @@ import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DecimalFormat
+import kotlin.math.truncate
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +31,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var chosenField : TextView
     lateinit var chosenImage : ImageView
 
-    private var precision =  DecimalFormat("#,##0.0000")
+    private var precision =  DecimalFormat("#,##0.00")
+
+    var fraction = false
+
+    var additionalValue = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -187,31 +192,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-//        super.onSaveInstanceState(outState, outPersistentState)
-//
-//        outState.putSerializable("firstValute",firstValute)
-//        outState.putSerializable("secondValute",secondValute)
-//        outState.putString("editTextSum",editTextSum.text.toString())
-//
-//    }
 
-
-
-//    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-//        super.onRestoreInstanceState(savedInstanceState)
-//
-////        editTextSum.text  = savedInstanceState.getString("editTextSum")
-//        firstValute = savedInstanceState.getSerializable("firstValute") as ValuteInfo?
-//        chosenImage = imageValute1
-//        chosenField = tvValute1
-//        setValutePresentation(firstValute)
-//        secondValute = savedInstanceState.getSerializable("secondValute") as ValuteInfo?
-//        chosenImage = imageValute2
-//        chosenField = tvValute2
-//        setValutePresentation(secondValute)
-//        calculateResult()
-//    }
 
 
     public override fun onSaveInstanceState(savedInstanceState: Bundle) {
@@ -220,11 +201,15 @@ class MainActivity : AppCompatActivity() {
         savedInstanceState.putSerializable("firstValute",firstValute)
         savedInstanceState.putSerializable("secondValute",secondValute)
         savedInstanceState.putString("editTextSum",editTextSum.text.toString())
+        savedInstanceState.putBoolean("fraction",fraction)
+        savedInstanceState.putBoolean("additionalValue",additionalValue)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
 
+        fraction = savedInstanceState.getBoolean("fraction")
+        additionalValue = savedInstanceState.getBoolean("additionalValue")
 
         firstValute = savedInstanceState.getSerializable("firstValute") as ValuteInfo?
         chosenImage = imageValute1
@@ -236,6 +221,119 @@ class MainActivity : AppCompatActivity() {
         setValutePresentation(secondValute)
         calculateResult()
 
+    }
+
+
+
+    fun onClickAction(view: View){
+
+        var btnId = view.resources.getResourceEntryName(view.id)
+
+        when(btnId){
+            "btn_1" -> performAction(1.toChar())
+            "btn_2" -> performAction(2.toChar())
+            "btn_3" -> performAction(3.toChar())
+            "btn_4" -> performAction(4.toChar())
+            "btn_5" -> performAction(5.toChar())
+            "btn_6" -> performAction(6.toChar())
+            "btn_7" -> performAction(7.toChar())
+            "btn_8" -> performAction(8.toChar())
+            "btn_9" -> performAction(9.toChar())
+            "btn_0" -> performAction(0.toChar())
+            "btn_dot" -> performAction(".".single())
+            else -> deleteSymbol()
+
+        }
+    }
+
+    fun performAction(actionSymbol:Char){
+
+        var number = actionSymbol.code
+
+        val sumValue = editTextSum.text.toString()
+
+        var sumDouble  = sumValue.toDouble()
+
+        var newSumDouble = 0.0
+
+        var newSumString = "0"
+
+        if (number == 46){
+
+            fraction = true
+
+        } else {
+
+
+
+            if (!fraction){
+                newSumDouble = sumDouble*10+number
+
+                newSumString = newSumDouble.toString()
+
+            } else {
+//                if (number!=0){
+//                    newSumDouble = sumDouble+number.toDouble()/10
+//                } else {
+//                    newSumDouble = sumDouble + 1/10
+//                }
+
+                var iPart = truncate(sumDouble)
+                var fPart = precision.format(sumDouble.minus(iPart)).toDouble()
+
+                var fPartLength = fPart.toString().length-2
+
+                var fractionCapacity = 10.0
+
+                if (fPart==0.0 && !additionalValue){
+                     fractionCapacity =  Math.pow(10.0,fPartLength.toDouble())
+                } else {
+                    fractionCapacity =  Math.pow(10.0,fPartLength.toDouble()+1)
+                }
+
+
+
+                fPart =(fPart*fractionCapacity+number)/fractionCapacity
+
+
+
+
+
+                newSumDouble = iPart + fPart
+
+                newSumString = newSumDouble.toString()
+
+                if (number ==0){
+
+                    newSumString = (newSumDouble.toString() + "0")
+
+                    additionalValue = true
+                }
+
+            }
+
+            editTextSum.setText(newSumString)
+
+        }
+
+
+
+    }
+
+    fun deleteSymbol(){
+
+//        var sumValue = editTextSum.text.toString()
+//        var newSumValue = sumValue.dropLast(1)
+//
+////        var sumDouble  = newSumValue.toDouble()
+//
+//        if (newSumValue.equals("")){
+//            newSumValue = "0.0000"
+//        }
+
+        fraction = false
+        additionalValue = false
+        editTextSum.setText("0.00")
     }
 }
 

@@ -20,61 +20,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="66dp"
-            android:layout_height="40dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvValute2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="20dp"
-            android:onClick="onClickSwitcher"
-            app:layout_constraintTop_toBottomOf="@+id/tvValute1"
-            app:srcCompat="@drawable/switch_valute" />
-
-        <TextView
-            android:id="@+id/tvValute1"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
+        <EditText
+            android:id="@+id/editTextSum"
+            android:layout_width="102dp"
+            android:layout_height="48dp"
             android:layout_marginTop="30dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/oval_shape"
-            android:clickable="true"
+            android:ems="10"
+            android:inputType="numberDecimal"
             android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="Select valute"
-            android:textSize="16sp"
+            android:text="0"
+            android:textColor="#000000"
+            android:enabled="false"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@id/tvValute1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toEndOf="@+id/imageValute1"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.151" />
-
-        <TextView
-            android:id="@+id/tvValute2"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/oval_shape"
-            android:clickable="true"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:text="Select valute"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.473"
-            app:layout_constraintStart_toEndOf="@+id/imageValute2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageValute1"
             android:layout_width="wrap_content"
-            android:layout_height="64dp"
+            android:layout_height="84dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,47 +53,221 @@
         <ImageView
             android:id="@+id/imageValute2"
             android:layout_width="wrap_content"
-            android:layout_height="64dp"
+            android:layout_height="84dp"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:layout_constraintVertical_bias="0.013"
+            app:layout_constraintVertical_bias="0.0"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <EditText
-            android:id="@+id/editTextSum"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:ems="10"
-            android:paddingStart="10dp"
-            android:background="@drawable/oval_shape"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="10dp"
-            android:inputType="numberDecimal"
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="66dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:onClick="onClickSwitcher"
+            app:layout_constraintBottom_toTopOf="@+id/tvValute2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvValute2" />
+            app:layout_constraintTop_toBottomOf="@+id/tvValute1"
+            app:srcCompat="@drawable/switcher" />
+
+        <TextView
+            android:id="@+id/tvValute2"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/oval_shape"
+            android:clickable="true"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Select valute"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/tvResult"
+            app:layout_constraintStart_toEndOf="@+id/imageValute2"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/tvValute1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/oval_shape"
+            android:clickable="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:text="Select valute"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView3"
+            app:layout_constraintEnd_toStartOf="@+id/editTextSum"
+            app:layout_constraintStart_toEndOf="@+id/imageValute1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.151" />
 
         <TextView
             android:id="@+id/tvResult"
-            android:layout_width="390dp"
-            android:layout_height="33dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="102dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:paddingTop="10dp"
             android:background="@drawable/oval_shape"
             android:paddingStart="10dp"
-            android:text="Result"
+            android:text="0.00"
             android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
 
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvValute2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <LinearLayout
+            android:id="@+id/lLayoutNumbers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="493dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSum"
-            app:layout_constraintVertical_bias="0.069" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
+                        android:id="@+id/btn_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="1" />
+
+                    <Button
+                        android:id="@+id/btn_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="2" />
+
+                    <Button
+                        android:id="@+id/btn_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="3" />
+
+                    <Button
+                        android:id="@+id/btn_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:onClick="onClickAction"
+                        android:text="Delete" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
+                        android:id="@+id/btn_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="4" />
+
+                    <Button
+                        android:id="@+id/btn_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="5" />
+
+                    <Button
+                        android:id="@+id/btn_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="6" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
+                        android:id="@+id/btn_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="7" />
+
+                    <Button
+                        android:id="@+id/btn_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="8" />
+
+                    <Button
+                        android:id="@+id/btn_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="9" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <Button
+                        android:id="@+id/btn_blank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:clickable="false"/>
+
+                    <Button
+                        android:id="@+id/btn_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="0" />
+
+                    <Button
+                        android:id="@+id/btn_dot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:onClick="onClickAction"
+                        android:text="." />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
