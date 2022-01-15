@@ -279,7 +279,7 @@ class MainActivity : AppCompatActivity() {
 //                }
 
                 var iPart = truncate(sumDouble)
-                var fPart = precision.format(sumDouble.minus(iPart)).toDouble()
+                var fPart = precision.format(sumDouble.minus(iPart)).replace(",",".").toDouble()
 
                 var fPartLength = fPart.toString().length-2
 
