@@ -161,7 +161,7 @@ class MainActivity : AppCompatActivity() {
 
           Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
 
-          chosenField.text = "${valuteInfo?.valute?.code}  ${valuteInfo?.valute?.name}"
+          chosenField.text = "${valuteInfo?.valute?.code}"
 
 
 //          chosenField.setCompoundDrawables(img.drawable,null,null,null)
