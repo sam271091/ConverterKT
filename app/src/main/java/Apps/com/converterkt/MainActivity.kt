@@ -252,70 +252,82 @@ class MainActivity : AppCompatActivity() {
 
         val sumValue = editTextSum.text.toString()
 
-        var sumDouble  = sumValue.toDouble()
-
-        var newSumDouble = 0.0
-
-        var newSumString = "0"
-
-        if (number == 46){
-
-            fraction = true
-
-        } else {
-
-
-
-            if (!fraction){
-                newSumDouble = sumDouble*10+number
-
-                newSumString = newSumDouble.toString()
-
-            } else {
-//                if (number!=0){
-//                    newSumDouble = sumDouble+number.toDouble()/10
+//        var sumDouble  = sumValue.toDouble()
+//
+//        var newSumDouble = 0.0
+//
+//        var newSumString = "0"
+//
+//        if (number == 46){
+//
+//            fraction = true
+//
+//        } else {
+//
+//
+//
+//            if (!fraction){
+//                newSumDouble = sumDouble*10+number
+//
+//                newSumString = newSumDouble.toString()
+//
+//            } else {
+////                if (number!=0){
+////                    newSumDouble = sumDouble+number.toDouble()/10
+////                } else {
+////                    newSumDouble = sumDouble + 1/10
+////                }
+//
+//                var iPart = truncate(sumDouble)
+//                var fPart = precision.format(sumDouble.minus(iPart)).replace(",",".").toDouble()
+//
+//                var fPartLength = fPart.toString().length-2
+//
+//                var fractionCapacity = 10.0
+//
+//                if (fPart==0.0 && !additionalValue){
+//                     fractionCapacity =  Math.pow(10.0,fPartLength.toDouble())
 //                } else {
-//                    newSumDouble = sumDouble + 1/10
+//                    fractionCapacity =  Math.pow(10.0,fPartLength.toDouble()+1)
 //                }
+//
+//
+//
+//                fPart =(fPart*fractionCapacity+number)/fractionCapacity
+//
+//
+//
+//
+//
+//                newSumDouble = iPart + fPart
+//
+//                newSumString = newSumDouble.toString()
+//
+//                if (number ==0){
+//
+//                    newSumString = (newSumDouble.toString() + "0")
+//
+//                    additionalValue = true
+//                }
+//
+//            }
+//
+//            editTextSum.setText(newSumString)
+//
+//        }
 
-                var iPart = truncate(sumDouble)
-                var fPart = precision.format(sumDouble.minus(iPart)).replace(",",".").toDouble()
 
-                var fPartLength = fPart.toString().length-2
-
-                var fractionCapacity = 10.0
-
-                if (fPart==0.0 && !additionalValue){
-                     fractionCapacity =  Math.pow(10.0,fPartLength.toDouble())
-                } else {
-                    fractionCapacity =  Math.pow(10.0,fPartLength.toDouble()+1)
-                }
-
-
-
-                fPart =(fPart*fractionCapacity+number)/fractionCapacity
-
-
-
-
-
-                newSumDouble = iPart + fPart
-
-                newSumString = newSumDouble.toString()
-
-                if (number ==0){
-
-                    newSumString = (newSumDouble.toString() + "0")
-
-                    additionalValue = true
-                }
-
+        if (sumValue == "0.00"){
+            editTextSum.setText(number.toString())
+        }
+        else if (number==46){
+            if (!sumValue.contains(".")){
+                editTextSum.setText(sumValue + ".")
             }
 
-            editTextSum.setText(newSumString)
-
+        } else {
+            editTextSum.setText(sumValue + number)
         }
-
 
 
     }
