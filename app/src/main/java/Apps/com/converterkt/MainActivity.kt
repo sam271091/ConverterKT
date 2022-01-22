@@ -133,9 +133,9 @@ class MainActivity : AppCompatActivity() {
                 var dataPoints = mutableListOf<DataPoint>()
 
                 for (valuteInfo in it){
-                   if (valuteInfo.valute != currValuteInfo.valute){
-                       break
-                   }
+//                   if (valuteInfo.valute != currValuteInfo.valute){
+//                       break
+//                   }
 
                     dataPoints.add(DataPoint(valuteInfo.date, valuteInfo.value))
                 }
