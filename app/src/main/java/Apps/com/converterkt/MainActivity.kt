@@ -1,6 +1,7 @@
 package Apps.com.converterkt
 
 
+import Apps.com.converterkt.pojo.Valute
 import android.content.Intent
 
 import androidx.appcompat.app.AppCompatActivity
@@ -16,9 +17,20 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
+import android.graphics.Color
+import androidx.lifecycle.Observer
+import com.jjoe64.graphview.LabelFormatter
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DecimalFormat
 import kotlin.math.truncate
+import com.jjoe64.graphview.DefaultLabelFormatter
+import java.text.SimpleDateFormat
+import android.graphics.DashPathEffect
+import android.graphics.Paint
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,6 +48,10 @@ class MainActivity : AppCompatActivity() {
     var fraction = false
 
     var additionalValue = false
+
+    var sdf = SimpleDateFormat(" dd.MM.yyyy")
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,10 +95,14 @@ class MainActivity : AppCompatActivity() {
                  if (chosenField ==tvValute1){
                      firstValute = valuteInfo
                      setValutePresentation(firstValute)
+                     makeGraph(firstValute)
+
                  } else {
                      secondValute = valuteInfo
                      setValutePresentation(secondValute)
                  }
+
+
 
                  calculateResult()
              }
@@ -96,6 +116,84 @@ class MainActivity : AppCompatActivity() {
         editTextSum.addTextChangedListener {
             calculateResult()
         }
+
+    }
+
+
+    fun makeGraph(currValuteInfo:ValuteInfo?){
+
+        graphView.removeAllSeries()
+
+        currValuteInfo?.valute?.let {
+            viewModel.getDataForTheGraph(it).observe(this, Observer {
+
+                graphView.removeAllSeries()
+
+
+                var dataPoints = mutableListOf<DataPoint>()
+
+                for (valuteInfo in it){
+                   if (valuteInfo.valute != currValuteInfo.valute){
+                       break
+                   }
+
+                    dataPoints.add(DataPoint(valuteInfo.date, valuteInfo.value))
+                }
+
+                var firstDate = Date()
+                var lastDate =  Date()
+
+                if (it.size > 0){
+                    firstDate = it[0].date
+                    lastDate = it[it.size-1].date
+                }
+
+
+
+                val series = LineGraphSeries(dataPoints.toTypedArray())
+
+
+                series.setAnimated(true)
+//                series.setColor(Color.GREEN)
+                series.setDrawDataPoints(true)
+                series.setDataPointsRadius(10F)
+                series.setThickness(8)
+
+
+
+
+
+
+                graphView.addSeries(series)
+
+
+                graphView.getGridLabelRenderer().setLabelFormatter(object : DefaultLabelFormatter() {
+                    override fun formatLabel(value: Double, isValueX: Boolean): String {
+                        return if (isValueX) {
+                            sdf.format(value)
+                        } else {
+                            super.formatLabel(value, isValueX)
+                        }
+                    }
+                })
+
+                graphView.getGridLabelRenderer().setNumHorizontalLabels(3)
+
+
+                graphView.getViewport().setMinX(firstDate.getTime().toDouble())
+                graphView.getViewport().setMaxX(lastDate.getTime().toDouble())
+                graphView.getViewport().setXAxisBoundsManual(false)
+
+                graphView.getViewport().setScalable(true)
+//
+                graphView.getGridLabelRenderer().setHorizontalLabelsAngle(1)
+                graphView.getGridLabelRenderer().setHumanRounding(true)
+
+            })
+        }
+
+
+
 
     }
 
@@ -182,6 +280,7 @@ class MainActivity : AppCompatActivity() {
         setValutePresentation(secondValute)
         calculateResult()
 
+        makeGraph(firstValute)
 
     }
 
@@ -317,7 +416,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
-        if (sumValue == "0.00"){
+        if (sumValue == "0.00" && number!=46){
             editTextSum.setText(number.toString())
         }
         else if (number==46){

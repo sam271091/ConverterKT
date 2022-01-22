@@ -31,6 +31,9 @@ interface ConverterDao {
     @Query("SELECT * FROM valute where code LIKE :filter OR name LIKE :filter")
     fun getFilteredValutes(filter:String) : LiveData<List<Valute>>
 
+    @Query("SELECT * FROM valuteInfo where valute = :valute Limit 3")
+    fun getDataForTheGraph(valute:Valute) : LiveData<List<ValuteInfo>>
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertValuteInfos(valuteInfo:List<ValuteInfo?>)

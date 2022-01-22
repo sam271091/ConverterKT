@@ -39,6 +39,12 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getAllValuteInfoFiltered(filter)
     }
 
+    fun getDataForTheGraph(valute:Valute): LiveData<List<ValuteInfo>> {
+        return db.converterDao().getDataForTheGraph(valute)
+    }
+
+
+
      fun loadData(){
 
          var datePr = SimpleDateFormat("dd.MM.yyyy").format(currDate)
