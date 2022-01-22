@@ -26,6 +26,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/oval_shape"
             android:ems="10"
             android:inputType="numberDecimal"
@@ -43,7 +44,7 @@
             android:id="@+id/imageValute1"
             android:layout_width="wrap_content"
             android:layout_height="84dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -54,7 +55,7 @@
             android:id="@+id/imageValute2"
             android:layout_width="wrap_content"
             android:layout_height="84dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView3"
@@ -115,6 +116,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
             android:paddingTop="10dp"
             android:background="@drawable/oval_shape"
             android:paddingStart="10dp"
@@ -150,6 +152,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="1" />
 
@@ -158,6 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="2" />
 
@@ -166,6 +170,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="3" />
 
@@ -177,6 +182,7 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="Delete" />
                 </TableRow>
@@ -190,6 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="4" />
 
@@ -198,6 +205,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="5" />
 
@@ -206,6 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="6" />
                 </TableRow>
@@ -219,6 +228,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="7" />
 
@@ -227,6 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="8" />
 
@@ -235,6 +246,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="9" />
                 </TableRow>
@@ -248,6 +260,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
+                        android:backgroundTint="@color/custom_color_background"
                         android:clickable="false"/>
 
                     <Button
@@ -256,6 +269,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:onClick="onClickAction"
+                        android:backgroundTint="@color/custom_color_background"
                         android:text="0" />
 
                     <Button
@@ -264,22 +278,13 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:onClick="onClickAction"
+                        android:backgroundTint="@color/custom_color_background"
                         android:text="." />
                 </TableRow>
             </TableLayout>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Button"
-        android:visibility="invisible"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
