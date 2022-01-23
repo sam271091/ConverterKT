@@ -15,7 +15,9 @@ import Apps.com.converterkt.utils.getValutePresentation
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 class ConverterViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -23,7 +25,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     private var compositeDisposable = CompositeDisposable()
     val valutesList = db.converterDao().getAllValutes()
     val allValuteInfo = db.converterDao().getAllValuteInfo()
-    val currDate = getCurrentTime()
+    var currDate = getCurrentTime()
     var valutes : (filter:String) -> LiveData<List<Valute>> = {db.converterDao().getFilteredValutes(it)}
 
 
@@ -31,7 +33,22 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
 
 
     init {
-        loadData()
+        var calendar = Calendar.getInstance()
+        calendar.time = currDate
+        calendar.add(Calendar.DAY_OF_YEAR, -21)
+
+        var minDate = calendar.time
+
+        while (currDate >= (minDate)){
+
+            loadData(currDate)
+            var calendar = Calendar.getInstance()
+            calendar.time = currDate
+            calendar.add(Calendar.DAY_OF_YEAR, -7)
+
+            currDate = calendar.time
+        }
+
     }
 
     fun getFilteredList(filter:ArrayList<Valute>): LiveData<List<ValuteInfo>> {
@@ -39,15 +56,15 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getAllValuteInfoFiltered(filter)
     }
 
-    fun getDataForTheGraph(valute:Valute): LiveData<List<ValuteInfo>> {
+    fun getDataForTheGraph(valute: Valute): LiveData<List<ValuteInfo>> {
         return db.converterDao().getDataForTheGraph(valute)
     }
 
 
 
-     fun loadData(){
+     fun loadData(downloadDate:Date){
 
-         var datePr = SimpleDateFormat("dd.MM.yyyy").format(currDate)
+         var datePr = SimpleDateFormat("dd.MM.yyyy").format(downloadDate)
          val disposable = ApiFactory.apiService.getData(datePr + ".xml")
             .subscribeOn(Schedulers.io())
 //            .observeOn(AndroidSchedulers.mainThread())

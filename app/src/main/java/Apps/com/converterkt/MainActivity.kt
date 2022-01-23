@@ -1,7 +1,6 @@
 package Apps.com.converterkt
 
 
-import Apps.com.converterkt.pojo.Valute
 import android.content.Intent
 
 import androidx.appcompat.app.AppCompatActivity
@@ -17,19 +16,16 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
-import android.graphics.Color
 import androidx.lifecycle.Observer
-import com.jjoe64.graphview.LabelFormatter
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DecimalFormat
-import kotlin.math.truncate
 import com.jjoe64.graphview.DefaultLabelFormatter
 import java.text.SimpleDateFormat
-import android.graphics.DashPathEffect
 import android.graphics.Paint
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -127,15 +123,36 @@ class MainActivity : AppCompatActivity() {
         currValuteInfo?.valute?.let {
             viewModel.getDataForTheGraph(it).observe(this, Observer {
 
-                graphView.removeAllSeries()
 
+                createGraph(it as ArrayList<ValuteInfo>)
+
+
+            })
+
+
+
+
+        }
+
+
+
+
+
+    }
+
+    fun createGraph(graphData:ArrayList<ValuteInfo>){
+
+
+
+        if (graphData.size > 0){
+            if (firstValute?.valute == graphData[0].valute){
+
+                graphView.removeAllSeries()
 
                 var dataPoints = mutableListOf<DataPoint>()
 
-                for (valuteInfo in it){
-//                   if (valuteInfo.valute != currValuteInfo.valute){
-//                       break
-//                   }
+                for (valuteInfo in graphData){
+
 
                     dataPoints.add(DataPoint(valuteInfo.date, valuteInfo.value))
                 }
@@ -143,9 +160,9 @@ class MainActivity : AppCompatActivity() {
                 var firstDate = Date()
                 var lastDate =  Date()
 
-                if (it.size > 0){
-                    firstDate = it[0].date
-                    lastDate = it[it.size-1].date
+                if (graphData.size > 0){
+                    firstDate = graphData[0].date
+                    lastDate = graphData[graphData.size-1].date
                 }
 
 
@@ -177,7 +194,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-                graphView.getGridLabelRenderer().setNumHorizontalLabels(3)
+                graphView.getGridLabelRenderer().setNumHorizontalLabels(5)
 
 
                 graphView.getViewport().setMinX(firstDate.getTime().toDouble())
@@ -188,15 +205,12 @@ class MainActivity : AppCompatActivity() {
 //
                 graphView.getGridLabelRenderer().setHorizontalLabelsAngle(1)
                 graphView.getGridLabelRenderer().setHumanRounding(true)
-
-            })
+            }
         }
 
 
 
-
     }
-
 
     fun calculateResult(){
         val sumValue = editTextSum.text.toString()
