@@ -11,11 +11,13 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getValuteFlagPath
 import kotlinx.android.synthetic.main.item_valute_info.view.*
 import java.text.DecimalFormat
+import java.text.SimpleDateFormat
 
 
 class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.ValuteInfoViewHolder>() {
 
     var valuteInfoList : List<ValuteInfo> = listOf()
+
 
     set(value) {
         field = value
@@ -38,6 +40,7 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
         with(holder){
 
             with(valuteInfo){
+                currencyDate.text = SimpleDateFormat("dd.MM.yyyy").format(valuteInfo.date)
                 tvCode.text = valuteInfo.valute?.code
                 tvValuteFullName.text = valuteInfo.valute?.name
                 tvValue.text = precision.format(valuteInfo.value)
@@ -59,6 +62,7 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
 
     inner class ValuteInfoViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
         val ivFlag = itemView.ivFlag
+        val currencyDate = itemView.currencyDate
         val tvCode = itemView.tvCode
         val tvValuteFullName = itemView.tvValuteFullName
         val tvValue = itemView.tvValue

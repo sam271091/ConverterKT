@@ -16,6 +16,7 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
+import android.graphics.Color
 import androidx.lifecycle.Observer
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -26,6 +27,10 @@ import java.text.SimpleDateFormat
 import android.graphics.Paint
 import java.util.*
 import kotlin.collections.ArrayList
+import com.jjoe64.graphview.series.DataPointInterface
+
+import com.jjoe64.graphview.series.PointsGraphSeries
+import com.jjoe64.graphview.series.PointsGraphSeries.CustomShape
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,13 +44,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var chosenField : TextView
     lateinit var chosenImage : ImageView
 
-    private var precision =  DecimalFormat("#,##0.00")
+    private var precision =  DecimalFormat("#,##0.0000")
 
     var fraction = false
 
     var additionalValue = false
 
-    var sdf = SimpleDateFormat(" dd.MM.yyyy")
+    var sdf = SimpleDateFormat(" dd.MM.yy")
 
 
 
@@ -142,6 +147,7 @@ class MainActivity : AppCompatActivity() {
 
     fun createGraph(graphData:ArrayList<ValuteInfo>){
 
+        graphData.sortBy { it.date }
 
 
         if (graphData.size > 0){
@@ -170,13 +176,23 @@ class MainActivity : AppCompatActivity() {
                 val series = LineGraphSeries(dataPoints.toTypedArray())
 
 
+//                val seriesPoints = PointsGraphSeries<DataPoint>(dataPoints.toTypedArray())
+//                seriesPoints.setCustomShape { canvas, paint, x, y, dataPoint ->
+//                    paint.color = Color.BLACK
+//                    paint.textSize = 20f
+//                    canvas.drawText(dataPoint.y.toString(), x, y, paint)
+//                }
+
+
+
                 series.setAnimated(true)
-//                series.setColor(Color.GREEN)
                 series.setDrawDataPoints(true)
-                series.setDataPointsRadius(10F)
+                series.setDataPointsRadius(15F)
                 series.setThickness(8)
 
 
+                series.setDrawBackground(true)
+                series.setDrawDataPoints(true)
 
 
 
@@ -194,6 +210,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
+
                 graphView.getGridLabelRenderer().setNumHorizontalLabels(5)
 
 
@@ -203,8 +220,12 @@ class MainActivity : AppCompatActivity() {
 
                 graphView.getViewport().setScalable(true)
 //
-                graphView.getGridLabelRenderer().setHorizontalLabelsAngle(1)
+                graphView.getGridLabelRenderer().setHorizontalLabelsAngle(30)
                 graphView.getGridLabelRenderer().setHumanRounding(true)
+
+                graphView.getGridLabelRenderer().setVerticalLabelsColor(Color.BLACK);
+                graphView.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK)
+                graphView.getGridLabelRenderer().reloadStyles()
             }
         }
 
@@ -273,7 +294,10 @@ class MainActivity : AppCompatActivity() {
 
           Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
 
-          chosenField.text = "${valuteInfo?.valute?.code}"
+          if (valuteInfo != null){
+              chosenField.text = "${valuteInfo?.valute?.code}"
+          }
+
 
 
 //          chosenField.setCompoundDrawables(img.drawable,null,null,null)
@@ -365,69 +389,11 @@ class MainActivity : AppCompatActivity() {
 
         val sumValue = editTextSum.text.toString()
 
-//        var sumDouble  = sumValue.toDouble()
-//
-//        var newSumDouble = 0.0
-//
-//        var newSumString = "0"
-//
-//        if (number == 46){
-//
-//            fraction = true
-//
-//        } else {
-//
-//
-//
-//            if (!fraction){
-//                newSumDouble = sumDouble*10+number
-//
-//                newSumString = newSumDouble.toString()
-//
-//            } else {
-////                if (number!=0){
-////                    newSumDouble = sumDouble+number.toDouble()/10
-////                } else {
-////                    newSumDouble = sumDouble + 1/10
-////                }
-//
-//                var iPart = truncate(sumDouble)
-//                var fPart = precision.format(sumDouble.minus(iPart)).replace(",",".").toDouble()
-//
-//                var fPartLength = fPart.toString().length-2
-//
-//                var fractionCapacity = 10.0
-//
-//                if (fPart==0.0 && !additionalValue){
-//                     fractionCapacity =  Math.pow(10.0,fPartLength.toDouble())
-//                } else {
-//                    fractionCapacity =  Math.pow(10.0,fPartLength.toDouble()+1)
-//                }
-//
-//
-//
-//                fPart =(fPart*fractionCapacity+number)/fractionCapacity
-//
-//
-//
-//
-//
-//                newSumDouble = iPart + fPart
-//
-//                newSumString = newSumDouble.toString()
-//
-//                if (number ==0){
-//
-//                    newSumString = (newSumDouble.toString() + "0")
-//
-//                    additionalValue = true
-//                }
-//
-//            }
-//
-//            editTextSum.setText(newSumString)
-//
-//        }
+
+        if (!sumValue.contains(".") && sumValue.take(1).contains("0") && number!=46){
+            editTextSum.setText("0.00")
+            return
+        }
 
 
         if (sumValue == "0.00" && number!=46){

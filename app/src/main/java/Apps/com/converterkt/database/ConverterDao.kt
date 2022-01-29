@@ -31,7 +31,7 @@ interface ConverterDao {
     @Query("SELECT * FROM valute where code LIKE :filter OR name LIKE :filter")
     fun getFilteredValutes(filter:String) : LiveData<List<Valute>>
 
-    @Query("SELECT * FROM valuteInfo where valute = :valute order by date ASC Limit 3 ")
+    @Query("SELECT * FROM valuteInfo where valute = :valute order by date DESC  Limit 5 ")
     fun getDataForTheGraph(valute:Valute) : LiveData<List<ValuteInfo>>
 
 

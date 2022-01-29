@@ -86,11 +86,11 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
 
                         var valuteInfo = ArrayList<ValuteInfo>()
                         if (it != null) {
-                            valuteInfo.add(ValuteInfo(date = currDate,valute = getAZN(), nominal = 1.0, value = 1.0))
+                            valuteInfo.add(ValuteInfo(date = downloadDate,valute = getAZN(), nominal = 1.0, value = 1.0))
 
                             for (valute in it){
 
-                                valuteInfo.add(ValuteInfo(date = currDate, valute = valute, nominal = valute.nominal.toDouble(), value = valute.value))
+                                valuteInfo.add(ValuteInfo(date = downloadDate, valute = valute, nominal = valute.nominal.toDouble(), value = valute.value))
                             }
 
                             db.converterDao().insertValuteInfos(valuteInfo)
