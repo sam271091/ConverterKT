@@ -16,6 +16,7 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
+import android.content.Context
 import android.graphics.Color
 import androidx.lifecycle.Observer
 import com.jjoe64.graphview.series.DataPoint
@@ -191,6 +192,7 @@ class MainActivity : AppCompatActivity() {
                 series.setThickness(8)
 
 
+
                 series.setDrawBackground(true)
                 series.setDrawDataPoints(true)
 
@@ -205,7 +207,8 @@ class MainActivity : AppCompatActivity() {
                         return if (isValueX) {
                             sdf.format(value)
                         } else {
-                            super.formatLabel(value, isValueX)
+//                            super.formatLabel(value, isValueX)
+                            precision.format(value)
                         }
                     }
                 })
@@ -223,8 +226,11 @@ class MainActivity : AppCompatActivity() {
                 graphView.getGridLabelRenderer().setHorizontalLabelsAngle(30)
                 graphView.getGridLabelRenderer().setHumanRounding(true)
 
-                graphView.getGridLabelRenderer().setVerticalLabelsColor(Color.BLACK);
-                graphView.getGridLabelRenderer().setHorizontalLabelsColor(Color.BLACK)
+//                graphView.getGridLabelRenderer().setVerticalLabelsColor(R.color.white);
+//                graphView.getGridLabelRenderer().setHorizontalLabelsColor(R.color.white)
+
+
+
                 graphView.getGridLabelRenderer().reloadStyles()
             }
         }
@@ -290,18 +296,25 @@ class MainActivity : AppCompatActivity() {
 
       fun setValutePresentation(valuteInfo:ValuteInfo?){
 
+          chosenImage.layoutParams.width = 0
 
-
-          Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
+//          Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
 
           if (valuteInfo != null){
               chosenField.text = "${valuteInfo?.valute?.code}"
+              Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
+              chosenImage.layoutParams.width = dpToPx(58)
           }
 
 
 
 //          chosenField.setCompoundDrawables(img.drawable,null,null,null)
       }
+
+    fun dpToPx(dp: Int): Int {
+        val density: Float = getResources().getDisplayMetrics().density
+        return Math.round(dp.toFloat() * density)
+    }
 
 
     fun onClickSwitcher(view: android.view.View) {

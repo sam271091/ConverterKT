@@ -57,10 +57,11 @@
             android:id="@+id/imageValute2"
             android:layout_width="wrap_content"
             android:layout_height="84dp"
+            android:layout_marginTop="35dp"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/imageValute1"
             app:layout_constraintVertical_bias="0.0"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -273,7 +274,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/oval_shape"
             android:paddingStart="10dp"
@@ -292,7 +293,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/oval_shape"
             android:clickable="true"
             android:paddingStart="10dp"
@@ -310,6 +311,7 @@
             android:layout_width="wrap_content"
             android:layout_height="170dp"
             android:layout_marginTop="10dp"
+
 
 
 
