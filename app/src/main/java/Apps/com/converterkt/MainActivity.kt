@@ -119,6 +119,9 @@ class MainActivity : AppCompatActivity() {
             calculateResult()
         }
 
+        graphView.getGridLabelRenderer().isHorizontalLabelsVisible = false
+        graphView.getGridLabelRenderer().isVerticalLabelsVisible   = false
+
     }
 
 
@@ -147,6 +150,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun createGraph(graphData:ArrayList<ValuteInfo>){
+
+        graphView.getGridLabelRenderer().isHorizontalLabelsVisible = true
+        graphView.getGridLabelRenderer().isVerticalLabelsVisible   = true
 
         graphData.sortBy { it.date }
 
@@ -304,6 +310,7 @@ class MainActivity : AppCompatActivity() {
               chosenField.text = "${valuteInfo?.valute?.code}"
               Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
               chosenImage.layoutParams.width = dpToPx(58)
+              chosenImage.layoutParams.height= dpToPx(84)
           }
 
 
