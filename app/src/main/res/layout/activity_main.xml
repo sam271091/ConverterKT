@@ -213,16 +213,16 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/btn_delete"
+                        android:id="@+id/btn_dot"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
-                        android:layout_marginEnd="10dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_marginBottom="10dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="Delete" />
+                        android:text="." />
 
                     <Button
                         android:id="@+id/btn_0"
@@ -234,16 +234,17 @@
                         android:text="0" />
 
                     <Button
-                        android:id="@+id/btn_dot"
+                        android:id="@+id/btn_delete"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginEnd="40dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="40dp"
                         android:layout_marginBottom="10dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="." />
+                        android:text="Delete" />
+
                 </TableRow>
             </TableLayout>
         </LinearLayout>
