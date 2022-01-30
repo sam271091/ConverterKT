@@ -122,6 +122,8 @@ class MainActivity : AppCompatActivity() {
         graphView.getGridLabelRenderer().isHorizontalLabelsVisible = false
         graphView.getGridLabelRenderer().isVerticalLabelsVisible   = false
 
+
+
     }
 
 
@@ -377,6 +379,7 @@ class MainActivity : AppCompatActivity() {
         chosenField = tvValute2
         setValutePresentation(secondValute)
         calculateResult()
+        makeGraph(firstValute)
 
     }
 
