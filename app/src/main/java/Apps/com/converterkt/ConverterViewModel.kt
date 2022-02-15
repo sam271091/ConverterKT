@@ -74,7 +74,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
             .subscribe({
 //                Log.d("TEST_OF_LOADING_DATA",it.toString())
                 try {
-                    var valutes = it.valType?.get(1)?.valute
+                    var valutes = it.valType?.get(1)?.valute?.filter { !it.code.equals("SDR") }
 
                     valutes?.map { it.name = valutesNames.get(it.code).toString() }
 
