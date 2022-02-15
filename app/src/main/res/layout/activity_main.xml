@@ -27,8 +27,8 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/oval_shape"
             android:ems="10"
             android:enabled="false"
@@ -47,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="84dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -69,7 +70,7 @@
             android:id="@+id/imageView3"
             android:layout_width="66dp"
             android:layout_height="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:onClick="onClickSwitcher"
             app:layout_constraintBottom_toTopOf="@+id/tvValute2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,6 +110,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="1"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -119,6 +121,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="2"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -132,6 +135,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="3"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                 </TableRow>
@@ -151,6 +155,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="4"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -161,6 +166,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="5"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -174,6 +180,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="6"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
                 </TableRow>
 
@@ -192,6 +199,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="7"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -202,6 +210,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="8"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -215,6 +224,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="9"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
                 </TableRow>
 
@@ -233,6 +243,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="."
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -243,6 +254,7 @@
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
                         android:text="0"
+                        android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
@@ -255,7 +267,9 @@
                         android:layout_marginBottom="10dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="Delete"
+                        android:textSize="@dimen/text_size_labels"
+                        android:text="C"
+
                         android:textStyle="bold" />
 
                 </TableRow>
@@ -267,7 +281,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/oval_shape"
             android:clickable="true"
             android:paddingStart="10dp"
@@ -287,7 +301,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/oval_shape"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
