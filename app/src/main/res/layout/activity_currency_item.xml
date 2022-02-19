@@ -42,7 +42,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.216"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/textViewNameLabel"
         app:layout_constraintTop_toBottomOf="@+id/codeTV"
         app:layout_constraintVertical_bias="0.162" />
 
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/flagIV" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/textViewNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -79,15 +79,75 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
+
+
+    <TableLayout
+        android:id="@+id/tableHeader"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
+        android:stretchColumns="0,1,2"
+        >
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/dateHeaderLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:layout_marginStart="60dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline2" />
+
+        <TextView
+            android:id="@+id/nominalHeaderLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nominal"
+
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
+            app:layout_constraintStart_toStartOf="@+id/dateHeaderLabel"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"/>
+
+        <TextView
+            android:id="@+id/valueHeaderLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Value"
+
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
+            app:layout_constraintStart_toStartOf="@+id/nominalHeaderLabel"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"/>
+
+    </TableRow>
+
+
+    </TableLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvValuteInfo"
-        android:layout_width="409dp"
-        android:layout_height="437dp"
-        android:layout_marginTop="10dp"
+
+        android:layout_width="0dp"
+        android:layout_height="377dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toBottomOf="@+id/tableHeader" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
