@@ -1,6 +1,7 @@
 package Apps.com.converterkt
 
 
+import Apps.com.converterkt.pojo.Valute
 import android.content.Intent
 
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import Apps.com.converterkt.pojo.ValuteInfo
+import Apps.com.converterkt.utils.dpToPx
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
@@ -123,6 +125,13 @@ class MainActivity : AppCompatActivity() {
         graphView.getGridLabelRenderer().isVerticalLabelsVisible   = false
 
 
+        imageValute1.setOnClickListener {
+            openCurrencyItem(firstValute?.valute)
+        }
+
+        imageValute2.setOnClickListener {
+            openCurrencyItem(secondValute?.valute)
+        }
 
     }
 
@@ -311,8 +320,8 @@ class MainActivity : AppCompatActivity() {
           if (valuteInfo != null){
               chosenField.text = "${valuteInfo?.valute?.code}"
               Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
-              chosenImage.layoutParams.width = dpToPx(58)
-              chosenImage.layoutParams.height= dpToPx(84)
+              chosenImage.layoutParams.width = dpToPx(58,resources.displayMetrics.density)
+              chosenImage.layoutParams.height= dpToPx(84,resources.displayMetrics.density)
           }
 
 
@@ -320,10 +329,7 @@ class MainActivity : AppCompatActivity() {
 //          chosenField.setCompoundDrawables(img.drawable,null,null,null)
       }
 
-    fun dpToPx(dp: Int): Int {
-        val density: Float = getResources().getDisplayMetrics().density
-        return Math.round(dp.toFloat() * density)
-    }
+
 
 
     fun onClickSwitcher(view: android.view.View) {
@@ -352,6 +358,11 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    fun openCurrencyItem(valute:Valute?){
+        val intent = ActivityCurrencyItem.newIntent(this)
+        intent.putExtra("currency",valute)
+        startActivity(intent)
+    }
 
 
     public override fun onSaveInstanceState(savedInstanceState: Bundle) {

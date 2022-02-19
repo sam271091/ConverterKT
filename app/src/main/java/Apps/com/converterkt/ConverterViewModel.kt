@@ -60,6 +60,10 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getDataForTheGraph(valute)
     }
 
+    fun getDataCurrencyItem(valute: Valute): LiveData<List<ValuteInfo>> {
+        return db.converterDao().getDataCurrencyItem(valute)
+    }
+
 
 
      fun loadData(downloadDate:Date){

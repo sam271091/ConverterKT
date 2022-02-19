@@ -10,9 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ConverterKT">
-<!--        <activity-->
-<!--            android:name=".SplashActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".ActivityCurrencyItem"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <!-- <activity -->
+        <!-- android:name=".SplashActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".ValuteListActivity"
             android:exported="false" />
@@ -26,7 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />

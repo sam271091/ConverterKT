@@ -9,3 +9,8 @@ fun getValuteFlagPath(valute:Valute?):String?{
 private fun getFlagName(valute:Valute?):String?{
     return valute?.code?.substring(0,2)?.lowercase()
 }
+
+fun dpToPx(dp: Int,density:Float): Int {
+    val density: Float = density
+    return Math.round(dp.toFloat() * density)
+}

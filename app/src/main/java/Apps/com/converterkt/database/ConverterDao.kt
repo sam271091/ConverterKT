@@ -35,6 +35,9 @@ interface ConverterDao {
     fun getDataForTheGraph(valute:Valute) : LiveData<List<ValuteInfo>>
 
 
+    @Query("SELECT * FROM valuteInfo where valute = :valute order by date ")
+    fun getDataCurrencyItem(valute:Valute) : LiveData<List<ValuteInfo>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertValuteInfos(valuteInfo:List<ValuteInfo?>)
 
