@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#F9F8F8</color>
+    <color name="custom_color_white">#E8E8E8</color>
     <color name="custom_color_background">#9B27B6</color>
     <color name="colorPurple">#800080</color>
     <color name="labelTextColor">#FFBB86FC</color>

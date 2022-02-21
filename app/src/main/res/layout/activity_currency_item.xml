@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityCurrencyItem">
+    tools:context=".ActivityCurrencyItem"
+    android:background="@color/custom_color_background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/main_table_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
     <ImageView
         android:id="@+id/flagIV"
@@ -77,6 +91,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/textViewNameLabel"
+        app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_percent="0.4" />
 
 
@@ -87,12 +105,13 @@
         android:id="@+id/rvValuteInfo"
 
         android:layout_width="0dp"
-        android:layout_height="377dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="380dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
