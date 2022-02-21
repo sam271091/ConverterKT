@@ -81,61 +81,6 @@
 
 
 
-    <TableLayout
-        android:id="@+id/tableHeader"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
-        app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
-        android:stretchColumns="0,1,2"
-        >
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/dateHeaderLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:layout_marginStart="60dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline2" />
-
-        <TextView
-            android:id="@+id/nominalHeaderLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nominal"
-
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
-            app:layout_constraintStart_toStartOf="@+id/dateHeaderLabel"
-            app:layout_constraintTop_toBottomOf="@id/guideline2"/>
-
-        <TextView
-            android:id="@+id/valueHeaderLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Value"
-
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
-            app:layout_constraintStart_toStartOf="@+id/nominalHeaderLabel"
-            app:layout_constraintTop_toBottomOf="@id/guideline2"/>
-
-    </TableRow>
-
-
-    </TableLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -148,6 +93,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
