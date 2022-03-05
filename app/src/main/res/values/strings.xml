@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Converter</string>
+    <string name="select_currency_label">Select currency</string>
+    <string name="code_label">Code</string>
+    <string name="name_label">Name</string>
+    <string name="date_label">Date</string>
+    <string name="nominal_label">Nominal</string>
+    <string name="rate_label">Rate</string>
 </resources>

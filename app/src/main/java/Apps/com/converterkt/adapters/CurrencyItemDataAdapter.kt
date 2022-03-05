@@ -15,12 +15,14 @@ class CurrencyItemDataAdapter(context:Context): RecyclerView.Adapter<CurrencyIte
 
     var valuteInfoList : List<ValuteInfo> = listOf()
 
-    private var precision =  DecimalFormat("#,##0.0000")
-
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    private var precision =  DecimalFormat("#,##0.0000")
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): currencyItemDataViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.currency_info_item,parent,false)

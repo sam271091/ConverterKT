@@ -26,12 +26,13 @@ class ActivityCurrencyItem : AppCompatActivity() {
 
       val currency = intent.getSerializableExtra("currency")
 
-        fillTheData(currency as Valute?)
+
 
 
 
         rvValuteInfo.adapter = adapter
 
+        fillTheData(currency as Valute?)
 
         rvValuteInfo.layoutManager = LinearLayoutManager(this)
 
