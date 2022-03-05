@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 class SplashActivity : AppCompatActivity() {
     val disposable = Observable.timer(3500, TimeUnit.MILLISECONDS)
         .subscribe {
-                            val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             }
@@ -30,25 +30,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
 
-//        val handler = Handler(Looper.getMainLooper())
-//        handler.postDelayed({
-//            startActivity(intent)
-//            finish()
-//        }, 3500)
 
-
-
-
-
-//        disposable.subscribe {
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//                finish()
-//            }
-
-
-
-//        disposable.dispose()
 
     }
 
