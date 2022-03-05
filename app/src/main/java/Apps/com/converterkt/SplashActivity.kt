@@ -11,6 +11,12 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.concurrent.TimeUnit
 
 class SplashActivity : AppCompatActivity() {
+    val disposable = Observable.timer(3500, TimeUnit.MILLISECONDS)
+        .subscribe {
+                            val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -33,12 +39,12 @@ class SplashActivity : AppCompatActivity() {
 
 
 
-        val disposable = Observable.timer(3500, TimeUnit.MILLISECONDS)
-            .subscribe {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+
+//        disposable.subscribe {
+//                val intent = Intent(this, MainActivity::class.java)
+//                startActivity(intent)
+//                finish()
+//            }
 
 
 
@@ -46,5 +52,8 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
+    }
 }
