@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var chosenImage : ImageView
 
     private var precision =  DecimalFormat("#,##0.0000")
+//    private var precisionInput =  DecimalFormat("#,##0.0000")
 
     var fraction = false
 
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
     var sdf = SimpleDateFormat(" dd.MM.yy")
 
+    var dotIsPressed = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -419,18 +421,25 @@ class MainActivity : AppCompatActivity() {
 
     fun performAction(actionSymbol:Char){
 
+
+
+
         var number = actionSymbol.code
 
         val sumValue = editTextSum.text.toString()
 
+        if (number==46){
+            dotIsPressed = true
+        }
 
-        if (!sumValue.contains(".") && sumValue.take(1).contains("0") && number!=46){
+        if (!sumValue.contains(".") && sumValue.take(1).contains("0") && number!=46
+            && number!=0){
             editTextSum.setText("0.00")
             return
         }
 
 
-        if (sumValue == "0.00" && number!=46){
+        if (sumValue == "0.00" && number!=46 && !dotIsPressed){
             editTextSum.setText(number.toString())
         }
         else if (number==46){
@@ -439,6 +448,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         } else {
+
+
+
             editTextSum.setText(sumValue + number)
         }
 
@@ -456,6 +468,7 @@ class MainActivity : AppCompatActivity() {
 //            newSumValue = "0.0000"
 //        }
 
+        dotIsPressed = false
         fraction = false
         additionalValue = false
         editTextSum.setText("0.00")
