@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import java.util.concurrent.TimeUnit
 
 class SplashActivity : AppCompatActivity() {
-    val disposable = Observable.timer(3500, TimeUnit.MILLISECONDS)
+    val disposable = Observable.timer(800, TimeUnit.MILLISECONDS)
         .subscribe {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
@@ -25,9 +25,9 @@ class SplashActivity : AppCompatActivity() {
             supportActionBar!!.hide()
         }
 
-        with(animationView){
-            speed = 3f
-        }
+//        with(animationView){
+//            speed = 3f
+//        }
 
 
 
