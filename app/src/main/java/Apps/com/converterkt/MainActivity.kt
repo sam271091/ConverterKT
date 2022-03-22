@@ -28,6 +28,8 @@ import java.text.DecimalFormat
 import com.jjoe64.graphview.DefaultLabelFormatter
 import java.text.SimpleDateFormat
 import android.graphics.Paint
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import java.util.*
 import kotlin.collections.ArrayList
 import com.jjoe64.graphview.series.DataPointInterface
@@ -62,6 +64,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        MobileAds.initialize(this)
+
+
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
 
         chosenField = tvValute1
         chosenImage = imageValute1
@@ -323,7 +331,7 @@ class MainActivity : AppCompatActivity() {
               chosenField.text = "${valuteInfo?.valute?.code}"
               Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
               chosenImage.layoutParams.width = dpToPx(58,resources.displayMetrics.density)
-              chosenImage.layoutParams.height= dpToPx(84,resources.displayMetrics.density)
+              chosenImage.layoutParams.height= dpToPx(58,resources.displayMetrics.density)
           }
 
 

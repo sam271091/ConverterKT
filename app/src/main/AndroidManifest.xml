@@ -38,6 +38,12 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3288419679900414~9346426260"/>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

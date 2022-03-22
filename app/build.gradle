@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "demo.com.converterkt"
@@ -91,5 +91,8 @@ dependencies {
 
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+
+    implementation 'com.google.android.gms:play-services-ads:20.6.0'
 
 }

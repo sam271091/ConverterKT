@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/oval_shape"
             android:ems="10"
@@ -48,10 +48,10 @@
         <ImageView
             android:id="@+id/imageValute1"
             android:layout_width="wrap_content"
-            android:layout_height="84dp"
+            android:layout_height="50dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="40dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView3"
+            android:layout_marginTop="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvValute1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.8"
@@ -60,20 +60,21 @@
         <ImageView
             android:id="@+id/imageValute2"
             android:layout_width="wrap_content"
-            android:layout_height="84dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/graphView"
+
+            app:layout_constraintBottom_toBottomOf="@+id/tvValute2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageValute1"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="1.0"
             tools:srcCompat="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="66dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="5dp"
             android:onClick="onClickSwitcher"
             app:layout_constraintBottom_toTopOf="@+id/tvValute2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,9 +94,10 @@
             app:layout_constraintTop_toBottomOf="@id/guidelineBottom">
 
             <TableLayout
+                android:id="@+id/numericTable"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="0dp"
                 android:stretchColumns="0,1,2">
 
                 <TableRow
@@ -107,7 +109,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
@@ -121,7 +123,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
 
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:layout_marginBottom="5dp"
@@ -136,7 +138,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginEnd="40dp"
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
@@ -299,7 +301,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/oval_shape"
             android:clickable="true"
             android:paddingStart="10dp"
@@ -327,6 +329,7 @@
             android:textSize="20sp"
 
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvValute2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvValute2"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -352,19 +355,18 @@
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graphView"
-            android:layout_width="wrap_content"
-            android:layout_height="170dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="10dp"
 
 
-
-
-
             android:paddingEnd="25dp"
-            app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
+            app:layout_constraintBottom_toTopOf="@+id/adView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvResult" />
+            app:layout_constraintTop_toBottomOf="@id/tvResult"
+
+            app:layout_constraintHeight_percent="0.23"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineBottom"
@@ -372,6 +374,25 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.6" />
+
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+
+
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-3288419679900414/6136124788"
+
+            app:layout_constraintBottom_toTopOf="@+id/lLayoutNumbers"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graphView"></com.google.android.gms.ads.AdView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
