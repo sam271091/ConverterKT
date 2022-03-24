@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import Apps.com.converterkt.adapters.ValuteInfoAdapter
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
 
 
@@ -23,6 +26,10 @@ class ValuteListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_valute_list)
 
 
+        MobileAds.initialize(this)
+
+        val adRequest = AdRequest.Builder().build()
+        adViewList.loadAd(adRequest)
 
         valuteRecyclerView.adapter = adapter
 

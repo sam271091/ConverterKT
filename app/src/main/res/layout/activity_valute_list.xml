@@ -11,32 +11,54 @@
         android:id="@+id/topView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/main_table_background"/>
+        android:background="@drawable/main_table_background"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/oval_shape"
+        app:layout_constraintBottom_toTopOf="@id/valuteRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/valuteRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="125dp"
-        android:layout_marginBottom="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="50dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.78"
+
         android:background="@color/white"
+
+        app:layout_constraintBottom_toTopOf="@+id/adViewList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBox"
+        />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adViewList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-3288419679900414/3784012355"
+
+        app:layout_constraintTop_toBottomOf="@id/valuteRecyclerView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <SearchView
-        android:id="@+id/searchBox"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/oval_shape"
-        app:layout_constraintBottom_toTopOf="@+id/valuteRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topView" />
+    </com.google.android.gms.ads.AdView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
