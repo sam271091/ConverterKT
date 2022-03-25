@@ -9,6 +9,8 @@ import com.squareup.picasso.Picasso
 import Apps.com.converterkt.R
 import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getValuteFlagPath
+import android.view.animation.AnimationUtils
+import kotlinx.android.synthetic.main.activity_valute_list.*
 import kotlinx.android.synthetic.main.item_valute_info.view.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -49,9 +51,13 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
                 itemView.setOnClickListener {
                     onValuteInfoClickListener?.onClick(this)
                 }
+
+
             }
 
         }
+
+
     }
 
 

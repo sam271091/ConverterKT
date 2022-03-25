@@ -146,6 +146,22 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+
+    }
+
+    override fun onResume() {
+        adView.resume()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+    }
+
     fun makeGraph(currValuteInfo:ValuteInfo?){
 
         graphView.removeAllSeries()

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import Apps.com.converterkt.adapters.ValuteInfoAdapter
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import android.view.animation.AnimationUtils
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
@@ -51,6 +52,8 @@ class ValuteListActivity : AppCompatActivity() {
 
         valuteRecyclerView.layoutManager = LinearLayoutManager(this)
 
+
+
         searchBox.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -73,6 +76,26 @@ class ValuteListActivity : AppCompatActivity() {
 
 
     }
+
+
+
+    override fun onPause() {
+        adViewList.pause()
+        super.onPause()
+
+    }
+
+    override fun onResume() {
+        adViewList.resume()
+        super.onResume()
+    }
+
+    override fun onDestroy() {
+        adViewList.destroy()
+        super.onDestroy()
+    }
+
+
 
 
     fun filterList(newText:String){
