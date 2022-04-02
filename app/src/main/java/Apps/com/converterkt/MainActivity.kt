@@ -28,6 +28,9 @@ import java.text.DecimalFormat
 import com.jjoe64.graphview.DefaultLabelFormatter
 import java.text.SimpleDateFormat
 import android.graphics.Paint
+import android.preference.PreferenceManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import java.util.*
@@ -36,6 +39,8 @@ import com.jjoe64.graphview.series.DataPointInterface
 
 import com.jjoe64.graphview.series.PointsGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries.CustomShape
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,6 +64,7 @@ class MainActivity : AppCompatActivity() {
     var sdf = SimpleDateFormat(" dd.MM.yy")
 
     var dotIsPressed = false
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,8 +149,44 @@ class MainActivity : AppCompatActivity() {
             openCurrencyItem(secondValute?.valute)
         }
 
+
+        readSavedValutes()
+
+
+
+
     }
 
+
+
+    fun readSavedValutes(){
+
+        var preferences = getPreferences(Context.MODE_PRIVATE)
+
+
+        var firstSavedValute = preferences.getString("firstValute","")
+
+        var secondSavedValute = preferences.getString("secondValute","")
+
+        if (firstSavedValute != "" || secondSavedValute != ""){
+            lifecycleScope.launch(Dispatchers.IO){
+
+                 firstValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(firstSavedValute as String))
+
+//
+
+
+                 secondValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(secondSavedValute as String))
+
+
+            }
+
+//                setValutePresentation(firstValute)
+//                makeGraph(firstValute)
+//
+//                setValutePresentation(secondValute)
+        }
+    }
 
     override fun onPause() {
         adView.pause()
@@ -158,9 +200,31 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        saveValuteInfo()
+
         adView.destroy()
         super.onDestroy()
     }
+
+
+    fun saveValuteInfo(){
+        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        with (sharedPref.edit()) {
+
+            if (firstValute != null){
+                putString("firstValute", firstValute?.valute?.code)
+            }
+
+            if (secondValute != null){
+                putString("secondValute", secondValute?.valute?.code)
+            }
+
+
+            apply()
+        }
+    }
+
+
 
     fun makeGraph(currValuteInfo:ValuteInfo?){
 

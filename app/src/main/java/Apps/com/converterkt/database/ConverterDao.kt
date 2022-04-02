@@ -41,4 +41,11 @@ interface ConverterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertValuteInfos(valuteInfo:List<ValuteInfo?>)
 
+    @Query("SELECT * FROM valute where code =:code")
+    fun getValuteByCode(code:String):Valute
+
+    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo WHERE valute = :valute GROUP by valute)")
+    fun getFilteredValuteInfo(valute:Valute) : ValuteInfo
+
+
 }

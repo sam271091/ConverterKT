@@ -64,6 +64,14 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getDataCurrencyItem(valute)
     }
 
+    fun getFilteredValuteInfo(valute:Valute):ValuteInfo {
+        return db.converterDao().getFilteredValuteInfo(valute)
+    }
+
+    fun getValuteByCode(code:String):Valute{
+        return db.converterDao().getValuteByCode(code)
+    }
+
 
 
      fun loadData(downloadDate:Date){
