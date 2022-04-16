@@ -31,6 +31,9 @@ import android.graphics.Paint
 import android.preference.PreferenceManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+
+
+
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import java.util.*
@@ -40,7 +43,9 @@ import com.jjoe64.graphview.series.DataPointInterface
 import com.jjoe64.graphview.series.PointsGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries.CustomShape
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class MainActivity : AppCompatActivity() {
@@ -169,22 +174,28 @@ class MainActivity : AppCompatActivity() {
         var secondSavedValute = preferences.getString("secondValute","")
 
         if (firstSavedValute != "" || secondSavedValute != ""){
-            lifecycleScope.launch(Dispatchers.IO){
-
-                 firstValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(firstSavedValute as String))
-
-//
 
 
-                 secondValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(secondSavedValute as String))
+            GlobalScope.launch{
+
+                firstValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(firstSavedValute as String))
+
+                secondValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(secondSavedValute as String))
+
+                withContext(Dispatchers.Main) {
+
+                    chosenImage = imageValute1
+                    setValutePresentation(firstValute,tvValute1)
+                makeGraph(firstValute)
+
+                    chosenImage = imageValute2
+                setValutePresentation(secondValute,tvValute2)
+                }
 
 
             }
 
-//                setValutePresentation(firstValute)
-//                makeGraph(firstValute)
-//
-//                setValutePresentation(secondValute)
+
         }
     }
 
@@ -401,14 +412,14 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-      fun setValutePresentation(valuteInfo:ValuteInfo?){
+      fun setValutePresentation(valuteInfo:ValuteInfo?,fieldToChange:TextView = chosenField){
 
           chosenImage.layoutParams.width = 0
 
 //          Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
 
           if (valuteInfo != null){
-              chosenField.text = "${valuteInfo?.valute?.code}"
+              fieldToChange.text = "${valuteInfo?.valute?.code}"
               Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
               chosenImage.layoutParams.width = dpToPx(58,resources.displayMetrics.density)
               chosenImage.layoutParams.height= dpToPx(58,resources.displayMetrics.density)

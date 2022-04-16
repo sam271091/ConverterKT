@@ -12,6 +12,7 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValutePresentation
+import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
@@ -65,6 +66,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun getFilteredValuteInfo(valute:Valute):ValuteInfo {
+
         return db.converterDao().getFilteredValuteInfo(valute)
     }
 
