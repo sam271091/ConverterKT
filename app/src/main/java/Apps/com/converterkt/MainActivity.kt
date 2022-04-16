@@ -242,15 +242,20 @@ class MainActivity : AppCompatActivity() {
         graphView.removeAllSeries()
 
         currValuteInfo?.valute?.let {
-            viewModel.getDataForTheGraph(it).observe(this, Observer {
+//            viewModel.getDataForTheGraph(it).observe(this, Observer {
+//
+//
+//                createGraph(it as ArrayList<ValuteInfo>)
+//
+//
+//            })
 
 
-                createGraph(it as ArrayList<ValuteInfo>)
+            lifecycleScope.launch(Dispatchers.IO){
+                var graphData = viewModel.getDataForTheGraph(it)
 
-
-            })
-
-
+                createGraph(graphData as ArrayList<ValuteInfo>)
+            }
 
 
         }

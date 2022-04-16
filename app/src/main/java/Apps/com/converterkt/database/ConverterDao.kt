@@ -32,7 +32,7 @@ interface ConverterDao {
     fun getFilteredValutes(filter:String) : LiveData<List<Valute>>
 
     @Query("SELECT * FROM valuteInfo where valute = :valute order by date DESC  Limit 5 ")
-    fun getDataForTheGraph(valute:Valute) : LiveData<List<ValuteInfo>>
+    fun getDataForTheGraph(valute:Valute) : List<ValuteInfo>
 
 
     @Query("SELECT * FROM valuteInfo where valute = :valute order by date ")

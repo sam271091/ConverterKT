@@ -57,7 +57,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getAllValuteInfoFiltered(filter)
     }
 
-    fun getDataForTheGraph(valute: Valute): LiveData<List<ValuteInfo>> {
+    fun getDataForTheGraph(valute: Valute): List<ValuteInfo> {
         return db.converterDao().getDataForTheGraph(valute)
     }
 
