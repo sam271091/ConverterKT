@@ -52,6 +52,16 @@ class ValuteListActivity : AppCompatActivity() {
 
         valuteRecyclerView.layoutManager = LinearLayoutManager(this)
 
+        searchBox.setOnClickListener {
+            searchBox.isIconified = false
+            searchBox.setIconifiedByDefault(false)
+        }
+
+        searchBox.setOnCloseListener {
+            return@setOnCloseListener false
+        }
+
+
 
 
         searchBox.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
