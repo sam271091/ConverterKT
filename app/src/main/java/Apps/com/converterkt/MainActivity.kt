@@ -174,6 +174,11 @@ class MainActivity : AppCompatActivity() {
             setDate()
         }
 
+
+        imageDownloadbtn.setOnClickListener {
+            viewModel.loadDataByDate(chosenDate)
+        }
+
     }
 
 

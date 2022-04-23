@@ -34,8 +34,14 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
 
 
     init {
+
+        loadDataByDate(currDate)
+
+    }
+
+    fun loadDataByDate(chosenDate:Date){
         var calendar = Calendar.getInstance()
-        calendar.time = currDate
+        calendar.time = chosenDate
         calendar.add(Calendar.DAY_OF_YEAR, -21)
 
         var minDate = calendar.time
@@ -49,7 +55,6 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
 
             currDate = calendar.time
         }
-
     }
 
     fun getFilteredList(filter:ArrayList<Valute>): LiveData<List<ValuteInfo>> {
