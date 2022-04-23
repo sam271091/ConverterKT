@@ -18,6 +18,7 @@ import Apps.com.converterkt.utils.dpToPx
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
+import android.app.DatePickerDialog
 import android.content.Context
 import android.graphics.Color
 import androidx.lifecycle.Observer
@@ -29,6 +30,7 @@ import com.jjoe64.graphview.DefaultLabelFormatter
 import java.text.SimpleDateFormat
 import android.graphics.Paint
 import android.preference.PreferenceManager
+import android.widget.DatePicker
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 
@@ -70,7 +72,9 @@ class MainActivity : AppCompatActivity() {
 
     var dotIsPressed = false
 
+    var calendar = Calendar.getInstance()
 
+    lateinit var chosenDate:Date
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +88,11 @@ class MainActivity : AppCompatActivity() {
 
         chosenField = tvValute1
         chosenImage = imageValute1
+
+
+        chosenDate = calendar.time
+
+        setDatePresentation()
 
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
 //        viewModel.valutesList.observe(this, Observer {
@@ -157,12 +166,39 @@ class MainActivity : AppCompatActivity() {
 
         readSavedValutes()
 
+        setDatePresentation()
 
 
+        textViewDate.setOnClickListener {
+
+            setDate()
+        }
 
     }
 
 
+
+    fun setDate(){
+
+        var datePicker = DatePickerDialog(this,
+            { view, year, month, day ->
+
+                calendar.set(year,month,day)
+
+                chosenDate = calendar.time
+
+                setDatePresentation()
+
+            },calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
+            )
+        datePicker.show()
+    }
+
+
+    fun setDatePresentation(){
+        textViewDate.text = SimpleDateFormat("dd.MM.yyyy").format(chosenDate)
+    }
 
     fun readSavedValutes(){
 
