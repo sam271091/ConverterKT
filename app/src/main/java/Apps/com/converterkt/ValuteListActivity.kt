@@ -17,11 +17,14 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ValuteListActivity : AppCompatActivity() {
     private lateinit var viewModel : ConverterViewModel
     val adapter = ValuteInfoAdapter(this)
+    lateinit var chosenDate : Date
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_valute_list)
@@ -34,7 +37,18 @@ class ValuteListActivity : AppCompatActivity() {
 
         valuteRecyclerView.adapter = adapter
 
+
+
+
+
+
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
+
+        var chosenDateLong = intent.getSerializableExtra("chosenDate") as Long
+//        var calInstance = Calendar.getInstance()
+//        calInstance.time = chosenDateLong
+        chosenDate = Date(chosenDateLong)
+
 
         fillTheList()
 
@@ -122,7 +136,7 @@ class ValuteListActivity : AppCompatActivity() {
     }
 
     fun fillTheList(){
-        viewModel.allValuteInfo.observe(this, Observer {
+        viewModel.allValuteInfo(chosenDate).observe(this, Observer {
             adapter.valuteInfoList = it
         })
     }

@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import java.util.*
 
 @Dao
 interface ConverterDao {
@@ -21,8 +22,8 @@ interface ConverterDao {
     fun insertValute(valute:Valute?)
 
 
-    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo GROUP by valute)")
-    fun getAllValuteInfo() : LiveData<List<ValuteInfo>>
+    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo Where date <= :chosenDate GROUP by valute)")
+    fun getAllValuteInfo(chosenDate:Date) : LiveData<List<ValuteInfo>>
 
 
     @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo GROUP by valute) AND valute in (:filter)")
@@ -44,8 +45,8 @@ interface ConverterDao {
     @Query("SELECT * FROM valute where code =:code")
     fun getValuteByCode(code:String):Valute
 
-    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo WHERE valute = :valute GROUP by valute)")
-    fun getFilteredValuteInfo(valute:Valute) : ValuteInfo
+    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo WHERE valute = :valute AND date <= :chosenDate GROUP by valute)")
+    fun getFilteredValuteInfo(valute:Valute,chosenDate:Date) : ValuteInfo
 
 
 }

@@ -194,6 +194,8 @@ class MainActivity : AppCompatActivity() {
 
                 setDatePresentation()
 
+                setValuteInfoByDate()
+
             },calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
             )
@@ -219,9 +221,9 @@ class MainActivity : AppCompatActivity() {
 
             GlobalScope.launch{
 
-                firstValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(firstSavedValute as String))
+                firstValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(firstSavedValute as String),chosenDate)
 
-                secondValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(secondSavedValute as String))
+                secondValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(secondSavedValute as String),chosenDate)
 
                 withContext(Dispatchers.Main) {
 
@@ -237,6 +239,16 @@ class MainActivity : AppCompatActivity() {
             }
 
 
+        }
+    }
+
+    fun setValuteInfoByDate(){
+        GlobalScope.launch{
+            firstValute = viewModel.getFilteredValuteInfo(firstValute?.valute as Valute,chosenDate)
+
+            secondValute = viewModel.getFilteredValuteInfo(secondValute?.valute as Valute,chosenDate)
+
+            calculateResult()
         }
     }
 
@@ -499,6 +511,7 @@ class MainActivity : AppCompatActivity() {
 
     fun openValuteInfoListChooser(){
         val intent = ValuteListActivity.newIntent(this)
+        intent.putExtra("chosenDate",chosenDate.time)
         resultLauncher.launch(intent)
 
 

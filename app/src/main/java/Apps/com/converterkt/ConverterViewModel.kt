@@ -25,7 +25,8 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     private val db = AppDatabase.getInstance(application)
     private var compositeDisposable = CompositeDisposable()
     val valutesList = db.converterDao().getAllValutes()
-    val allValuteInfo = db.converterDao().getAllValuteInfo()
+//    val allValuteInfo = db.converterDao().getAllValuteInfo()
+    val allValuteInfo : (chosenDate:Date)-> LiveData<List<ValuteInfo>> = {db.converterDao().getAllValuteInfo(it)}
     var currDate = getCurrentTime()
     var valutes : (filter:String) -> LiveData<List<Valute>> = {db.converterDao().getFilteredValutes(it)}
 
@@ -70,9 +71,9 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getDataCurrencyItem(valute)
     }
 
-    fun getFilteredValuteInfo(valute:Valute):ValuteInfo {
+    fun getFilteredValuteInfo(valute:Valute,chosenDate:Date):ValuteInfo {
 
-        return db.converterDao().getFilteredValuteInfo(valute)
+        return db.converterDao().getFilteredValuteInfo(valute,chosenDate)
     }
 
     fun getValuteByCode(code:String):Valute{

@@ -10,6 +10,7 @@ class MySecondActivityContract : ActivityResultContract<Intent, ValuteInfo?>() {
     override fun createIntent(context: Context, input: Intent?): Intent {
         return Intent(context, ValuteListActivity::class.java)
             .putExtra("my_input_key", input)
+            .putExtra("chosenDate",input?.getSerializableExtra("chosenDate"))
     }
 
     override fun parseResult(resultCode: Int, intent: Intent?): ValuteInfo? {
