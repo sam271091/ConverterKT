@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_weight="0"
-                android:backgroundTint="@color/black"
+                android:backgroundTint="@color/genuineBlack"
                 app:srcCompat="@android:drawable/stat_sys_download" />
 
         </LinearLayout>

@@ -58,9 +58,9 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun getFilteredList(filter:ArrayList<Valute>): LiveData<List<ValuteInfo>> {
+    fun getFilteredList(filter:ArrayList<Valute>,chosenDate:Date): LiveData<List<ValuteInfo>> {
 
-        return db.converterDao().getAllValuteInfoFiltered(filter)
+        return db.converterDao().getAllValuteInfoFiltered(filter,chosenDate)
     }
 
     fun getDataForTheGraph(valute: Valute): List<ValuteInfo> {

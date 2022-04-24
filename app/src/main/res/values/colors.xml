@@ -13,4 +13,5 @@
     <color name="labelTextColor">#FFBB86FC</color>
     <color name="colorPrimaryDark">#353E4F</color>
     <color name="mainwhite">#F9F8F8</color>
+    <color name="genuineBlack">#FF000000</color>
 </resources>

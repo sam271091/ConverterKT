@@ -20,6 +20,7 @@ import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValuteFlagPath
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import androidx.lifecycle.Observer
 import com.jjoe64.graphview.series.DataPoint
@@ -31,6 +32,7 @@ import java.text.SimpleDateFormat
 import android.graphics.Paint
 import android.preference.PreferenceManager
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 
@@ -44,10 +46,7 @@ import com.jjoe64.graphview.series.DataPointInterface
 
 import com.jjoe64.graphview.series.PointsGraphSeries
 import com.jjoe64.graphview.series.PointsGraphSeries.CustomShape
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -243,13 +242,42 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setValuteInfoByDate(){
-        GlobalScope.launch{
-            firstValute = viewModel.getFilteredValuteInfo(firstValute?.valute as Valute,chosenDate)
+        runBlocking (Dispatchers.IO) {
+            GlobalScope.launch{
 
-            secondValute = viewModel.getFilteredValuteInfo(secondValute?.valute as Valute,chosenDate)
+                try {
+                    var firstValuteData = viewModel.getFilteredValuteInfo(firstValute?.valute as Valute,chosenDate)
+                    var secondValuteData = viewModel.getFilteredValuteInfo(secondValute?.valute as Valute,chosenDate)
 
-            calculateResult()
+                    if (firstValuteData!=null && secondValuteData != null){
+                        firstValute = firstValuteData
+
+                        secondValute = secondValuteData
+
+                        calculateResult()
+                    } else {
+                        firstValute = null
+                        secondValute = null
+
+
+//                        chosenImage = imageValute1
+//                        setValutePresentation(firstValute,tvValute1)
+//                        chosenImage = imageValute2
+//                        setValutePresentation(secondValute,tvValute2)
+                        throw Exception("null data")
+                    }
+
+
+
+
+                } catch (e:Throwable){
+//                    Toast.makeText(applicationContext, "No data available for this date. Unable to convert.", Toast.LENGTH_SHORT).show()
+                    tvResult.text = precision.format(0.0)
+                }
+
+            }
         }
+
     }
 
     override fun onPause() {
@@ -481,6 +509,10 @@ class MainActivity : AppCompatActivity() {
               Picasso.get().load(getValuteFlagPath(valuteInfo?.valute)).into(chosenImage)
               chosenImage.layoutParams.width = dpToPx(58,resources.displayMetrics.density)
               chosenImage.layoutParams.height= dpToPx(58,resources.displayMetrics.density)
+          } else {
+//              fieldToChange.text = "Select currency"
+//              chosenImage.layoutParams.width = dpToPx(0,resources.displayMetrics.density)
+//              chosenImage.layoutParams.height= dpToPx(0,resources.displayMetrics.density)
           }
 
 

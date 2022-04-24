@@ -125,7 +125,7 @@ class ValuteListActivity : AppCompatActivity() {
     fun filterList(newText:String){
 
          viewModel.valutes("%" +newText + "%").observe(this, Observer {
-             viewModel.getFilteredList(it as ArrayList<Valute>).observe(this, Observer {
+             viewModel.getFilteredList(it as ArrayList<Valute>,chosenDate).observe(this, Observer {
                  adapter.valuteInfoList = it
              })
          })
