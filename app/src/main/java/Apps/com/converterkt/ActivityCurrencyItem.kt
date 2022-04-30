@@ -45,11 +45,13 @@ class ActivityCurrencyItem : AppCompatActivity() {
         floatingScrollUp.setOnClickListener {
             rvValuteInfo.scrollToPosition(0)
             floatingScrollUp.isVisible = false
+            floatingScrollDown.isVisible = true
         }
 
         floatingScrollDown.setOnClickListener {
             rvValuteInfo.scrollToPosition(adapter.itemCount-1)
             floatingScrollDown.isVisible = false
+            floatingScrollUp.isVisible = true
 
         }
 
