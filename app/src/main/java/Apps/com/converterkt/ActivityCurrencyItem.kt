@@ -8,11 +8,16 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_currency_item.*
+import kotlinx.android.synthetic.main.activity_valute_list.*
 
 class ActivityCurrencyItem : AppCompatActivity() {
     private lateinit var viewModel : ConverterViewModel
@@ -36,6 +41,43 @@ class ActivityCurrencyItem : AppCompatActivity() {
 
         rvValuteInfo.layoutManager = LinearLayoutManager(this)
 
+
+        floatingScrollUp.setOnClickListener {
+            rvValuteInfo.scrollToPosition(0)
+            floatingScrollUp.isVisible = false
+        }
+
+        floatingScrollDown.setOnClickListener {
+            rvValuteInfo.scrollToPosition(adapter.itemCount-1)
+            floatingScrollDown.isVisible = false
+
+        }
+
+
+        rvValuteInfo.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                when (newState){
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+                        var linearLayoutManager =  recyclerView.layoutManager as LinearLayoutManager
+                        var currentItem = linearLayoutManager.findFirstVisibleItemPosition()
+//                        Log.v("scroll_A", "currentItem $currentItem")
+                        floatingScrollUp.isVisible = currentItem != 0
+
+
+                        floatingScrollDown.isVisible = currentItem != (adapter.itemCount-1) - 4
+                    }
+                }
+
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+            }
+        })
+
     }
 
 
@@ -56,6 +98,8 @@ class ActivityCurrencyItem : AppCompatActivity() {
     fun fillTheList(currency:Valute){
         viewModel.getDataCurrencyItem(currency).observe(this, Observer {
             adapter.valuteInfoList = it
+            rvValuteInfo.scrollToPosition(adapter.itemCount-1)
+            floatingScrollDown.isVisible = false
         })
     }
 

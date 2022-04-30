@@ -46,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_weight="0"
+                android:background="@drawable/oval_download_btn"
                 android:backgroundTint="@color/genuineBlack"
                 app:srcCompat="@android:drawable/stat_sys_download" />
 

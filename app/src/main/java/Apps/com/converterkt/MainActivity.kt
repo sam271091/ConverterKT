@@ -14,10 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import Apps.com.converterkt.pojo.ValuteInfo
-import Apps.com.converterkt.utils.dpToPx
-import Apps.com.converterkt.utils.getAZN
-import Apps.com.converterkt.utils.getCurrentTime
-import Apps.com.converterkt.utils.getValuteFlagPath
+import Apps.com.converterkt.utils.*
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.Resources
@@ -89,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         chosenImage = imageValute1
 
 
-        chosenDate = calendar.time
+        chosenDate = getEndOfTheDay(calendar.time)
 
         setDatePresentation()
 
@@ -189,7 +186,7 @@ class MainActivity : AppCompatActivity() {
 
                 calendar.set(year,month,day)
 
-                chosenDate = calendar.time
+                chosenDate = getEndOfTheDay(calendar.time)
 
                 setDatePresentation()
 
