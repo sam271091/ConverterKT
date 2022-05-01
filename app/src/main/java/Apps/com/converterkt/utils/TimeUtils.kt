@@ -16,3 +16,13 @@ fun getEndOfTheDay(date:Date) : Date {
 
    return calendar.time
 }
+
+fun getStartOfTheDay(date:Date) : Date {
+   var calendar = Calendar.getInstance()
+   calendar.setTime(date)
+   calendar.set(Calendar.HOUR_OF_DAY, 0)
+   calendar.set(Calendar.MINUTE, 0)
+   calendar.set(Calendar.SECOND, 0)
+
+   return calendar.time
+}

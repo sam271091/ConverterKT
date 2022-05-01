@@ -41,6 +41,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun loadDataByDate(chosenDate:Date){
+        currDate = chosenDate
         var calendar = Calendar.getInstance()
         calendar.time = chosenDate
         calendar.add(Calendar.DAY_OF_YEAR, -21)

@@ -172,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
 
         imageDownloadbtn.setOnClickListener {
-            viewModel.loadDataByDate(chosenDate)
+            viewModel.loadDataByDate(getStartOfTheDay(chosenDate))
         }
 
     }
@@ -443,6 +443,9 @@ class MainActivity : AppCompatActivity() {
     fun calculateResult(){
         val sumValue = editTextSum.text.toString()
 
+
+
+
         var Res = 0.0
 
        if (!sumValue.equals("")){
@@ -615,6 +618,8 @@ class MainActivity : AppCompatActivity() {
 
         val sumValue = editTextSum.text.toString()
 
+
+
         if (number==46){
             dotIsPressed = true
         }
@@ -641,6 +646,10 @@ class MainActivity : AppCompatActivity() {
             editTextSum.setText(sumValue + number)
         }
 
+
+        if (editTextSum.text.toString().equals("00")){
+            editTextSum.setText("0")
+        }
 
     }
 
