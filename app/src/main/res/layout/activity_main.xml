@@ -37,15 +37,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_weight="0"
+                android:layout_marginBottom="5dp"
                 android:text="TextView"
                 android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/imageDownloadbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:layout_weight="0"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/oval_download_btn"
                 android:backgroundTint="@color/genuineBlack"
                 app:srcCompat="@android:drawable/stat_sys_download" />
