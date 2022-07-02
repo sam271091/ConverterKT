@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import Apps.com.converterkt.api.ApiFactory
+import Apps.com.converterkt.api.BanksAPIFactory
 import Apps.com.converterkt.database.AppDatabase
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
@@ -37,8 +38,29 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     init {
 
         loadDataByDate(currDate)
+        loadBanksInfo()
 
     }
+
+
+
+    fun loadBanksInfo(){
+        val disposable = BanksAPIFactory.apiService.getBanksRates()
+            .subscribeOn(Schedulers.io())
+//            .delaySubscription(1,TimeUnit.SECONDS)
+            .retry()
+            .subscribe({
+
+
+                db.converterDao().clearBankInfo()
+                db.converterDao().insertBankInfos(it)
+
+            },{
+                Log.d("ERROR_LOADING_BI",it.localizedMessage)
+            })
+
+    }
+
 
     fun loadDataByDate(chosenDate:Date){
         currDate = chosenDate

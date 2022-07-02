@@ -15,6 +15,21 @@ android {
         versionName "1.9.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        // NEW
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+    }
+
+
+    // NEW
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
 
     buildTypes {
@@ -99,5 +114,8 @@ dependencies {
 
 
     implementation 'com.google.android.gms:play-services-ads:20.6.0'
+
+    // NEW
+    androidTestImplementation "android.arch.persistence.room:testing:$room_version"
 
 }

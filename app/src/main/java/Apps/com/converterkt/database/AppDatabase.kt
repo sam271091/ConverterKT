@@ -7,10 +7,14 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import Apps.com.converterkt.converters.DateConverter
 import Apps.com.converterkt.converters.ValuteConverter
+import Apps.com.converterkt.pojo.BankInfo
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import Apps.com.converterkt.utils.MIGRATION_1_2
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Valute::class,ValuteInfo::class], version = 1, exportSchema = false)
+@Database(entities = [(Valute::class),(ValuteInfo::class),(BankInfo::class)], version = 2, exportSchema = true)
 @TypeConverters(value = [ValuteConverter::class,DateConverter::class])
 abstract class AppDatabase : RoomDatabase() {
 
@@ -26,7 +30,9 @@ abstract class AppDatabase : RoomDatabase() {
             val instance = Room.databaseBuilder(
                 context,
                 AppDatabase::class.java,
-                DB_NAME).build()
+                DB_NAME)
+                .addMigrations(MIGRATION_1_2)
+                .build()
 
             db = instance
 
@@ -34,6 +40,9 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
     }
+
+
+
 
     abstract fun converterDao():ConverterDao
 }

@@ -1,5 +1,6 @@
 package Apps.com.converterkt.database
 
+import Apps.com.converterkt.pojo.BankInfo
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -48,5 +49,15 @@ interface ConverterDao {
     @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo WHERE valute = :valute AND date <= :chosenDate GROUP by valute)")
     fun getFilteredValuteInfo(valute:Valute,chosenDate:Date) : ValuteInfo
 
+
+
+
+    //Banks
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBankInfos(bankInfo:List<BankInfo?>)
+
+    @Query("DELETE FROM bankinfo")
+    fun clearBankInfo()
 
 }
