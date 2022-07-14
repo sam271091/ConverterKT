@@ -172,9 +172,13 @@ class MainActivity : AppCompatActivity() {
 
 
         imageDownloadbtn.setOnClickListener {
-            viewModel.loadDataByDate(getStartOfTheDay(chosenDate))
+//            viewModel.loadDataByDate(getStartOfTheDay(chosenDate))
         }
 
+
+        viewModel.allValuteInfo(chosenDate).observe(this, Observer {
+            setValuteInfoByDate()
+        })
     }
 
 
@@ -188,14 +192,20 @@ class MainActivity : AppCompatActivity() {
 
                 chosenDate = getEndOfTheDay(calendar.time)
 
-                setDatePresentation()
 
-                setValuteInfoByDate()
+                setDatePresentation()
+                viewModel.loadDataByDate(getStartOfTheDay(chosenDate))
+
+
+
+//                setValuteInfoByDate()
 
             },calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
             )
         datePicker.show()
+
+
     }
 
 
@@ -243,6 +253,9 @@ class MainActivity : AppCompatActivity() {
             GlobalScope.launch{
 
                 try {
+
+
+
                     var firstValuteData = viewModel.getFilteredValuteInfo(firstValute?.valute as Valute,chosenDate)
                     var secondValuteData = viewModel.getFilteredValuteInfo(secondValute?.valute as Valute,chosenDate)
 

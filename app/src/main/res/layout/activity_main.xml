@@ -49,6 +49,7 @@
                 android:layout_weight="0"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:visibility="invisible"
                 android:background="@drawable/oval_download_btn"
                 android:backgroundTint="@color/genuineBlack"
                 app:srcCompat="@android:drawable/stat_sys_download" />
