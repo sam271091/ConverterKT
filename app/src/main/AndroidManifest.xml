@@ -11,10 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConverterKT">
         <activity
+            android:name=".BanksDataActivity"
+            android:exported="false" />
+        <activity
             android:name=".ActivityCurrencyItem"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-        <!-- <activity -->
+            android:screenOrientation="portrait" /> <!-- <activity -->
         <!-- android:name=".SplashActivity" -->
         <!-- android:exported="false" /> -->
         <activity
@@ -38,13 +40,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3288419679900414~9346426260"/>
-
-
+            android:value="ca-app-pub-3288419679900414~9346426260" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

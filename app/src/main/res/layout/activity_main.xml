@@ -41,18 +41,16 @@
                 android:text="TextView"
                 android:textSize="20sp" />
 
-            <ImageButton
-                android:id="@+id/imageDownloadbtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <Button
+                android:id="@+id/banksBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="10dp"
-                android:layout_weight="0"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:visibility="invisible"
-                android:background="@drawable/oval_download_btn"
-                android:backgroundTint="@color/genuineBlack"
-                app:srcCompat="@android:drawable/stat_sys_download" />
+                android:layout_weight="0"
+                android:backgroundTint="@color/custom_color_background"
+                android:text="Banks" />
 
         </LinearLayout>
 
@@ -135,7 +133,7 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/btn_1"
+                        android:id="@+id/btn_7"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
@@ -144,27 +142,26 @@
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="1"
+                        android:text="7"
                         android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/btn_2"
+                        android:id="@+id/btn_8"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-
-                        android:layout_marginTop="5dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="2"
+                        android:text="8"
                         android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/btn_3"
+                        android:id="@+id/btn_9"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -173,10 +170,9 @@
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="3"
+                        android:text="9"
                         android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
-
                 </TableRow>
 
                 <TableRow
@@ -232,7 +228,7 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/btn_7"
+                        android:id="@+id/btn_1"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
@@ -241,26 +237,27 @@
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="7"
+                        android:text="1"
                         android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/btn_8"
+                        android:id="@+id/btn_2"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+
+                        android:layout_marginTop="5dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="8"
+                        android:text="2"
                         android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/btn_9"
+                        android:id="@+id/btn_3"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -269,10 +266,13 @@
                         android:layout_marginBottom="5dp"
                         android:backgroundTint="@color/custom_color_background"
                         android:onClick="onClickAction"
-                        android:text="9"
+                        android:text="3"
                         android:textSize="@dimen/text_size_labels"
                         android:textStyle="bold" />
+
                 </TableRow>
+
+
 
                 <TableRow
                     android:layout_width="match_parent"

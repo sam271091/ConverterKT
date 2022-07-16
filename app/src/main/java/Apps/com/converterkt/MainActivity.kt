@@ -171,8 +171,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        imageDownloadbtn.setOnClickListener {
-//            viewModel.loadDataByDate(getStartOfTheDay(chosenDate))
+        banksBtn.setOnClickListener {
+
+            val intent = BanksDataActivity.newIntent(this)
+            startActivity(intent)
         }
 
 
@@ -222,7 +224,7 @@ class MainActivity : AppCompatActivity() {
 
         var secondSavedValute = preferences.getString("secondValute","")
 
-        if (firstSavedValute != "" || secondSavedValute != ""){
+        if (!firstSavedValute.equals("")  && !secondSavedValute.equals("")){
 
 
             GlobalScope.launch{

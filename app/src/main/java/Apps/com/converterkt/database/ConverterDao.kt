@@ -60,4 +60,13 @@ interface ConverterDao {
     @Query("DELETE FROM bankinfo")
     fun clearBankInfo()
 
+
+    @Query("SELECT * FROM bankinfo")
+    fun getAllBankInfos() : LiveData<List<BankInfo>>
+
+//    @Query("SELECT 0 as id,0 as date, '' as currencyCode, bank,bankLogo,0 as buyCash,0 as buyNonCash,0 as buyForCards,0 as sellCash,0 as sellNonCash,0 as sellForCards  FROM BankInfo ORDER BY bank,bankLogo")
+@Query("SELECT bank,bankLogo FROM BankInfo GROUP BY bank,bankLogo")
+    fun getAllBanksData() : LiveData<List<BankInfo>>
+
+
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import Apps.com.converterkt.api.ApiFactory
 import Apps.com.converterkt.api.BanksAPIFactory
 import Apps.com.converterkt.database.AppDatabase
+import Apps.com.converterkt.pojo.BankInfo
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getAZN
@@ -30,9 +31,10 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val allValuteInfo : (chosenDate:Date)-> LiveData<List<ValuteInfo>> = {db.converterDao().getAllValuteInfo(it)}
     var currDate = getCurrentTime()
     var valutes : (filter:String) -> LiveData<List<Valute>> = {db.converterDao().getFilteredValutes(it)}
-
-
     val valutesNames = getValutePresentation()
+
+    val allBanksInfo = db.converterDao().getAllBankInfos()
+    val allBanksData = db.converterDao().getAllBanksData()
 
 
     init {
@@ -80,6 +82,11 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
             currDate = calendar.time
         }
     }
+
+
+//    fun getAllBankInfo() : LiveData<List<BankInfo>>{
+//        return db.converterDao().getAllBankInfos()
+//    }
 
     fun getFilteredList(filter:ArrayList<Valute>,chosenDate:Date): LiveData<List<ValuteInfo>> {
 
