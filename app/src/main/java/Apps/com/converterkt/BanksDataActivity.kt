@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import kotlinx.android.synthetic.main.activity_banks_data.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
 
 class BanksDataActivity : AppCompatActivity() {
@@ -26,7 +28,12 @@ class BanksDataActivity : AppCompatActivity() {
 //        adViewList.loadAd(adRequest)
 
 
+        banksInfoRV.adapter = adapter
+
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
+
+
+        banksInfoRV.layoutManager = LinearLayoutManager(this)
 
 
         viewModel.allBanksInfo.observe(this, Observer {

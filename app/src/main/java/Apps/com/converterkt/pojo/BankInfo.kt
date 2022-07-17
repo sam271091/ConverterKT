@@ -22,6 +22,9 @@ data class BankInfo(
     @SerializedName("bank")
     @Expose
     var  bank :String ?=null,
+    @SerializedName("bankName")
+    @Expose
+    var  bankName :String ?=null,
     @SerializedName("bankLogo")
     @Expose
     var  bankLogo : String ?=null,
