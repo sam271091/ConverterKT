@@ -4,10 +4,12 @@ import Apps.com.converterkt.R
 import Apps.com.converterkt.pojo.BankInfo
 import Apps.com.converterkt.utils.dpToPx
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentViewHolder
 import com.squareup.picasso.Picasso
@@ -16,8 +18,11 @@ import de.codecrafters.tableview.TableView
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter
 import kotlinx.android.synthetic.main.item_bank_info.view.*
+import java.text.DecimalFormat
 
 class BanksInfoAdapter(context:Context):RecyclerView.Adapter<BanksInfoAdapter.BanksInfoViewHolder>() {
+
+    private var precision =  DecimalFormat("#,##0.0000")
 
     var banksDataList : List<BankInfo> = listOf()
 
@@ -47,35 +52,9 @@ class BanksInfoAdapter(context:Context):RecyclerView.Adapter<BanksInfoAdapter.Ba
                 tvBankName.setText(bankData.bankName)
 
 
-
-                val list: MutableList<Array<String?>> = ArrayList()
-
-                val valutelist: MutableList<String?> = ArrayList<String?>()
-
-
                 var banksDetails = banksInfoList.filter { it.bank.equals(bankData.bank)}
 
-                for (banksDetailsVi in banksDetails) {
-                    val records = arrayOfNulls<String>(5)
-                    if (banksDetailsVi.currencyCode == null) {
-                        records[0] = "None"
-                    } else {
-                        records[0] = banksDetailsVi.currencyCode
-                    }
-                    valutelist.add(banksDetailsVi.currencyCode)
-                    records[1] = banksDetailsVi.buyCash?.let { java.lang.Double.toString(it) }
-                    records[2] = banksDetailsVi.sellCash?.let { java.lang.Double.toString(it) }
-                    records[3] = banksDetailsVi.buyNonCash?.let { java.lang.Double.toString(it) }
-                    records[4] = banksDetailsVi.sellNonCash?.let { java.lang.Double.toString(it) }
-                    list.add(records)
-                }
-
-
-
-                val tableView =
-                    holder.itemView.findViewById<View>(R.id.tableView) as TableView<Array<String>>
-
-                createTable(tableView,holder.itemView.context,list)
+                createTableData(banksDetails,holder)
 
 
             }
@@ -84,15 +63,52 @@ class BanksInfoAdapter(context:Context):RecyclerView.Adapter<BanksInfoAdapter.Ba
     }
 
 
-    fun createTable(tableView: TableView<*>?, context: Context?, tableData:MutableList<Array<String?>>) {
-//        reportsGenerator.setTableData(tableData)
-//        reportsGenerator.createTable(tableView, context, holder.itemView)
+    fun createTableData(banksDetails:List<BankInfo>,holder:BanksInfoViewHolder){
+        val list: MutableList<Array<String?>> = ArrayList()
+
+        val valutelist: MutableList<String?> = ArrayList<String?>()
+
+
+
+
+        for (banksDetailsVi in banksDetails) {
+            val records = arrayOfNulls<String>(5)
+            if (banksDetailsVi.currencyCode == null) {
+                records[0] = "None"
+            } else {
+                records[0] = banksDetailsVi.currencyCode
+            }
+            valutelist.add(banksDetailsVi.currencyCode)
+//            records[1] = banksDetailsVi.buyCash?.let { java.lang.Double.toString(it) }
+//            records[2] = banksDetailsVi.sellCash?.let { java.lang.Double.toString(it) }
+//            records[3] = banksDetailsVi.buyNonCash?.let { java.lang.Double.toString(it) }
+//            records[4] = banksDetailsVi.sellNonCash?.let { java.lang.Double.toString(it) }
+            records[1] = banksDetailsVi.buyCash?.let {precision.format(it)}
+            records[2] = banksDetailsVi.sellCash?.let { precision.format(it) }
+            records[3] = banksDetailsVi.buyNonCash?.let { precision.format(it)}
+            records[4] = banksDetailsVi.sellNonCash?.let { precision.format(it) }
+            list.add(records)
+        }
+
+
+
+        val tableView =
+            holder.itemView.findViewById<View>(R.id.tableView) as TableView<Array<String>>
+
+        createTable(tableView,holder.itemView.context,list)
+    }
+
+
+    fun createTable(tableView: TableView<*>?, context: Context, tableData:MutableList<Array<String?>>) {
+
 
         tableView!!.columnCount = 5
 
-        tableView!!.setHeaderBackgroundColor(Color.parseColor("#2ecc71"))
+//        tableView!!.setHeaderBackgroundColor(Color.parseColor("#2ecc71"))
+        tableView!!.setHeaderBackgroundColor(ContextCompat.getColor(context,R.color.labelTextColor))
 
-        val Columns = arrayOf("Valute","buy Cash","sell Cash","buy non-Cash","sell non-Cash")
+
+        val Columns = arrayOf("Val","buy Csh","sell Csh","buy nonCsh","sell nonCsh")
 
 
         tableView!!.headerAdapter = SimpleTableHeaderAdapter(context, *Columns)
