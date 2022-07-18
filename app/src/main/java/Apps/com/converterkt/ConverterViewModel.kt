@@ -49,7 +49,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     fun loadBanksInfo(){
         val disposable = BanksAPIFactory.apiService.getBanksRates()
             .subscribeOn(Schedulers.io())
-//            .delaySubscription(1,TimeUnit.SECONDS)
+            .delaySubscription(1,TimeUnit.SECONDS)
             .retry()
             .subscribe({
 
