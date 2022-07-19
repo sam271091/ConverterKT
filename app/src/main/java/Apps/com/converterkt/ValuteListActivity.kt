@@ -86,7 +86,7 @@ class ValuteListActivity : AppCompatActivity() {
             }
             override fun onQueryTextChange(newText: String?): Boolean {
 
-                if (newText != null && newText?.length > 2){
+                if (newText != null && newText?.length > 0){
                     filterList(newText)
                 } else {
                     fillTheList()

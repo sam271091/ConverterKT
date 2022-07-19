@@ -14,4 +14,5 @@
     <color name="colorPrimaryDark">#353E4F</color>
     <color name="mainwhite">#F9F8F8</color>
     <color name="genuineBlack">#FF000000</color>
+    <color name="greyColor">#E8E8E8</color>
 </resources>

@@ -6,4 +6,8 @@
     <string name="date_label">Date</string>
     <string name="nominal_label">Nominal</string>
     <string name="rate_label">Rate</string>
+    <string name="banks_label">Banks</string>
+    <string name="valute_col_label">Valute</string>
+    <string name="buycash_col_label">Buy Cash</string>
+    <string name="sellcash_col_label">Sell Cash</string>
 </resources>

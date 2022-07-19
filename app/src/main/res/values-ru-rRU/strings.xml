@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Converter</string>
+    <string name="select_currency_label">Выберите валюту</string>
+    <string name="code_label">Код</string>
+    <string name="name_label">Наименование</string>
+    <string name="date_label">Дата</string>
+    <string name="nominal_label">Коэффициент</string>
+    <string name="rate_label">Курс</string>
+    <string name="banks_label">Банки</string>
+    <string name="valute_col_label">Валюта</string>
+    <string name="buycash_col_label">Покупка нал.</string>
+    <string name="sellcash_col_label">Продажа нал.</string>
+</resources>

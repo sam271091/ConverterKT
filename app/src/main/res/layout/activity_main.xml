@@ -50,7 +50,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="0"
                 android:backgroundTint="@color/custom_color_background"
-                android:text="Banks" />
+                android:text="@string/banks_label" />
 
         </LinearLayout>
 
