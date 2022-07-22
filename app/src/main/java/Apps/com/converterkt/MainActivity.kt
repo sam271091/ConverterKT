@@ -200,7 +200,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//                setValuteInfoByDate()
+                if (!checkForInternet(this)){
+                    setValuteInfoByDate()
+                }
+
 
             },calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)
@@ -227,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         if (!firstSavedValute.equals("")  && !secondSavedValute.equals("")){
 
 
-            GlobalScope.launch{
+            CoroutineScope(Dispatchers.IO).launch{
 
                 firstValute = viewModel.getFilteredValuteInfo(viewModel.getValuteByCode(firstSavedValute as String),chosenDate)
 
@@ -252,7 +255,7 @@ class MainActivity : AppCompatActivity() {
 
     fun setValuteInfoByDate(){
         runBlocking (Dispatchers.IO) {
-            GlobalScope.launch{
+            CoroutineScope(Dispatchers.IO).launch{
 
                 try {
 
