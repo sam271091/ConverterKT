@@ -92,49 +92,82 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/textViewNameLabel"
-        app:layout_constraintBottom_toTopOf="@id/rvValuteInfo"
+        app:layout_constraintBottom_toTopOf="@id/fragmentContainerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintGuide_percent="0.4" />
 
 
-
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvValuteInfo"
-
-        android:layout_width="0dp"
-        android:layout_height="380dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingScrollDown"
-            android:layout_width="wrap_content"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabsChanger"
+            android:layout_width="409dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:clickable="true"
-            android:backgroundTint="@color/custom_color_white"
-            app:layout_constraintBottom_toBottomOf="@+id/rvValuteInfo"
-            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="306dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/arrow_down_float" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guideline2"
+            app:layout_constraintBottom_toTopOf="@id/fragmentContainerView">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingScrollUp"
-            android:layout_width="wrap_content"
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/history_label" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/banks_valute_label" />
+ />
+        </com.google.android.material.tabs.TabLayout>
+
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:backgroundTint="@color/custom_color_white"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rvValuteInfo"
-            app:srcCompat="@android:drawable/arrow_up_float" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabsChanger"/>
+
+
+
+
+        <!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/rvValuteInfo"-->
+
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="380dp"-->
+
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/guideline2" />-->
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/floatingScrollDown"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:clickable="true"-->
+<!--            android:backgroundTint="@color/custom_color_white"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/rvValuteInfo"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:srcCompat="@android:drawable/arrow_down_float" />-->
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/floatingScrollUp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:clickable="true"-->
+<!--            android:backgroundTint="@color/custom_color_white"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/rvValuteInfo"-->
+<!--            app:srcCompat="@android:drawable/arrow_up_float" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

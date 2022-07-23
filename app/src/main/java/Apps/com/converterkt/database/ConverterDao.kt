@@ -69,4 +69,6 @@ interface ConverterDao {
     fun getAllBanksData() : LiveData<List<BankInfo>>
 
 
+    @Query("SELECT bank,bankName,buyCash,sellCash FROM BankInfo Where currencyCode = :valuteCode")
+    fun getBanksDataByValute(valuteCode:String) : LiveData<List<BankInfo>>
 }

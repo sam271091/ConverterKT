@@ -35,6 +35,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
 
     val allBanksInfo = db.converterDao().getAllBankInfos()
     val allBanksData = db.converterDao().getAllBanksData()
+    val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
 
 
     init {
