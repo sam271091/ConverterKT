@@ -112,10 +112,10 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
 
         var height = tableData.size * 60;
 
-        tableView.layoutParams.height= context?.resources?.displayMetrics?.let {
-            dpToPx(height,
-                it?.density)
-        }!!
+//        tableView.layoutParams.height= context?.resources?.displayMetrics?.let {
+//            dpToPx(height,
+//                it?.density)
+//        }!!
 
     }
 
