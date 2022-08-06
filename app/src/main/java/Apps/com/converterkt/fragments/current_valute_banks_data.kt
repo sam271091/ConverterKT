@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.squareup.picasso.Picasso
 import de.codecrafters.tableview.TableDataAdapter
 import de.codecrafters.tableview.TableView
 import de.codecrafters.tableview.listeners.TableDataClickListener
@@ -52,8 +53,11 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
         tableView = tableViewBanksByValute as TableView<Array<String>>
 
         viewModel.banksDataByValute(currency.code).observe(viewLifecycleOwner, Observer {
-            createTableData(it,view)
-            banksDataDetails = it
+
+            banksDataDetails = it.filter { it.buyCash != 0.0000 && it.sellCash != 0.0000 }
+
+            createTableData(banksDataDetails,view)
+
         })
 
 
@@ -85,6 +89,7 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
                 bottomSheetView.tvBuyCashValue.text         = rowBankInfo.buyCash?.let {precision.format(it)}
                 bottomSheetView.tvSellCashValue.text         = rowBankInfo.sellCash?.let {precision.format(it)}
 
+                Picasso.get().load(rowBankInfo.bankLogo).into(bottomSheetView.ivBankLogo)
 
 
 
