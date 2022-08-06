@@ -74,7 +74,7 @@ class BanksInfoAdapter(context:Context):RecyclerView.Adapter<BanksInfoAdapter.Ba
                 tvBankName.setText(bankData.bankName)
 
 
-                var banksDetails = banksInfoList.filter { it.bank.equals(bankData.bank)}
+                var banksDetails = banksInfoList.filter { it.bank.equals(bankData.bank) && it.buyCash != 0.0000 && it.sellCash != 0.0000}
 
                 createTableData(banksDetails,holder)
 
