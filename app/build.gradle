@@ -11,8 +11,8 @@ android {
         applicationId "demo.com.converterkt"
         minSdk 21
         targetSdk 30
-        versionCode 18
-        versionName "1.9.7"
+        versionCode 19
+        versionName "1.9.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

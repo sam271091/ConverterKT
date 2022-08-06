@@ -1,38 +1,43 @@
 package Apps.com.converterkt.fragments
 
 import Apps.com.converterkt.ConverterViewModel
+import Apps.com.converterkt.R
+import Apps.com.converterkt.pojo.BankInfo
+import Apps.com.converterkt.pojo.Valute
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import Apps.com.converterkt.R
-import Apps.com.converterkt.adapters.BanksInfoAdapter
-import Apps.com.converterkt.adapters.CurrencyItemDataAdapter
-import Apps.com.converterkt.pojo.BankInfo
-import Apps.com.converterkt.pojo.Valute
-import Apps.com.converterkt.pojo.ValuteInfo
-import Apps.com.converterkt.utils.dpToPx
-import android.content.Context
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.codecrafters.tableview.TableDataAdapter
 import de.codecrafters.tableview.TableView
+import de.codecrafters.tableview.listeners.TableDataClickListener
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter
 import de.codecrafters.tableview.toolkit.TableDataRowBackgroundProviders
+import kotlinx.android.synthetic.main.bank_row_details.*
+import kotlinx.android.synthetic.main.bank_row_details.textViewBankNameDetail
+import kotlinx.android.synthetic.main.bank_row_details.tvBuyCashValue
+import kotlinx.android.synthetic.main.bank_row_details.tvSellCashValue
+import kotlinx.android.synthetic.main.bank_row_details.view.*
 import kotlinx.android.synthetic.main.fragment_current_valute_banks_data.*
 import kotlinx.android.synthetic.main.valute_history_fragment.*
-import java.io.Serializable
 import java.text.DecimalFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class current_valute_banks_data(val currency: Valute, var viewModel : ConverterViewModel) : Fragment() {
 
     private var precision =  DecimalFormat("#,##0.0000")
+
+    private var banksDataDetails = listOf<BankInfo>()
+
+    private lateinit var tableView : TableView<Array<String>>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,15 +49,58 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        tableView = tableViewBanksByValute as TableView<Array<String>>
+
         viewModel.banksDataByValute(currency.code).observe(viewLifecycleOwner, Observer {
             createTableData(it,view)
+            banksDataDetails = it
         })
 
 
+        showBankDetails()
 
         super.onViewCreated(view, savedInstanceState)
     }
 
+
+    fun showBankDetails(){
+        var bottomSheetDialog = BottomSheetDialog(
+            tableView.getContext(), R.style.BottomSheetDialogTheme
+        )
+
+        tableView.addDataClickListener(TableDataClickListener { rowIndex, clickedData ->
+            var rowBankInfo = banksDataDetails.get(rowIndex)
+
+
+            if (!bottomSheetDialog.isShowing){
+
+                val bottomSheetView = LayoutInflater.from(tableView.context)
+                    .inflate(
+                        R.layout.bank_row_details,
+                        bottomSheetContainerBankDetails
+                    )
+
+
+                bottomSheetView.textViewBankNameDetail.text = rowBankInfo.bankName.toString()
+                bottomSheetView.tvBuyCashValue.text         = rowBankInfo.buyCash?.let {precision.format(it)}
+                bottomSheetView.tvSellCashValue.text         = rowBankInfo.sellCash?.let {precision.format(it)}
+
+
+
+
+                bottomSheetDialog.setContentView(bottomSheetView)
+
+
+
+                bottomSheetDialog.show()
+
+            }
+
+
+        })
+
+
+    }
 
 
     fun createTableData(banksDetails:List<BankInfo>,view: View){
@@ -79,7 +127,8 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
 
 
 
-        val tableView = tableViewBanksByValute as TableView<Array<String>>
+
+
 
         createTable(tableView,view.context,list)
     }

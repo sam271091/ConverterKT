@@ -11,4 +11,7 @@
     <string name="valute_col_label">Валюта</string>
     <string name="buycash_col_label">Покупка нал.</string>
     <string name="sellcash_col_label">Продажа нал.</string>
+    <string name="history_label">История</string>
+    <string name="banks_valute_label">Банки</string>
+    <string name="bank_row_label">Банк</string>
 </resources>
