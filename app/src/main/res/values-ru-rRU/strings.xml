@@ -14,4 +14,7 @@
     <string name="history_label">История</string>
     <string name="banks_valute_label">Банки</string>
     <string name="bank_row_label">Банк</string>
+    <string name="label_best_rates_buy">" Лучшая покупка"</string>
+    <string name="label_best_rates_sell">Лучшая продажа</string>
+    <string name="hello_blank_fragment">Пустой фрагмент</string>
 </resources>

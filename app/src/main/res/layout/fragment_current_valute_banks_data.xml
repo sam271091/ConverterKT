@@ -13,11 +13,75 @@
         android:layout_height="match_parent">
 
 
+        <TextView
+            android:id="@+id/labelMostFavorableRatesBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/label_best_rates_buy"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/mostFavorableRatesBuy"
+            app:layout_constraintEnd_toStartOf="@id/guidelineFavourablerates"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mostFavorableRatesBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="10dp"
+            android:text=""
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/tableViewBanksByValute"
+            app:layout_constraintEnd_toStartOf="@id/guidelineFavourablerates"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@id/labelMostFavorableRatesBuy" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineFavourablerates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+
+        <TextView
+            android:id="@+id/mostFavorableRatesSell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text=""
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/tableViewBanksByValute"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelineFavourablerates"
+
+            app:layout_constraintTop_toBottomOf="@id/labelMostFavorableRatesSell" />
+
+        <TextView
+            android:id="@+id/labelMostFavorableRatesSell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/label_best_rates_sell"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/mostFavorableRatesSell"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toEndOf="@id/guidelineFavourablerates"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <de.codecrafters.tableview.TableView
 
             android:id="@+id/tableViewBanksByValute"
             android:layout_width="match_parent"
-            android:layout_height="1000dp"
+            android:layout_height="800dp"
             android:layout_marginTop="25dp"
             app:tableView_headerElevation="10"
 

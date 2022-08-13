@@ -108,6 +108,22 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
     }
 
 
+    fun setBestRates(banksDetails_sort: List<BankInfo>){
+        val value = banksDetails_sort.map { it.copy() }
+        (value as MutableList).sortByDescending { it.buyCash }
+
+
+        if (value.size > 0){
+            mostFavorableRatesBuy.text = value.get(0).bankName
+        }
+
+        (value as MutableList).sortBy { it.sellCash }
+
+        if (value.size > 0){
+            mostFavorableRatesSell.text = value.get(0).bankName
+        }
+    }
+
     fun createTableData(banksDetails:List<BankInfo>,view: View){
         val list: MutableList<Array<String?>> = ArrayList()
 
@@ -136,6 +152,8 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
 
 
         createTable(tableView,view.context,list)
+
+        setBestRates(banksDetails)
     }
 
 
