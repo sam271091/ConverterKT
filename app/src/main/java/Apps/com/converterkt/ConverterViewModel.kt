@@ -38,6 +38,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val allBanksData = db.converterDao().getAllBanksData()
     val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
 
+//    val favoriteValutes = db.converterDao().getFavouriteValutes()
 
     init {
 
@@ -130,6 +131,10 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         db.converterDao().deleteFavouriteValute(favoriteValute)
     }
 
+
+    fun getFavoriteValutes() : List<FavoriteValute?>{
+        return db.converterDao().getFavouriteValutes()
+    }
 
 
 

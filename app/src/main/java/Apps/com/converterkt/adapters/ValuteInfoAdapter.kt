@@ -7,18 +7,28 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import Apps.com.converterkt.R
+import Apps.com.converterkt.pojo.FavoriteValute
+import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getValuteFlagPath
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_currency_item.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
 import kotlinx.android.synthetic.main.item_valute_info.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
 
 class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.ValuteInfoViewHolder>() {
 
+    var favValutes : List<FavoriteValute?> = listOf()
+
     var valuteInfoList : List<ValuteInfo> = listOf()
+
 
 
     set(value) {
@@ -52,6 +62,10 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
                     onValuteInfoClickListener?.onClick(this)
                 }
 
+                checkFavorite(itemView.ivFavList,valuteInfo.valute)
+
+
+
 
             }
 
@@ -60,6 +74,19 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
 
     }
 
+    fun checkFavorite(imageViewFav:ImageView,valute: Valute?){
+        var isFavorite = favValutes.filter { it?.valute == valute }.size != 0
+        setFavourite(isFavorite,imageViewFav)
+    }
+
+    fun setFavourite(isFavorite:Boolean,imageViewFav:ImageView){
+
+        if (!isFavorite) {
+            imageViewFav.setImageResource(R.drawable.favourite_add_to)
+        } else {
+            imageViewFav.setImageResource(R.drawable.favourite_remove)
+        }
+    }
 
 
     override fun getItemCount(): Int {
@@ -73,6 +100,7 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
         val tvValuteFullName = itemView.tvValuteFullName
         val tvValue = itemView.tvValue
         val tvNominal = itemView.tvNominal
+        val ivFavList = itemView.ivFavList
     }
 
     interface OnValuteInfoClickListener{

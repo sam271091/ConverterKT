@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import Apps.com.converterkt.adapters.ValuteInfoAdapter
+import Apps.com.converterkt.pojo.FavoriteValute
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
 import android.view.animation.AnimationUtils
@@ -17,6 +18,9 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -25,6 +29,8 @@ class ValuteListActivity : AppCompatActivity() {
     private lateinit var viewModel : ConverterViewModel
     val adapter = ValuteInfoAdapter(this)
     lateinit var chosenDate : Date
+    var favValutes = listOf<FavoriteValute?>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_valute_list)
@@ -43,6 +49,13 @@ class ValuteListActivity : AppCompatActivity() {
 
 
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
+
+
+        CoroutineScope(Dispatchers.IO).launch {
+            favValutes = viewModel.getFavoriteValutes()
+        }
+
+
 
         var chosenDateLong = intent.getSerializableExtra("chosenDate") as Long
 //        var calInstance = Calendar.getInstance()
@@ -128,6 +141,7 @@ class ValuteListActivity : AppCompatActivity() {
          viewModel.valutes("%" +newText + "%").observe(this, Observer {
              viewModel.getFilteredList(it as ArrayList<Valute>,chosenDate).observe(this, Observer {
                  adapter.valuteInfoList = it
+                 adapter.favValutes = favValutes
              })
          })
 
@@ -139,6 +153,7 @@ class ValuteListActivity : AppCompatActivity() {
     fun fillTheList(){
         viewModel.allValuteInfo(chosenDate).observe(this, Observer {
             adapter.valuteInfoList = it
+            adapter.favValutes = favValutes
         })
     }
 

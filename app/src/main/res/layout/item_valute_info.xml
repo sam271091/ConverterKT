@@ -107,6 +107,16 @@
 
             app:layout_constraintGuide_percent="0.7"/>
 
+        <ImageView
+            android:id="@+id/ivFavList"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvNominal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvValue"
+            app:srcCompat="@drawable/favourite_add_to" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

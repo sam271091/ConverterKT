@@ -75,6 +75,9 @@ interface ConverterDao {
     fun insertFavoriteValute(favoriteValute:FavoriteValute)
 
 
+    @Query("SELECT * FROM favoriteValutes")
+    fun getFavouriteValutes(): List<FavoriteValute?>
+
     @Query("SELECT * FROM favoriteValutes WHERE code == :valuteCode")
     fun getFavouriteValuteById(valuteCode:String): FavoriteValute?
 
