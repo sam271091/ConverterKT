@@ -1,13 +1,11 @@
 package Apps.com.converterkt.database
 
 import Apps.com.converterkt.pojo.BankInfo
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import Apps.com.converterkt.pojo.FavoriteValute
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import java.util.*
 
 @Dao
@@ -23,7 +21,7 @@ interface ConverterDao {
     fun insertValute(valute:Valute?)
 
 
-    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo Where date <= :chosenDate GROUP by valute)")
+    @Query( "SELECT valuteInfo.date,valuteInfo.valute,valuteInfo.id,valuteInfo.nominal,valuteInfo.value FROM valuteInfo   LEFT JOIN favoriteValutes ON valuteInfo.valute = favoriteValutes.valute where (valuteInfo.valute,date) IN (SELECT valute,max(date) FROM valuteInfo Where date <= :chosenDate GROUP by valuteInfo.valute) ORDER BY favoriteValutes.valute <> ''  DESC")
     fun getAllValuteInfo(chosenDate:Date) : LiveData<List<ValuteInfo>>
 
 
@@ -71,4 +69,18 @@ interface ConverterDao {
 
     @Query("SELECT bank,bankName,buyCash,sellCash,bankLogo FROM BankInfo Where currencyCode = :valuteCode")
     fun getBanksDataByValute(valuteCode:String) : LiveData<List<BankInfo>>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertFavoriteValute(favoriteValute:FavoriteValute)
+
+
+    @Query("SELECT * FROM favoriteValutes WHERE code == :valuteCode")
+    fun getFavouriteValuteById(valuteCode:String): FavoriteValute?
+
+    @Delete
+    fun deleteFavouriteValute(favoriteValute: FavoriteValute)
+
+
+
 }

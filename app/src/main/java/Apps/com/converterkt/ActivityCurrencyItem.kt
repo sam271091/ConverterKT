@@ -8,25 +8,24 @@ import Apps.com.converterkt.utils.dpToPx
 import Apps.com.converterkt.utils.getValuteFlagPath
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import androidx.core.view.isVisible
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_currency_item.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
-import java.io.Serializable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ActivityCurrencyItem : AppCompatActivity() {
     private lateinit var viewModel : ConverterViewModel
     val adapter = CurrencyItemDataAdapter(this)
+    var isFavorite = false
+    lateinit var valute:Valute
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +33,14 @@ class ActivityCurrencyItem : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
 
+
+
+
       val currency = intent.getSerializableExtra("currency")
+
+        valute = (currency as Valute)
+
+        checkFavorite()
 
 
         tabsChanger.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -107,7 +113,56 @@ class ActivityCurrencyItem : AppCompatActivity() {
 //            }
 //        })
 
+        imageViewAddToFavourite.setOnClickListener {
+            onClickChangeFavourite()
+        }
+
+
+
+
     }
+
+
+    fun checkFavorite(){
+        CoroutineScope(Dispatchers.IO).launch {
+            isFavorite = viewModel.getFavoriteValuteById(valute) != null
+            setFavourite()
+        }
+    }
+
+    fun onClickChangeFavourite() {
+        if (!isFavorite) {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.insertFavoriteValute(valute)
+                checkFavorite()
+            }
+            Toast.makeText(this, getString(R.string.add_to_favourite), Toast.LENGTH_SHORT).show()
+        } else {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.deleteFavoriteValute(valute)
+                checkFavorite()
+            }
+
+            Toast.makeText(this, getString(R.string.remove_from_favourite), Toast.LENGTH_SHORT)
+                .show()
+        }
+
+
+
+//        setFavourite()
+
+    }
+
+    fun setFavourite(){
+
+        if (!isFavorite) {
+            imageViewAddToFavourite.setImageResource(R.drawable.favourite_add_to)
+        } else {
+            imageViewAddToFavourite.setImageResource(R.drawable.favourite_remove)
+        }
+    }
+
+
 
 
     fun replaceFragment(fragment:Fragment){

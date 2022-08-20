@@ -131,7 +131,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabsChanger"/>
 
+        <ImageView
+            android:id="@+id/imageViewAddToFavourite"
+            android:layout_width="@dimen/size_of_star"
+            android:layout_height="@dimen/size_of_star"
 
+
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.696"
+            app:layout_constraintStart_toEndOf="@+id/nameTV"
+            app:layout_constraintTop_toBottomOf="@+id/flagIV"
+            app:layout_constraintVertical_bias="0.578"
+            app:srcCompat="@drawable/favourite_remove" />
 
 
         <!--    <androidx.recyclerview.widget.RecyclerView-->

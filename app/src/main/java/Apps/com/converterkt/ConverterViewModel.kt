@@ -9,6 +9,7 @@ import Apps.com.converterkt.api.ApiFactory
 import Apps.com.converterkt.api.BanksAPIFactory
 import Apps.com.converterkt.database.AppDatabase
 import Apps.com.converterkt.pojo.BankInfo
+import Apps.com.converterkt.pojo.FavoriteValute
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getAZN
@@ -110,6 +111,25 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     fun getValuteByCode(code:String):Valute{
         return db.converterDao().getValuteByCode(code)
     }
+
+
+
+    fun getFavoriteValuteById(valute: Valute) : FavoriteValute?{
+        return db.converterDao().getFavouriteValuteById(valute.code)
+    }
+
+
+    fun insertFavoriteValute(valute: Valute){
+        var favoriteValute = FavoriteValute(valute)
+        db.converterDao().insertFavoriteValute(favoriteValute)
+    }
+
+
+    fun deleteFavoriteValute(valute: Valute){
+        var favoriteValute = FavoriteValute(valute)
+        db.converterDao().deleteFavouriteValute(favoriteValute)
+    }
+
 
 
 

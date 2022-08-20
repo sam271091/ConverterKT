@@ -17,4 +17,8 @@
     <string name="bank_row_label">Bank</string>
     <string name="label_best_rates_buy">Best rates (Buy)</string>
     <string name="label_best_rates_sell">Best rates (Sell)</string>
+
+
+    <string name="add_to_favourite">Added to favorites</string>
+    <string name="remove_from_favourite">Removed from favorites</string>
 </resources>

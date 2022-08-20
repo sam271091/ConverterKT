@@ -17,4 +17,6 @@
     <string name="label_best_rates_buy">" Лучшая покупка"</string>
     <string name="label_best_rates_sell">Лучшая продажа</string>
     <string name="hello_blank_fragment">Пустой фрагмент</string>
+    <string name="add_to_favourite">Добавлен в избранное</string>
+    <string name="remove_from_favourite">Удалено из избранного</string>
 </resources>
