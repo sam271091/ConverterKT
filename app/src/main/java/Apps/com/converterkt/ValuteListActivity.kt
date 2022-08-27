@@ -14,10 +14,12 @@ import Apps.com.converterkt.pojo.FavoriteValute
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
+import kotlinx.android.synthetic.main.activity_valute_list.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,9 +53,7 @@ class ValuteListActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
 
 
-        CoroutineScope(Dispatchers.IO).launch {
-            favValutes = viewModel.getFavoriteValutes()
-        }
+        setFavValutes()
 
 
 
@@ -72,6 +72,14 @@ class ValuteListActivity : AppCompatActivity() {
                 intent.putExtra("valuteInfo",valuteInfo)
                 setResult(Activity.RESULT_OK,intent)
                 finish()
+            }
+        }
+
+
+
+        adapter.onFavoriteClickListener = object  : ValuteInfoAdapter.OnFavoriteClickListener {
+            override fun onFavoriteClick(valute: Valute?) {
+                onClickChangeFavourite(valute)
             }
         }
 
@@ -115,6 +123,54 @@ class ValuteListActivity : AppCompatActivity() {
 
     }
 
+
+    fun setFavValutes(){
+        CoroutineScope(Dispatchers.IO).launch {
+            favValutes = viewModel.getFavoriteValutes()
+            adapter.favValutes = favValutes
+        }
+
+    }
+
+
+    fun onClickChangeFavourite(valute:Valute?) {
+        var isFavorite = isFavoriteVal(valute)
+
+        if (!isFavorite) {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.insertFavoriteValute(valute as Valute)
+                setFavValutes()
+            }
+            Toast.makeText(this, getString(R.string.add_to_favourite), Toast.LENGTH_SHORT).show()
+        } else {
+            CoroutineScope(Dispatchers.IO).launch {
+                viewModel.deleteFavoriteValute(valute as Valute)
+                setFavValutes()
+            }
+
+            Toast.makeText(this, getString(R.string.remove_from_favourite), Toast.LENGTH_SHORT)
+                .show()
+        }
+
+
+        if (!searchBox.query.toString().equals("")){
+            searchBox.setQuery("",false)
+            searchBox.clearFocus()
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+    fun isFavoriteVal(valute: Valute?) : Boolean{
+        return favValutes.filter { it?.valute == valute }.size != 0
+    }
 
 
     override fun onPause() {

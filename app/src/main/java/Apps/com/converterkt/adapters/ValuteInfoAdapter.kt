@@ -13,6 +13,7 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.getValuteFlagPath
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_currency_item.*
 import kotlinx.android.synthetic.main.activity_valute_list.*
 import kotlinx.android.synthetic.main.item_valute_info.view.*
@@ -37,6 +38,7 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
     }
 
     var onValuteInfoClickListener : OnValuteInfoClickListener? = null
+    var onFavoriteClickListener   : OnFavoriteClickListener?   = null
 
     private var precision =  DecimalFormat("#,##0.0000")
 
@@ -65,6 +67,9 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
                 checkFavorite(itemView.ivFavList,valuteInfo.valute)
 
 
+                itemView.ivFavList.setOnClickListener {
+                    onFavoriteClickListener?.onFavoriteClick(valuteInfo.valute)
+                }
 
 
             }
@@ -74,8 +79,16 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
 
     }
 
+
+
+
+
+    fun isFavoriteVal(valute: Valute?) : Boolean{
+       return favValutes.filter { it?.valute == valute }.size != 0
+    }
+
     fun checkFavorite(imageViewFav:ImageView,valute: Valute?){
-        var isFavorite = favValutes.filter { it?.valute == valute }.size != 0
+        var isFavorite = isFavoriteVal(valute)//favValutes.filter { it?.valute == valute }.size != 0
         setFavourite(isFavorite,imageViewFav)
     }
 
@@ -106,4 +119,10 @@ class ValuteInfoAdapter(context:Context):RecyclerView.Adapter<ValuteInfoAdapter.
     interface OnValuteInfoClickListener{
         fun onClick(valuteInfo:ValuteInfo)
     }
+
+
+    interface OnFavoriteClickListener{
+        fun onFavoriteClick(valute:Valute?)
+    }
+
 }
