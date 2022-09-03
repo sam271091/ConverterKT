@@ -122,6 +122,7 @@
         </com.google.android.material.tabs.TabLayout>
 
 
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
             android:layout_width="match_parent"
