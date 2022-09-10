@@ -19,4 +19,6 @@
     <string name="hello_blank_fragment">Пустой фрагмент</string>
     <string name="add_to_favourite">Добавлен в избранное</string>
     <string name="remove_from_favourite">Удалено из избранного</string>
+    <string name="tab_label_graph">График</string>
+    <string name="tab_label_favorites">Избранные</string>
 </resources>
