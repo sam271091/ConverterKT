@@ -1,6 +1,8 @@
 package Apps.com.converterkt
 
 
+import Apps.com.converterkt.fragments.favorites_Converter_Fragment
+import Apps.com.converterkt.fragments.graph_Fragment
 import Apps.com.converterkt.pojo.Valute
 import android.content.Intent
 
@@ -17,32 +19,19 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.*
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
 import androidx.lifecycle.Observer
-import com.jjoe64.graphview.series.DataPoint
-import com.jjoe64.graphview.series.LineGraphSeries
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DecimalFormat
-import com.jjoe64.graphview.DefaultLabelFormatter
 import java.text.SimpleDateFormat
-import android.graphics.Paint
-import android.preference.PreferenceManager
-import android.widget.DatePicker
-import android.widget.Toast
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-
+import androidx.fragment.app.Fragment
 
 
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.tabs.TabLayout
 import java.util.*
 import kotlin.collections.ArrayList
-import com.jjoe64.graphview.series.DataPointInterface
 
-import com.jjoe64.graphview.series.PointsGraphSeries
-import com.jjoe64.graphview.series.PointsGraphSeries.CustomShape
 import kotlinx.coroutines.*
 
 
@@ -72,6 +61,8 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var chosenDate:Date
 
+    var currTabPosition : Int? =  0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -91,13 +82,6 @@ class MainActivity : AppCompatActivity() {
         setDatePresentation()
 
         viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
-//        viewModel.valutesList.observe(this, Observer {
-//            Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
-//        })
-//
-//        viewModel.allValuteInfo.observe(this, Observer {
-//            Log.d("TEST_OF_LOADING_DATA","Success in activity : $it")
-//        })
 
 
         tvValute1.setOnClickListener(View.OnClickListener {
@@ -147,8 +131,8 @@ class MainActivity : AppCompatActivity() {
             calculateResult()
         }
 
-        graphView.getGridLabelRenderer().isHorizontalLabelsVisible = false
-        graphView.getGridLabelRenderer().isVerticalLabelsVisible   = false
+//        graphView.getGridLabelRenderer().isHorizontalLabelsVisible = false
+//        graphView.getGridLabelRenderer().isVerticalLabelsVisible   = false
 
 
         imageValute1.setOnClickListener {
@@ -181,8 +165,45 @@ class MainActivity : AppCompatActivity() {
         viewModel.allValuteInfo(chosenDate).observe(this, Observer {
             setValuteInfoByDate()
         })
+
+
+        tabsChangerMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                var currentPos = tab?.position
+
+                currTabPosition = currentPos
+
+                when(currentPos){
+                    0->replaceFragment(graph_Fragment(firstValute,viewModel))
+                    1->replaceFragment(favorites_Converter_Fragment(firstValute,viewModel,editTextSum.text.toString(),chosenDate))
+                }
+
+            }
+
+
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
+
+        replaceFragment(graph_Fragment(firstValute,viewModel))
+
+
     }
 
+
+    fun replaceFragment(fragment: Fragment){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainerView_Main,fragment)
+        fragmentTransaction.commit()
+    }
 
 
     fun setDate(){
@@ -335,26 +356,32 @@ class MainActivity : AppCompatActivity() {
 
     fun makeGraph(currValuteInfo:ValuteInfo?){
 
-        graphView.removeAllSeries()
-
-        currValuteInfo?.valute?.let {
-//            viewModel.getDataForTheGraph(it).observe(this, Observer {
-//
-//
-//                createGraph(it as ArrayList<ValuteInfo>)
-//
-//
-//            })
-
-
-            lifecycleScope.launch(Dispatchers.IO){
-                var graphData = viewModel.getDataForTheGraph(it)
-
-                createGraph(graphData as ArrayList<ValuteInfo>)
-            }
-
-
+        if (currTabPosition==0){
+            replaceFragment(graph_Fragment(firstValute,viewModel))
         }
+
+
+
+//        graphView.removeAllSeries()
+//
+//        currValuteInfo?.valute?.let {
+////            viewModel.getDataForTheGraph(it).observe(this, Observer {
+////
+////
+////                createGraph(it as ArrayList<ValuteInfo>)
+////
+////
+////            })
+//
+//
+//            lifecycleScope.launch(Dispatchers.IO){
+//                var graphData = viewModel.getDataForTheGraph(it)
+//
+//                createGraph(graphData as ArrayList<ValuteInfo>)
+//            }
+//
+//
+//        }
 
 
 
@@ -364,95 +391,95 @@ class MainActivity : AppCompatActivity() {
 
     fun createGraph(graphData:ArrayList<ValuteInfo>){
 
-        graphView.getGridLabelRenderer().isHorizontalLabelsVisible = true
-        graphView.getGridLabelRenderer().isVerticalLabelsVisible   = true
-
-        graphData.sortBy { it.date }
-
-
-        if (graphData.size > 0){
-            if (firstValute?.valute == graphData[0].valute){
-
-                graphView.removeAllSeries()
-
-                var dataPoints = mutableListOf<DataPoint>()
-
-                for (valuteInfo in graphData){
-
-
-                    dataPoints.add(DataPoint(valuteInfo.date, valuteInfo.value))
-                }
-
-                var firstDate = Date()
-                var lastDate =  Date()
-
-                if (graphData.size > 0){
-                    firstDate = graphData[0].date
-                    lastDate = graphData[graphData.size-1].date
-                }
-
-
-
-                val series = LineGraphSeries(dataPoints.toTypedArray())
-
-
-//                val seriesPoints = PointsGraphSeries<DataPoint>(dataPoints.toTypedArray())
-//                seriesPoints.setCustomShape { canvas, paint, x, y, dataPoint ->
-//                    paint.color = Color.BLACK
-//                    paint.textSize = 20f
-//                    canvas.drawText(dataPoint.y.toString(), x, y, paint)
-//                }
-
-
-
-                series.setAnimated(true)
-                series.setDrawDataPoints(true)
-                series.setDataPointsRadius(15F)
-                series.setThickness(8)
-
-
-
-                series.setDrawBackground(true)
-                series.setDrawDataPoints(true)
-
-
-
-
-                graphView.addSeries(series)
-
-
-                graphView.getGridLabelRenderer().setLabelFormatter(object : DefaultLabelFormatter() {
-                    override fun formatLabel(value: Double, isValueX: Boolean): String {
-                        return if (isValueX) {
-                            sdf.format(value)
-                        } else {
-//                            super.formatLabel(value, isValueX)
-                            precision.format(value)
-                        }
-                    }
-                })
-
-
-                graphView.getGridLabelRenderer().setNumHorizontalLabels(5)
-
-
-                graphView.getViewport().setMinX(firstDate.getTime().toDouble())
-                graphView.getViewport().setMaxX(lastDate.getTime().toDouble())
-                graphView.getViewport().setXAxisBoundsManual(false)
-
-                graphView.getViewport().setScalable(true)
+//        graphView.getGridLabelRenderer().isHorizontalLabelsVisible = true
+//        graphView.getGridLabelRenderer().isVerticalLabelsVisible   = true
 //
-                graphView.getGridLabelRenderer().setHorizontalLabelsAngle(30)
-                graphView.getGridLabelRenderer().setHumanRounding(true)
-
-//                graphView.getGridLabelRenderer().setVerticalLabelsColor(R.color.white);
-//                graphView.getGridLabelRenderer().setHorizontalLabelsColor(R.color.white)
-
-
-
-                graphView.getGridLabelRenderer().reloadStyles()
-            }
-        }
+//        graphData.sortBy { it.date }
+//
+//
+//        if (graphData.size > 0){
+//            if (firstValute?.valute == graphData[0].valute){
+//
+//                graphView.removeAllSeries()
+//
+//                var dataPoints = mutableListOf<DataPoint>()
+//
+//                for (valuteInfo in graphData){
+//
+//
+//                    dataPoints.add(DataPoint(valuteInfo.date, valuteInfo.value))
+//                }
+//
+//                var firstDate = Date()
+//                var lastDate =  Date()
+//
+//                if (graphData.size > 0){
+//                    firstDate = graphData[0].date
+//                    lastDate = graphData[graphData.size-1].date
+//                }
+//
+//
+//
+//                val series = LineGraphSeries(dataPoints.toTypedArray())
+//
+//
+////                val seriesPoints = PointsGraphSeries<DataPoint>(dataPoints.toTypedArray())
+////                seriesPoints.setCustomShape { canvas, paint, x, y, dataPoint ->
+////                    paint.color = Color.BLACK
+////                    paint.textSize = 20f
+////                    canvas.drawText(dataPoint.y.toString(), x, y, paint)
+////                }
+//
+//
+//
+//                series.setAnimated(true)
+//                series.setDrawDataPoints(true)
+//                series.setDataPointsRadius(15F)
+//                series.setThickness(8)
+//
+//
+//
+//                series.setDrawBackground(true)
+//                series.setDrawDataPoints(true)
+//
+//
+//
+//
+//                graphView.addSeries(series)
+//
+//
+//                graphView.getGridLabelRenderer().setLabelFormatter(object : DefaultLabelFormatter() {
+//                    override fun formatLabel(value: Double, isValueX: Boolean): String {
+//                        return if (isValueX) {
+//                            sdf.format(value)
+//                        } else {
+////                            super.formatLabel(value, isValueX)
+//                            precision.format(value)
+//                        }
+//                    }
+//                })
+//
+//
+//                graphView.getGridLabelRenderer().setNumHorizontalLabels(5)
+//
+//
+//                graphView.getViewport().setMinX(firstDate.getTime().toDouble())
+//                graphView.getViewport().setMaxX(lastDate.getTime().toDouble())
+//                graphView.getViewport().setXAxisBoundsManual(false)
+//
+//                graphView.getViewport().setScalable(true)
+////
+//                graphView.getGridLabelRenderer().setHorizontalLabelsAngle(30)
+//                graphView.getGridLabelRenderer().setHumanRounding(true)
+//
+////                graphView.getGridLabelRenderer().setVerticalLabelsColor(R.color.white);
+////                graphView.getGridLabelRenderer().setHorizontalLabelsColor(R.color.white)
+//
+//
+//
+//                graphView.getGridLabelRenderer().reloadStyles()
+//            }
+//        }
 
 
 
@@ -464,6 +491,12 @@ class MainActivity : AppCompatActivity() {
         var Res = getCalculatedResult(sumValue,firstValute,secondValute)
 
         tvResult.text = precision.format(Res)
+
+
+        if (currTabPosition == 1) {
+            replaceFragment(favorites_Converter_Fragment(firstValute,viewModel,sumValue,chosenDate))
+        }
+
 
     }
 

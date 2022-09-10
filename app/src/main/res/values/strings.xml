@@ -21,4 +21,6 @@
 
     <string name="add_to_favourite">Added to favorites</string>
     <string name="remove_from_favourite">Removed from favorites</string>
+    <string name="tab_label_graph">Graph</string>
+    <string name="tab_label_favorites">Favorites</string>
 </resources>

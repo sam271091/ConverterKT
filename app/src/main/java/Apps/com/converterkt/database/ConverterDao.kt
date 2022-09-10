@@ -28,6 +28,10 @@ interface ConverterDao {
     @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo where date <= :chosenDate GROUP by valute) AND valute in (:filter)")
     fun getAllValuteInfoFiltered(filter:List<Valute>,chosenDate:Date) : LiveData<List<ValuteInfo>>
 
+
+    @Query( "SELECT * FROM valuteInfo where (valute,date) IN (SELECT valute,max(date) FROM valuteInfo where date <= :chosenDate GROUP by valute) AND valute in (:filter)")
+    fun getAllValuteInfoFilteredNonObservable(filter:List<Valute>,chosenDate:Date) : List<ValuteInfo>
+
     @Query("SELECT * FROM valute where code LIKE :filter OR name LIKE :filter")
     fun getFilteredValutes(filter:String) : LiveData<List<Valute>>
 
@@ -84,6 +88,9 @@ interface ConverterDao {
     @Delete
     fun deleteFavouriteValute(favoriteValute: FavoriteValute)
 
+
+    @Query("SELECT valute FROM favoriteValutes")
+    fun getFavouriteValutesForFilter(): LiveData<List<Valute>>
 
 
 }

@@ -38,7 +38,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val allBanksData = db.converterDao().getAllBanksData()
     val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
 
-//    val favoriteValutes = db.converterDao().getFavouriteValutes()
+    val favoriteValutes = db.converterDao().getFavouriteValutesForFilter()
 
     init {
 
@@ -96,6 +96,12 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getAllValuteInfoFiltered(filter,chosenDate)
     }
 
+
+    fun getFilteredListNonObservable(filter:ArrayList<Valute>,chosenDate:Date): List<ValuteInfo> {
+
+        return db.converterDao().getAllValuteInfoFilteredNonObservable(filter,chosenDate)
+    }
+
     fun getDataForTheGraph(valute: Valute): List<ValuteInfo> {
         return db.converterDao().getDataForTheGraph(valute)
     }
@@ -135,6 +141,8 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     fun getFavoriteValutes() : List<FavoriteValute?>{
         return db.converterDao().getFavouriteValutes()
     }
+
+
 
 
 

@@ -149,8 +149,11 @@ class BanksInfoAdapter(context:Context):RecyclerView.Adapter<BanksInfoAdapter.Ba
         var height = tableData.size * 60;
 
         tableView.layoutParams.height= context?.resources?.displayMetrics?.let {
-            dpToPx(height,
-                it?.density)
+            it?.density?.let { it1 ->
+                dpToPx(height,
+                    it1
+                )
+            }
         }!!
 
     }
