@@ -529,6 +529,11 @@ class MainActivity : AppCompatActivity() {
     fun onClickSwitcher(view: android.view.View) {
 //        openValuteInfoListChooser()
 
+
+        if (firstValute== null){
+            return
+        }
+
         val intermediateValute = firstValute
         firstValute = secondValute
         chosenImage = imageValute1

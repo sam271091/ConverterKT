@@ -9,4 +9,12 @@
         android:id="@+id/rvFavoritesConverter"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/noFavsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No favorites to display"
+        android:gravity="center"
+        />
 </FrameLayout>

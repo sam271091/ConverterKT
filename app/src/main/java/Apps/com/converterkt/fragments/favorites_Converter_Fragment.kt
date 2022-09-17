@@ -11,6 +11,7 @@ import Apps.com.converterkt.adapters.FavoriteAdapter
 import Apps.com.converterkt.adapters.ValuteInfoAdapter
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_valute_list.*
@@ -58,9 +59,14 @@ class favorites_Converter_Fragment(var currValuteInfo: ValuteInfo?, var viewMode
 
             viewModel.favoriteValutes.observe(viewLifecycleOwner, Observer {
                 viewModel.getFilteredList(it as ArrayList<Valute>,chosenDate).observe(viewLifecycleOwner, Observer {
+
+                    noFavsLabel.isVisible = it.size == 0
+
                     adapter.valuteInfoList = it
                     adapter.firstValute = currValuteInfo
                     adapter.currValue  = value
+
+
                 })
             })
 
