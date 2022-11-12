@@ -19,6 +19,7 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.*
 import android.app.DatePickerDialog
 import android.content.Context
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DecimalFormat
@@ -35,9 +36,13 @@ import kotlin.collections.ArrayList
 import kotlinx.coroutines.*
 
 
+
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: ConverterViewModel
+//    private lateinit var viewModel: ConverterViewModel
+
+    private  val viewModel: ConverterViewModel by viewModels()
+
 
     lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
@@ -81,8 +86,13 @@ class MainActivity : AppCompatActivity() {
 
         setDatePresentation()
 
-        viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
+//        viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]
 
+//        viewModel: ConverterViewModel by activityViewModels {
+//            ConverterViewModelFactory(
+//                (application as ConverterApplication).database.converterDao()
+//            )
+//        }
 
         tvValute1.setOnClickListener(View.OnClickListener {
             chosenField = tvValute1
@@ -162,9 +172,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        viewModel.allValuteInfo(chosenDate).observe(this, Observer {
+//        viewModel.allValuteInfo(chosenDate).observe(this, Observer {
+//            setValuteInfoByDate()
+//        })
+
+        collectLatestLifecycleFlow(viewModel.allValuteInfo(chosenDate)){
             setValuteInfoByDate()
-        })
+        }
 
 
         tabsChangerMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

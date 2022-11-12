@@ -88,7 +88,11 @@ dependencies {
     // Lifecycles only (without ViewModel or LiveData)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycle_version")
 
+
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
 
 
 
@@ -98,7 +102,8 @@ dependencies {
 
 
 
-    def room_version = "2.3.0"
+//    def room_version = "2.3.0"
+    def room_version = "2.4.2"
 
     implementation("androidx.room:room-runtime:$room_version")
 

@@ -4,6 +4,7 @@ import Apps.com.converterkt.ConverterViewModel
 import Apps.com.converterkt.R
 import Apps.com.converterkt.pojo.BankInfo
 import Apps.com.converterkt.pojo.Valute
+import Apps.com.converterkt.utils.collectLatestLifecycleFlow
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -52,13 +53,19 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
 
         tableView = tableViewBanksByValute as TableView<Array<String>>
 
-        viewModel.banksDataByValute(currency.code).observe(viewLifecycleOwner, Observer {
+//        viewModel.banksDataByValute(currency.code).observe(viewLifecycleOwner, Observer {
+//
+//            banksDataDetails = it.filter { it.buyCash != 0.0000 && it.sellCash != 0.0000 }
+//
+//            createTableData(banksDataDetails,view)
+//
+//        })
 
+        collectLatestLifecycleFlow(viewModel.banksDataByValute(currency.code)){
             banksDataDetails = it.filter { it.buyCash != 0.0000 && it.sellCash != 0.0000 }
 
             createTableData(banksDataDetails,view)
-
-        })
+        }
 
 
         showBankDetails()

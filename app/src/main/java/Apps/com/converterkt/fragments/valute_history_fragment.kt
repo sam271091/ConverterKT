@@ -4,6 +4,7 @@ import Apps.com.converterkt.ConverterViewModel
 import Apps.com.converterkt.R
 import Apps.com.converterkt.adapters.CurrencyItemDataAdapter
 import Apps.com.converterkt.pojo.Valute
+import Apps.com.converterkt.utils.collectLatestLifecycleFlow
 import Apps.com.converterkt.utils.dpToPx
 import Apps.com.converterkt.utils.getValuteFlagPath
 import android.os.Bundle
@@ -146,11 +147,18 @@ class valute_history_fragment(val currency:Serializable?,var viewModel : Convert
     }
 
     fun fillTheList(currency:Valute){
-        viewModel.getDataCurrencyItem(currency).observe(viewLifecycleOwner, Observer {
+//        viewModel.getDataCurrencyItem(currency).observe(viewLifecycleOwner, Observer {
+//            adapter?.valuteInfoList = it
+//            rvValuteInfo.scrollToPosition(adapter?.itemCount?.minus(1) ?: 0)
+//            floatingScrollDown.isVisible = false
+//        })
+
+        collectLatestLifecycleFlow(viewModel.getDataCurrencyItem(currency)){
             adapter?.valuteInfoList = it
             rvValuteInfo.scrollToPosition(adapter?.itemCount?.minus(1) ?: 0)
             floatingScrollDown.isVisible = false
-        })
+        }
+
     }
 
 }

@@ -18,6 +18,7 @@ import Apps.com.converterkt.utils.getValutePresentation
 import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.Flow
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -29,14 +30,17 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     private var compositeDisposable = CompositeDisposable()
     val valutesList = db.converterDao().getAllValutes()
 //    val allValuteInfo = db.converterDao().getAllValuteInfo()
-    val allValuteInfo : (chosenDate:Date)-> LiveData<List<ValuteInfo>> = {db.converterDao().getAllValuteInfo(it)}
+//    val allValuteInfo : (chosenDate:Date)-> LiveData<List<ValuteInfo>> = {db.converterDao().getAllValuteInfo(it)}
+    val allValuteInfo : (chosenDate:Date)-> Flow<List<ValuteInfo>> = {db.converterDao().getAllValuteInfo(it)}
     var currDate = getCurrentTime()
-    var valutes : (filter:String) -> LiveData<List<Valute>> = {db.converterDao().getFilteredValutes(it)}
+//    var valutes : (filter:String) -> LiveData<List<Valute>> = {db.converterDao().getFilteredValutes(it)}
+    var valutes : (filter:String) -> Flow<List<Valute>> = {db.converterDao().getFilteredValutes(it)}
     val valutesNames = getValutePresentation()
 
     val allBanksInfo = db.converterDao().getAllBankInfos()
     val allBanksData = db.converterDao().getAllBanksData()
-    val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
+//    val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
+    val banksDataByValute :(filter:String) -> Flow<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
 
     val favoriteValutes = db.converterDao().getFavouriteValutesForFilter()
 
@@ -91,7 +95,12 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
 //        return db.converterDao().getAllBankInfos()
 //    }
 
-    fun getFilteredList(filter:ArrayList<Valute>,chosenDate:Date): LiveData<List<ValuteInfo>> {
+//    fun getFilteredList(filter:ArrayList<Valute>,chosenDate:Date): LiveData<List<ValuteInfo>> {
+//
+//        return db.converterDao().getAllValuteInfoFiltered(filter,chosenDate)
+//    }
+
+    fun getFilteredList(filter:ArrayList<Valute>,chosenDate:Date): Flow<List<ValuteInfo>> {
 
         return db.converterDao().getAllValuteInfoFiltered(filter,chosenDate)
     }
@@ -106,7 +115,11 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
         return db.converterDao().getDataForTheGraph(valute)
     }
 
-    fun getDataCurrencyItem(valute: Valute): LiveData<List<ValuteInfo>> {
+//    fun getDataCurrencyItem(valute: Valute): LiveData<List<ValuteInfo>> {
+//        return db.converterDao().getDataCurrencyItem(valute)
+//    }
+
+    fun getDataCurrencyItem(valute: Valute): Flow<List<ValuteInfo>> {
         return db.converterDao().getDataCurrencyItem(valute)
     }
 

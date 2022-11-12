@@ -13,6 +13,7 @@ import Apps.com.converterkt.adapters.ValuteInfoAdapter
 import Apps.com.converterkt.pojo.FavoriteValute
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import Apps.com.converterkt.utils.collectLatestLifecycleFlow
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
@@ -194,23 +195,34 @@ class ValuteListActivity : AppCompatActivity() {
 
     fun filterList(newText:String){
 
-         viewModel.valutes("%" +newText + "%").observe(this, Observer {
-             viewModel.getFilteredList(it as ArrayList<Valute>,chosenDate).observe(this, Observer {
-                 adapter.valuteInfoList = it
-                 adapter.favValutes = favValutes
-             })
-         })
+//         viewModel.valutes("%" +newText + "%").observe(this, Observer {
+//             viewModel.getFilteredList(it as ArrayList<Valute>,chosenDate).observe(this, Observer {
+//                 adapter.valuteInfoList = it
+//                 adapter.favValutes = favValutes
+//             })
+//         })
 
+        collectLatestLifecycleFlow(viewModel.valutes("%" +newText + "%")){filter->
+            collectLatestLifecycleFlow(viewModel.getFilteredList(filter as ArrayList<Valute>,chosenDate)) {
+                adapter.valuteInfoList = it
+                adapter.favValutes = favValutes
+            }
+
+        }
 
 
 
     }
 
     fun fillTheList(){
-        viewModel.allValuteInfo(chosenDate).observe(this, Observer {
+//        viewModel.allValuteInfo(chosenDate).observe(this, Observer {
+//            adapter.valuteInfoList = it
+//            adapter.favValutes = favValutes
+//        })
+        collectLatestLifecycleFlow(viewModel.allValuteInfo(chosenDate)){
             adapter.valuteInfoList = it
             adapter.favValutes = favValutes
-        })
+        }
     }
 
     companion object {

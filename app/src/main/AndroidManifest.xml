@@ -3,6 +3,7 @@
     package="Apps.com.converterkt">
 
     <application
+        android:name="Apps.com.converterkt.ConverterApplication"
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"

@@ -27,7 +27,8 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.03"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/tvValute1"
@@ -105,8 +106,9 @@
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="66dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            app:layout_constraintHeight_percent="0.04"
             android:onClick="onClickSwitcher"
             app:layout_constraintBottom_toTopOf="@+id/tvValute2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -387,7 +389,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/oval_shape"
             android:clickable="true"
             android:paddingStart="10dp"
@@ -421,12 +423,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.7" />
+            app:layout_constraintGuide_percent="0.65" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabsChangerMain"
             android:layout_width="409dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.05"
             android:layout_marginTop="10dp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="306dp"
@@ -463,16 +466,17 @@
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-
             app:adSize="BANNER"
             app:adUnitId="ca-app-pub-3288419679900414/6136124788"
-
             app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
+
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintHeight_percent="0.05"
+
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragmentContainerView_Main">
 

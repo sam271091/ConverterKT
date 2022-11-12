@@ -11,6 +11,7 @@ import Apps.com.converterkt.adapters.FavoriteAdapter
 import Apps.com.converterkt.adapters.ValuteInfoAdapter
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
+import Apps.com.converterkt.utils.collectLatestLifecycleFlow
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,20 +58,31 @@ class favorites_Converter_Fragment(var currValuteInfo: ValuteInfo?, var viewMode
 //
 //            adapter.valuteInfoList = filteredList
 
-            viewModel.favoriteValutes.observe(viewLifecycleOwner, Observer {
-                viewModel.getFilteredList(it as ArrayList<Valute>,chosenDate).observe(viewLifecycleOwner, Observer {
-
-                    noFavsLabel.isVisible = it.size == 0
-
-                    adapter.valuteInfoList = it
-                    adapter.firstValute = currValuteInfo
-                    adapter.currValue  = value
-
-
-                })
-            })
+//            viewModel.favoriteValutes.observe(viewLifecycleOwner, Observer {
+//                viewModel.getFilteredList(it as ArrayList<Valute>,chosenDate).observe(viewLifecycleOwner, Observer {
+//
+//                    noFavsLabel.isVisible = it.size == 0
+//
+//                    adapter.valuteInfoList = it
+//                    adapter.firstValute = currValuteInfo
+//                    adapter.currValue  = value
+//
+//
+//                })
+//            })
 
 //        }
+
+        collectLatestLifecycleFlow(viewModel.favoriteValutes){filter->
+            collectLatestLifecycleFlow(viewModel.getFilteredList(filter as ArrayList<Valute>,chosenDate)){
+                noFavsLabel.isVisible = it.size == 0
+
+                adapter.valuteInfoList = it
+                adapter.firstValute = currValuteInfo
+                adapter.currValue  = value
+            }
+
+        }
 
 
         rvFavoritesConverter.adapter = adapter

@@ -3,6 +3,7 @@ package Apps.com.converterkt
 import Apps.com.converterkt.adapters.BanksInfoAdapter
 import Apps.com.converterkt.adapters.ValuteInfoAdapter
 import Apps.com.converterkt.pojo.BankInfo
+import Apps.com.converterkt.utils.collectLatestLifecycleFlow
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -40,17 +41,25 @@ class BanksDataActivity : AppCompatActivity() {
 
 
 
-        viewModel.allBanksInfo.observe(this, Observer {
+//        viewModel.allBanksInfo.observe(this, Observer {
+//            adapter.banksInfoList = it
+////            dataMap.put("banksInfoList",it)
+////            adapter.dataMap = dataMap
+//        })
+
+
+        collectLatestLifecycleFlow(viewModel.allBanksInfo){
             adapter.banksInfoList = it
-//            dataMap.put("banksInfoList",it)
-//            adapter.dataMap = dataMap
-        })
+        }
 
+//        viewModel.allBanksData.observe(this, Observer {
+//            adapter.banksDataList = it
+////            dataMap.put("banksInfoList",it)
+//        })
 
-        viewModel.allBanksData.observe(this, Observer {
+        collectLatestLifecycleFlow(viewModel.allBanksData){
             adapter.banksDataList = it
-//            dataMap.put("banksInfoList",it)
-        })
+        }
 
 
 //        viewModel.allBanksData.observe(this, Observer {
