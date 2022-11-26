@@ -22,4 +22,6 @@
     <string name="tab_label_graph">График</string>
     <string name="tab_label_favorites">Избранные</string>
     <string name="no_favorites_to_display_Label">Нет избранного для отображения</string>
+    <string name="country_flag">Флаг страны</string>
+    <string name="favorite_star">Звезда избранный</string>
 </resources>

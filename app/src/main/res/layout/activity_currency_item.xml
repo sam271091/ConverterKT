@@ -22,6 +22,7 @@
 
         <ImageView
             android:id="@+id/flagIV"
+            android:contentDescription="@string/country_flag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -36,7 +37,7 @@
             android:id="@+id/imageViewAddToFavourite"
             android:layout_width="@dimen/size_of_star"
             android:layout_height="@dimen/size_of_star"
-
+            android:contentDescription="@string/favorite_star"
 
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +51,7 @@
             android:id="@+id/nameTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="15dp"
             android:text="Name"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -66,10 +67,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="5dp"
             android:text="@string/code_label"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/textViewNameLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/flagIV" />
 
@@ -78,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:text="@string/name_label"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -91,10 +93,11 @@
             android:id="@+id/codeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="5dp"
             android:text="Code"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/nameTV"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.229"
             app:layout_constraintStart_toEndOf="@+id/textViewCodelabel"
@@ -106,26 +109,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/fragmentContainerView"
+            app:layout_constraintBottom_toTopOf="@id/tabsChanger"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintGuide_percent="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewNameLabel" />
 
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabsChanger" />
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabsChanger"
             android:layout_width="409dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toTopOf="@id/fragmentContainerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,9 +139,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/banks_valute_label" />
-            />
+
         </com.google.android.material.tabs.TabLayout>
 
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="435dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabsChanger" />
 
         <!--    <androidx.recyclerview.widget.RecyclerView-->
         <!--        android:id="@+id/rvValuteInfo"-->
