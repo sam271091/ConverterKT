@@ -84,6 +84,10 @@ class MainActivity : AppCompatActivity() {
 
         chosenDate = getEndOfTheDay(calendar.time)
 
+
+        viewModel.loadData()
+
+
         setDatePresentation()
 
 //        viewModel = ViewModelProvider(this)[ConverterViewModel::class.java]

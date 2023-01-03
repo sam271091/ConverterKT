@@ -45,10 +45,14 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val favoriteValutes = db.converterDao().getFavouriteValutesForFilter()
 
     init {
+//        loadDataByDate(currDate)
+//        loadBanksInfo()
+    }
 
+
+    fun loadData(){
         loadDataByDate(currDate)
         loadBanksInfo()
-
     }
 
 

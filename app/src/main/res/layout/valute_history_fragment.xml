@@ -27,18 +27,18 @@
                 app:layout_constraintBottom_toBottomOf="@+id/rvValuteInfo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@android:drawable/arrow_down_float" />
+                app:srcCompat="@drawable/arrowdown" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingScrollUp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:backgroundTint="@color/custom_color_white"
-                android:layout_marginTop="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rvValuteInfo"
-                app:srcCompat="@android:drawable/arrow_up_float" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingScrollUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/custom_color_white"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rvValuteInfo"
+        app:srcCompat="@drawable/arrowup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
