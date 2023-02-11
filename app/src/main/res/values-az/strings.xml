@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Converter</string>
+    <string name="select_currency_label">Valyutanı seçin</string>
+    <string name="code_label">Kod</string>
+    <string name="name_label">Adı</string>
+    <string name="date_label">Tarix</string>
+    <string name="nominal_label">Nominal</string>
+    <string name="rate_label">Məzənnə</string>
+    <string name="banks_label">Banklar</string>
+    <string name="valute_col_label">Valyuta</string>
+    <string name="buycash_col_label">Nağd alışı</string>
+    <string name="sellcash_col_label">Nağd satışı</string>
+    <string name="history_label">Tarixçə</string>
+    <string name="banks_valute_label">Banklar</string>
+    <string name="hello_blank_fragment">Boş fraqment</string>
+    <string name="bank_row_label">Bank</string>
+    <string name="label_best_rates_buy">Ən yaxşı alış</string>
+    <string name="label_best_rates_sell">Ən yaxşı satış</string>
+    <string name="add_to_favourite">Seçilmişlərə əlavə edildi</string>
+    <string name="remove_from_favourite">Sevimlilərdən silindi</string>
+    <string name="tab_label_graph">Qrafik</string>
+    <string name="tab_label_favorites">Seçilmiş</string>
+    <string name="no_favorites_to_display_Label">Göstərmək üçün Sevimlilər yoxdur</string>
+    <string name="country_flag">Ölkə bayrağı</string>
+    <string name="favorite_star">Ulduz seçilmiş</string>
+</resources>
