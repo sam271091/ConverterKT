@@ -461,7 +461,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabsChangerMain"
             app:layout_constraintBottom_toTopOf="@id/adView"
-            app:layout_constraintHeight_percent="0.3"/>
+            app:layout_constraintHeight_percent="0.3"
+            tools:layout="@layout/fragment_graph" />
 
 
         <com.google.android.gms.ads.AdView
