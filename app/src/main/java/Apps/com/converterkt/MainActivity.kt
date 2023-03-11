@@ -19,6 +19,8 @@ import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.*
 import android.app.DatePickerDialog
 import android.content.Context
+import android.text.InputType
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
@@ -141,9 +143,35 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+
+//        editTextSum.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//        editTextSum.setTextIsSelectable(true);
+//        editTextSum.setFocusable(true);
+        editTextSum.setShowSoftInputOnFocus(false);
+
         editTextSum.addTextChangedListener {
             calculateResult()
         }
+
+//        editTextSum.setOnFocusChangeListener { view, b ->
+//
+//            if (b){
+//                Toast.makeText(this, "focused", Toast.LENGTH_SHORT).show()
+//
+//            } else {
+//                Toast.makeText(this, "not focused", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+
+
+
+//        editTextSum.setOnTouchListener { view, motionEvent ->
+//
+//            Toast.makeText(this, "touched", Toast.LENGTH_SHORT).show()
+//
+//            false
+//        }
 
 //        graphView.getGridLabelRenderer().isHorizontalLabelsVisible = false
 //        graphView.getGridLabelRenderer().isVerticalLabelsVisible   = false
@@ -630,13 +658,38 @@ class MainActivity : AppCompatActivity() {
             "btn_9" -> performAction(9.toChar())
             "btn_0" -> performAction(0.toChar())
             "btn_dot" -> performAction(".".single())
+            "btn_remove" -> removeSymbol()
             else -> deleteSymbol()
 
         }
     }
 
+
+    fun removeSymbol(){
+
+        var positionStart = editTextSum.selectionStart
+        var positionEnd = editTextSum.selectionEnd
+
+        var inputText = editTextSum.text
+
+
+        if (positionEnd ==0){
+            return
+        }
+
+        if (positionStart==positionEnd){
+            positionStart = positionEnd - 1
+        }
+
+
+        inputText.delete(positionStart,positionEnd)
+
+    }
+
+
     fun performAction(actionSymbol:Char){
 
+        editTextSum.clearFocus()
 
 
 
@@ -689,6 +742,8 @@ class MainActivity : AppCompatActivity() {
 //        if (newSumValue.equals("")){
 //            newSumValue = "0.0000"
 //        }
+
+        editTextSum.clearFocus()
 
         dotIsPressed = false
         fraction = false

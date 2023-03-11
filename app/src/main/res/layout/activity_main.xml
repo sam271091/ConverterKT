@@ -65,7 +65,7 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/oval_shape"
             android:ems="10"
-            android:enabled="false"
+            android:enabled="true"
             android:inputType="numberDecimal"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
@@ -339,6 +339,31 @@
                         android:textSize="@dimen/text_size_labels"
 
                         android:textStyle="bold" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/btn_remove"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="1dp"
+                        android:layout_marginBottom="0dp"
+
+                        android:backgroundTint="@color/custom_color_background"
+                        android:onClick="onClickAction"
+                        android:text=""
+                        android:textColor="@color/mainwhite"
+                        android:textSize="@dimen/text_size_labels"
+                        android:textStyle="bold"
+                        app:icon="@android:drawable/ic_input_delete" />
+
+
 
                 </TableRow>
             </TableLayout>
