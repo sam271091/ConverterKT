@@ -70,6 +70,8 @@ class MainActivity : AppCompatActivity() {
 
     var currTabPosition : Int? =  0
 
+    var symbolRemoved = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -684,13 +686,20 @@ class MainActivity : AppCompatActivity() {
 
         inputText.delete(positionStart,positionEnd)
 
+        symbolRemoved = true
+
     }
 
 
     fun performAction(actionSymbol:Char){
 
-        editTextSum.clearFocus()
+//        editTextSum.clearFocus()
 
+
+        if (!symbolRemoved){
+            editTextSum.setSelection(editTextSum.text.length)
+//            editTextSum.clearFocus()
+        }
 
 
         var number = actionSymbol.code
@@ -721,8 +730,30 @@ class MainActivity : AppCompatActivity() {
         } else {
 
 
+            var positionStart = editTextSum.selectionStart
+            var positionEnd = editTextSum.selectionEnd
 
-            editTextSum.setText(sumValue + number)
+
+
+
+//            if (positionEnd ==0){
+//                return
+//            }
+
+//            if (positionStart==positionEnd){
+//                positionStart = positionEnd - 1
+//            }
+
+            var sumValue_new = sumValue.substring(0, positionStart) + number + sumValue.substring(positionEnd)
+
+
+            editTextSum.setText(sumValue_new)
+
+            symbolRemoved = false
+
+
+
+//            editTextSum.setText(sumValue + number)
         }
 
 
@@ -734,14 +765,7 @@ class MainActivity : AppCompatActivity() {
 
     fun deleteSymbol(){
 
-//        var sumValue = editTextSum.text.toString()
-//        var newSumValue = sumValue.dropLast(1)
-//
-////        var sumDouble  = newSumValue.toDouble()
-//
-//        if (newSumValue.equals("")){
-//            newSumValue = "0.0000"
-//        }
+
 
         editTextSum.clearFocus()
 
