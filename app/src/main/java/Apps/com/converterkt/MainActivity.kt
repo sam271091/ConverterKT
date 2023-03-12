@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     var currTabPosition : Int? =  0
 
-    var symbolRemoved = false
+//    var symbolRemoved = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -686,7 +686,7 @@ class MainActivity : AppCompatActivity() {
 
         inputText.delete(positionStart,positionEnd)
 
-        symbolRemoved = true
+//        symbolRemoved = true
 
     }
 
@@ -695,11 +695,15 @@ class MainActivity : AppCompatActivity() {
 
 //        editTextSum.clearFocus()
 
+        var positionStart = editTextSum.selectionStart
+        var positionEnd = editTextSum.selectionEnd
 
-        if (!symbolRemoved){
-            editTextSum.setSelection(editTextSum.text.length)
+
+//        if (!symbolRemoved){
 //            editTextSum.clearFocus()
-        }
+//            editTextSum.setSelection(editTextSum.text.length)
+
+//        }
 
 
         var number = actionSymbol.code
@@ -724,14 +728,18 @@ class MainActivity : AppCompatActivity() {
         }
         else if (number==46){
             if (!sumValue.contains(".")){
-                editTextSum.setText(sumValue + ".")
+
+                if (sumValue.equals("")){
+                    editTextSum.setText("0.00")
+                } else {
+                    editTextSum.setText(sumValue + ".")
+                }
             }
 
         } else {
 
 
-            var positionStart = editTextSum.selectionStart
-            var positionEnd = editTextSum.selectionEnd
+
 
 
 
@@ -749,7 +757,9 @@ class MainActivity : AppCompatActivity() {
 
             editTextSum.setText(sumValue_new)
 
-            symbolRemoved = false
+//            symbolRemoved = false
+
+
 
 
 
@@ -761,6 +771,7 @@ class MainActivity : AppCompatActivity() {
             editTextSum.setText("0")
         }
 
+        editTextSum.setSelection(editTextSum.text.length)
     }
 
     fun deleteSymbol(){
