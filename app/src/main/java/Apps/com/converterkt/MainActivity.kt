@@ -1,6 +1,7 @@
 package Apps.com.converterkt
 
 
+import Apps.com.converterkt.fragments.banksResultsFragment
 import Apps.com.converterkt.fragments.favorites_Converter_Fragment
 import Apps.com.converterkt.fragments.graph_Fragment
 import Apps.com.converterkt.pojo.Valute
@@ -225,6 +226,7 @@ class MainActivity : AppCompatActivity() {
                 when(currentPos){
                     0->replaceFragment(graph_Fragment(firstValute,viewModel))
                     1->replaceFragment(favorites_Converter_Fragment(firstValute,viewModel,editTextSum.text.toString(),chosenDate))
+                    2->replaceFragment(banksResultsFragment(firstValute,viewModel,editTextSum.text.toString()))
                 }
 
             }
