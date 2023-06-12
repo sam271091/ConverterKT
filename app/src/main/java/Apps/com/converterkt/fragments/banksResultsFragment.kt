@@ -42,7 +42,7 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
 
             var valute = currValuteInfo?.let { it.valute }
 
-            viewModel.state.searchQuery = valute?.code.toString()
+            viewModel.searchQuery = valute?.code.toString()
             viewModel.getBanksDataByValute()
 
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
@@ -74,12 +74,12 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
     @Composable
     fun banksInfoByValute(){
 
-        val state = viewModel.state
+//        val state = viewModel.state
 
         Column(modifier = Modifier.fillMaxSize()) {
            LazyColumn( modifier = Modifier.fillMaxSize()){
-               items(state.banksDataDetails.size){i->
-                   var bankInfo = viewModel.state.banksDataDetails[i]
+               items(viewModel.banksDataDetails.size){i->
+                   var bankInfo = viewModel.banksDataDetails[i]
                    bankInfoItemByValute(bankInfo = bankInfo)
                }
            }

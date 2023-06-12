@@ -13,8 +13,9 @@ import kotlinx.coroutines.launch
 
 
 class composeViewModel(var converterviewModel : ConverterViewModel) : ViewModel() {
-    var state by mutableStateOf(BankInfoState())
-
+//    var state by mutableStateOf(BankInfoState())
+      var banksDataDetails by mutableStateOf(listOf<BankInfo>())
+      var searchQuery by mutableStateOf("")
 
 
 //    lateinit var converterviewModel : ConverterViewModel
@@ -25,9 +26,10 @@ class composeViewModel(var converterviewModel : ConverterViewModel) : ViewModel(
 
      fun getBanksDataByValute(){
         viewModelScope.launch {
-            converterviewModel.banksDataByValute(state.searchQuery.toString())
+            converterviewModel.banksDataByValute(searchQuery.toString())
                 .collect{result ->
-                    state.banksDataDetails = result
+//                    state.banksDataDetails = result
+                    banksDataDetails = result
 
 //                    state = state.copy()
                 }
