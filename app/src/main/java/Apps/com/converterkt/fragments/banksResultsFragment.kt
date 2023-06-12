@@ -15,17 +15,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+
+
 class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewModel : ConverterViewModel
                            , var value:String) : Fragment(){
 
-    val viewModel = composeViewModel()
+    val viewModel = composeViewModel(converterviewModel)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,18 +42,24 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
 
             var valute = currValuteInfo?.let { it.valute }
 
+            viewModel.state.searchQuery = valute?.code.toString()
+            viewModel.getBanksDataByValute()
+
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme {
 
 
+
+//                    var state by remember { mutableStateOf(true) }
+
 //
 
-                    collectLatestLifecycleFlow(converterviewModel.banksDataByValute(valute?.code.toString())){
-                       var banksDataDetails = it.filter { it.buyCash != 0.0000 && it.sellCash != 0.0000 }
-                        viewModel.state.banksDataDetails = banksDataDetails
-
-                    }
+//                    collectLatestLifecycleFlow(converterviewModel.banksDataByValute(valute?.code.toString())){
+//                       var banksDataDetails = it.filter { it.buyCash != 0.0000 && it.sellCash != 0.0000 }
+//                        viewModel.state.banksDataDetails = banksDataDetails
+//
+//                    }
 
 //                    val viewModel = viewModel<composeViewModel>()
 
@@ -66,9 +74,11 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
     @Composable
     fun banksInfoByValute(){
 
+        val state = viewModel.state
+
         Column(modifier = Modifier.fillMaxSize()) {
            LazyColumn( modifier = Modifier.fillMaxSize()){
-               items(viewModel.state.banksDataDetails.size){i->
+               items(state.banksDataDetails.size){i->
                    var bankInfo = viewModel.state.banksDataDetails[i]
                    bankInfoItemByValute(bankInfo = bankInfo)
                }
