@@ -545,7 +545,11 @@ class MainActivity : AppCompatActivity() {
 
         if (currTabPosition == 1) {
             replaceFragment(favorites_Converter_Fragment(firstValute,viewModel,sumValue,chosenDate))
+//            replaceFragment(banksResultsFragment(firstValute,viewModel,editTextSum.text.toString()))
+        } else if (currTabPosition == 2){
+            replaceFragment(banksResultsFragment(firstValute,viewModel,sumValue))
         }
+
 
 
     }
