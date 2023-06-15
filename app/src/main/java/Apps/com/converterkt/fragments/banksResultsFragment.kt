@@ -11,15 +11,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -67,22 +65,16 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
             setContent {
                 MaterialTheme {
 
+                    Scaffold() { contentPadding ->
+                        Box(
+                            modifier = Modifier.padding(contentPadding)
+                        ) {
+                            // In Compose world
+                            banksInfoByValute()
+                        }
+                    }
 
 
-//                    var state by remember { mutableStateOf(true) }
-
-//
-
-//                    collectLatestLifecycleFlow(converterviewModel.banksDataByValute(valute?.code.toString())){
-//                       var banksDataDetails = it.filter { it.buyCash != 0.0000 && it.sellCash != 0.0000 }
-//                        viewModel.state.banksDataDetails = banksDataDetails
-//
-//                    }
-
-//                    val viewModel = viewModel<composeViewModel>()
-
-                    // In Compose world
-                    banksInfoByValute()
                 }
             }
         }
@@ -99,7 +91,9 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
 
 
 
-        Column(modifier = Modifier.fillMaxSize()
+        Column(modifier = Modifier
+            .fillMaxSize()
+            ,
             ) {
             bankInfoByValuteListingCap()
             LazyColumn( modifier = Modifier.fillMaxSize(),
@@ -159,7 +153,8 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
             .padding(top = 10.dp, bottom = 10.dp)
             ,
         verticalAlignment = Alignment.CenterVertically) {
-            Column(modifier = Modifier.weight(1f)
+            Column(modifier = Modifier
+                .weight(1f)
                 .padding(start = 2.dp)) {
                 Text(text = bankInfo.bankName.toString(),
                 color = colorResource(id = R.color.black))
