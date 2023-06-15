@@ -1,6 +1,7 @@
 package Apps.com.converterkt.fragments
 
 import Apps.com.converterkt.ConverterViewModel
+import Apps.com.converterkt.R
 import Apps.com.converterkt.composeViewModel
 import Apps.com.converterkt.pojo.BankInfo
 import Apps.com.converterkt.pojo.Valute
@@ -10,24 +11,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
-
+import java.text.DecimalFormat
 
 
 class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewModel : ConverterViewModel
                            , var value:String) : Fragment(){
 
     val viewModel = composeViewModel(converterviewModel)
+    private var precision =  DecimalFormat("#,##0.0000")
+    val sumDouble : Double = value.toDouble()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +55,8 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
             // is destroyed
 
 //            var banksInfoByCurrency = converterviewModel.bankInfoByCurrency
+
+
 
             var valute = currValuteInfo?.let { it.valute }
 
@@ -71,13 +89,22 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
     }
 
 
+
+
     @Composable
     fun banksInfoByValute(){
 
 //        val state = viewModel.state
 
-        Column(modifier = Modifier.fillMaxSize()) {
-           LazyColumn( modifier = Modifier.fillMaxSize()){
+
+
+
+        Column(modifier = Modifier.fillMaxSize()
+            ) {
+            bankInfoByValuteListingCap()
+            LazyColumn( modifier = Modifier.fillMaxSize(),
+                userScrollEnabled = true
+                ){
                items(viewModel.banksDataDetails.size){i->
                    var bankInfo = viewModel.banksDataDetails[i]
                    bankInfoItemByValute(bankInfo = bankInfo)
@@ -86,10 +113,68 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
         }
         
     }
+    @Composable
+    fun bankInfoByValuteListingCap(){
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .background(color = colorResource(id = R.color.labelTextColor))
+            .padding(top = 10.dp, bottom = 10.dp),
+            verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = stringResource(id = R.string.bank_row_label),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold)
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = stringResource(id = R.string.buycash_col_label),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold)
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = stringResource(id = R.string.sellcash_col_label),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold)
+            }
+        }
+    }
 
     @Composable
     fun bankInfoItemByValute(bankInfo:BankInfo){
-        Text(text = bankInfo.bankName.toString())
+
+        var buyCash = bankInfo?.buyCash ?: 0.0000
+        var sellCash = bankInfo?.sellCash ?: 0.0000
+
+        Spacer(modifier = Modifier
+            .height(4.dp)
+            .background(color = colorResource(id = R.color.mainwhite))
+        )
+
+        Row(modifier = Modifier
+            .fillMaxWidth()
+//            .background(color = colorResource(id = R.color.greyColor))
+            .border(
+                border = ButtonDefaults.outlinedBorder,
+                shape = RoundedCornerShape(10.dp)
+            )
+            .padding(top = 10.dp, bottom = 10.dp)
+            ,
+        verticalAlignment = Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f)
+                .padding(start = 2.dp)) {
+                Text(text = bankInfo.bankName.toString(),
+                color = colorResource(id = R.color.black))
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = precision.format(buyCash * sumDouble),
+                    color = colorResource(id = R.color.black))
+            }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = precision.format(sellCash * sumDouble),
+                    color = colorResource(id = R.color.black))
+            }
+        }
+
+
     }
 
 
