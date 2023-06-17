@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
+
 import java.text.DecimalFormat
 
 
@@ -40,7 +42,7 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
                            , var value:String) : Fragment(){
 
     val viewModel = composeViewModel(converterviewModel)
-    private var precision =  DecimalFormat("#,##0.0000")
+    private var precision =  DecimalFormat("#,##0.00")
     val sumDouble : Double = value.toDouble()
 
     override fun onCreateView(
@@ -93,6 +95,7 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
 
         Column(modifier = Modifier
             .fillMaxSize()
+            .background(color = colorResource(id = R.color.white))
             ,
             ) {
             bankInfoByValuteListingCap()
@@ -140,12 +143,12 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
 
         Spacer(modifier = Modifier
             .height(4.dp)
-            .background(color = colorResource(id = R.color.mainwhite))
+//            .background(color = colorResource(id = R.color.white))
         )
 
         Row(modifier = Modifier
             .fillMaxWidth()
-//            .background(color = colorResource(id = R.color.greyColor))
+            .background(color = colorResource(id = R.color.white))
             .border(
                 border = ButtonDefaults.outlinedBorder,
                 shape = RoundedCornerShape(10.dp)
@@ -153,9 +156,18 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
             .padding(top = 10.dp, bottom = 10.dp)
             ,
         verticalAlignment = Alignment.CenterVertically) {
+
+
+            Column(modifier = Modifier
+                .weight(0.2f)
+                ) {
+                AsyncImage(model = bankInfo.bankLogo, contentDescription = "Bank logo")
+            }
+
+
             Column(modifier = Modifier
                 .weight(1f)
-                .padding(start = 2.dp)) {
+                .padding(start = 5.dp)) {
                 Text(text = bankInfo.bankName.toString(),
                 color = colorResource(id = R.color.black))
             }

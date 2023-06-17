@@ -12,8 +12,8 @@ android {
         applicationId "demo.com.converterkt"
         minSdk 21
         targetSdk 33
-        versionCode 36
-        versionName "1.2.2.3"
+        versionCode 37
+        versionName "1.2.2.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -149,5 +149,8 @@ dependencies {
     androidTestImplementation "android.arch.persistence.room:testing:$room_version"
 
     implementation 'de.codecrafters.tableview:tableview:2.8.0'
+
+
+    implementation("io.coil-kt:coil-compose:2.0.0")
 
 }
