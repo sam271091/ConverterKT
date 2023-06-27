@@ -1,9 +1,6 @@
 package Apps.com.converterkt.database
 
-import Apps.com.converterkt.pojo.BankInfo
-import Apps.com.converterkt.pojo.FavoriteValute
-import Apps.com.converterkt.pojo.Valute
-import Apps.com.converterkt.pojo.ValuteInfo
+import Apps.com.converterkt.pojo.*
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
@@ -100,6 +97,14 @@ fun getAllBanksData() : Flow<List<BankInfo>>
     @Query("SELECT valute FROM favoriteValutes")
 //    fun getFavouriteValutesForFilter(): LiveData<List<Valute>>
     fun getFavouriteValutesForFilter(): Flow<List<Valute>>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertbankBranch(bankBranch: BankBranch)
+
+
+    @Query("DELETE FROM bankbranch WHERE bankCode == :bank")
+    fun clearBranch(bank : String?)
 
 
 }

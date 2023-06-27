@@ -26,4 +26,5 @@
     <string name="no_favorites_to_display_Label">No favorites to display</string>
     <string name="country_flag">Country flag</string>
     <string name="favorite_star">Favorite star</string>
+    <string name="title_activity_bank_branch">BankBranchActivity</string>
 </resources>
