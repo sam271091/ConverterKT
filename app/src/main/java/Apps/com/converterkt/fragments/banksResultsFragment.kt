@@ -43,7 +43,12 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
 
     val viewModel = composeViewModel(converterviewModel)
     private var precision =  DecimalFormat("#,##0.00")
-    val sumDouble : Double = value.toDouble()
+    val sumDouble : Double = when(value){
+        ""->0.000
+        else -> {
+            value.toDouble()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
