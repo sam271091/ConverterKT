@@ -122,17 +122,20 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
             .background(color = colorResource(id = R.color.labelTextColor))
             .padding(top = 10.dp, bottom = 10.dp),
             verticalAlignment = Alignment.CenterVertically) {
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = stringResource(id = R.string.bank_row_label),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold)
             }
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = stringResource(id = R.string.buycash_col_label),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold)
             }
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = stringResource(id = R.string.sellcash_col_label),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold)
@@ -176,11 +179,13 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
                 Text(text = bankInfo.bankName.toString(),
                 color = colorResource(id = R.color.black))
             }
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = precision.format(buyCash * sumDouble),
                     color = colorResource(id = R.color.black))
             }
-            Column(modifier = Modifier.weight(1f)) {
+            Column(modifier = Modifier.weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(text = precision.format(sellCash * sumDouble),
                     color = colorResource(id = R.color.black))
             }
