@@ -41,6 +41,8 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
 //    val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
     val banksDataByValute :(filter:String) -> Flow<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
 
+    val bankBranchByBank :(filter:String) -> Flow<List<BankBranch>> =  {db.converterDao().getBranchesByBank(it)}
+
     val favoriteValutes = db.converterDao().getFavouriteValutesForFilter()
 
     init {

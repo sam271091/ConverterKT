@@ -1,5 +1,6 @@
 package Apps.com.converterkt
 
+import Apps.com.converterkt.pojo.BankBranch
 import Apps.com.converterkt.pojo.BankInfo
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -12,10 +13,12 @@ import kotlinx.coroutines.launch
 
 
 
-class composeViewModel(var converterviewModel : ConverterViewModel) : ViewModel() {
+class composeViewModel(var converterviewModel : ConverterViewModel) : ViewModel(),java.io.Serializable {
 //    var state by mutableStateOf(BankInfoState())
       var banksDataDetails by mutableStateOf(listOf<BankInfo>())
       var searchQuery by mutableStateOf("")
+      var bankName    by mutableStateOf("")
+      var bankBranches by mutableStateOf(listOf<BankBranch>())
 
 
 //    lateinit var converterviewModel : ConverterViewModel
@@ -32,6 +35,17 @@ class composeViewModel(var converterviewModel : ConverterViewModel) : ViewModel(
                     banksDataDetails = result
 
 //                    state = state.copy()
+                }
+        }
+    }
+
+
+    fun getBankBranchByBank(){
+        viewModelScope.launch {
+            converterviewModel.bankBranchByBank(bankName.toString())
+                .collect{result ->
+                    bankBranches = result
+
                 }
         }
     }

@@ -19,7 +19,7 @@ interface GoogleMapsApiService {
         const val KEY = "AIzaSyAHNe6jOSqzUOMCIOKWPOdh1HAUKmTo_SI"
         const val LOCATION = "40.409264, 49.867092"
         const val RADIUS = 50000
-        const val TYPES = "bank"
+        const val TYPES = "bank,postoffice"
     }
 
 
