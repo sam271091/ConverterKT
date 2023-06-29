@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModelProvider
 
 class BankBranchActivity() : ComponentActivity() {
@@ -57,10 +59,10 @@ class BankBranchActivity() : ComponentActivity() {
     fun TabScreen() {
         var tabIndex by remember { mutableStateOf(0) }
 
-        val tabs = listOf("Home", "About", "Settings")
+        val tabs = listOf(stringResource(R.string.bank_branches_list), stringResource(R.string.Map))
 
         Column(modifier = Modifier.fillMaxWidth()) {
-            TabRow(selectedTabIndex = tabIndex) {
+            TabRow(selectedTabIndex = tabIndex, backgroundColor = colorResource(id = R.color.custom_color_background)) {
                 tabs.forEachIndexed { index, title ->
                     Tab(text = { Text(title) },
                         selected = tabIndex == index,

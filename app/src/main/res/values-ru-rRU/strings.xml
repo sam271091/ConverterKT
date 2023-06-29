@@ -24,4 +24,7 @@
     <string name="no_favorites_to_display_Label">Нет избранного для отображения</string>
     <string name="country_flag">Флаг страны</string>
     <string name="favorite_star">Звезда избранный</string>
+    <string name="title_activity_bank_branch">BankBranchActivity</string>
+    <string name="bank_branches_list">Подразделения банков</string>
+    <string name="Map">Карта</string>
 </resources>

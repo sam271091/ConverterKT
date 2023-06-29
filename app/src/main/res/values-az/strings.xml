@@ -24,4 +24,7 @@
     <string name="no_favorites_to_display_Label">Göstərmək üçün Sevimlilər yoxdur</string>
     <string name="country_flag">Ölkə bayrağı</string>
     <string name="favorite_star">Ulduz seçilmiş</string>
+    <string name="title_activity_bank_branch">BankBranchActivity</string>
+    <string name="bank_branches_list">Bank bölmələri</string>
+    <string name="Map">Xəritə</string>
 </resources>
