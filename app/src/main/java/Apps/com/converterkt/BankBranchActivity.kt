@@ -64,7 +64,7 @@ class BankBranchActivity() : ComponentActivity() {
         Column(modifier = Modifier.fillMaxWidth()) {
             TabRow(selectedTabIndex = tabIndex, backgroundColor = colorResource(id = R.color.custom_color_background)) {
                 tabs.forEachIndexed { index, title ->
-                    Tab(text = { Text(title) },
+                    Tab(text = { Text(title,color = colorResource(id = R.color.mainwhite)) },
                         selected = tabIndex == index,
                         onClick = { tabIndex = index }
                     )
