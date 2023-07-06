@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ConverterKT"
         android:usesCleartextTraffic="true">
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDvqLU_vcnl-A8mH7UaZ3KMzRcGQ0yh4Rc"/>
+
         <activity
             android:name=".BankBranchActivity"
             android:exported="false"

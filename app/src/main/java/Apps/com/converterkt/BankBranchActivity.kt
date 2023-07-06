@@ -1,6 +1,7 @@
 package Apps.com.converterkt
 
 import Apps.com.converterkt.composeScreens.BankBranchScreen
+import Apps.com.converterkt.composeScreens.BankBranchesMapScreen
 import Apps.com.converterkt.pojo.BankInfo
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -72,7 +73,7 @@ class BankBranchActivity() : ComponentActivity() {
             }
             when (tabIndex) {
                 0 -> BankBranchScreen(viewModel = viewModel, bankInfo = bankInfo)
-//                1 -> AboutScreen()
+                1 -> BankBranchesMapScreen(viewModel = viewModel)
 //                2 -> SettingsScreen()
             }
         }

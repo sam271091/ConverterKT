@@ -126,6 +126,9 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.2.5'
 
 
+    implementation 'com.google.maps.android:maps-compose:2.11.4'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+
 
     // Annotation processor
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
