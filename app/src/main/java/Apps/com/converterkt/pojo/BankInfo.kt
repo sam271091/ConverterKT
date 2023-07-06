@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import java.io.Serializable
 import java.util.*
 
 
@@ -48,7 +49,7 @@ data class BankInfo(
     var  sellNonCash : Double ?=null,
     @SerializedName("Sell_ForCards")
     @Expose
-    var  sellForCards :Double ?=null){
+    var  sellForCards :Double ?=null): Serializable {
 
 //    @Ignore var children: List<BankInfo> = emptyList()
 //

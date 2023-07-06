@@ -92,6 +92,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.loadData()
 
+        collectLatestLifecycleFlow(viewModel.allBanksData){
+            it.onEach {
+                viewModel.loadBankBranches(it)
+            }
+        }
+
 
         setDatePresentation()
 
@@ -243,6 +249,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         replaceFragment(graph_Fragment(firstValute,viewModel))
+
 
 
     }

@@ -1,12 +1,17 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package Apps.com.converterkt.fragments
 
+import Apps.com.converterkt.BankBranchActivity
 import Apps.com.converterkt.ConverterViewModel
 import Apps.com.converterkt.R
+import Apps.com.converterkt.composeScreens.BankBranchScreen
 import Apps.com.converterkt.composeViewModel
 import Apps.com.converterkt.pojo.BankInfo
 import Apps.com.converterkt.pojo.Valute
 import Apps.com.converterkt.pojo.ValuteInfo
 import Apps.com.converterkt.utils.collectLatestLifecycleFlow
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +20,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -72,14 +74,28 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
             setContent {
                 MaterialTheme {
 
+
                     Scaffold() { contentPadding ->
                         Box(
                             modifier = Modifier.padding(contentPadding)
                         ) {
                             // In Compose world
+
+
                             banksInfoByValute()
                         }
                     }
+
+//                    BottomSheetScaffold(sheetContent = {
+//                        Box(
+//                            modifier = Modifier
+//                                .fillMaxSize()
+//                                .height(300.dp)){
+//                            Text(text = "test")
+//                        }
+//                    }) {
+//
+//                    }
 
 
                 }
@@ -162,6 +178,9 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
                 shape = RoundedCornerShape(10.dp)
             )
             .padding(top = 10.dp, bottom = 10.dp)
+            .clickable {
+                onItemClick(bankInfo)
+            }
             ,
         verticalAlignment = Alignment.CenterVertically) {
 
@@ -192,6 +211,12 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
         }
 
 
+    }
+
+    fun onItemClick(bankInfo:BankInfo){
+//        BankBranchScreen(viewModel = viewModel, bankInfo = bankInfo)
+//        val intent = BankBranchActivity.newIntent()
+        startActivity(BankBranchActivity.newIntent(context as Context,bankInfo))
     }
 
 

@@ -7,11 +7,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import Apps.com.converterkt.api.ApiFactory
 import Apps.com.converterkt.api.BanksAPIFactory
+import Apps.com.converterkt.api.GoogleMapsApiFactory
 import Apps.com.converterkt.database.AppDatabase
-import Apps.com.converterkt.pojo.BankInfo
-import Apps.com.converterkt.pojo.FavoriteValute
-import Apps.com.converterkt.pojo.Valute
-import Apps.com.converterkt.pojo.ValuteInfo
+import Apps.com.converterkt.pojo.*
 import Apps.com.converterkt.utils.getAZN
 import Apps.com.converterkt.utils.getCurrentTime
 import Apps.com.converterkt.utils.getValutePresentation
@@ -19,6 +17,7 @@ import androidx.lifecycle.viewModelScope
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -41,6 +40,8 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val allBanksData = db.converterDao().getAllBanksData()
 //    val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
     val banksDataByValute :(filter:String) -> Flow<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
+
+    val bankBranchByBank :(filter:String) -> Flow<List<BankBranch>> =  {db.converterDao().getBranchesByBank(it)}
 
     val favoriteValutes = db.converterDao().getFavouriteValutesForFilter()
 
@@ -72,6 +73,35 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
                 Log.d("ERROR_LOADING_BI",it.localizedMessage)
             })
 
+    }
+
+
+    fun loadBankBranches(bankInfo:BankInfo){
+        val disposable = GoogleMapsApiFactory.apiService.getBankLocation(bankCode = bankInfo.bank)
+            .subscribeOn(Schedulers.io())
+            .delaySubscription(1,TimeUnit.SECONDS)
+            .retry()
+            .subscribe({
+
+
+                var bankLocationModel = it
+                var results = it.results
+
+                if (results.size != 0){
+                    db.converterDao().clearBranch(bankInfo.bank)
+                }
+
+                results.onEach {
+
+                var bankBranch = BankBranch(bankCode = bankInfo.bank, branchName = it.name, vicinity = it.vicinity,
+                    lat = it.geometry.location.lat.toString(), lng = it.geometry.location.lng.toString())
+                db.converterDao().insertbankBranch(bankBranch)
+                }
+
+
+            },{
+                Log.d("ERROR_LOADING_BI",it.localizedMessage)
+            })
     }
 
 

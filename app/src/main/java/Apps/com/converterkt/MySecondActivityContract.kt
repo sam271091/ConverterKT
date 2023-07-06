@@ -7,7 +7,13 @@ import Apps.com.converterkt.pojo.ValuteInfo
 
 class MySecondActivityContract : ActivityResultContract<Intent, ValuteInfo?>() {
 
-    override fun createIntent(context: Context, input: Intent?): Intent {
+//    override fun createIntent(context: Context, input: Intent?): Intent {
+//        return Intent(context, ValuteListActivity::class.java)
+//            .putExtra("my_input_key", input)
+//            .putExtra("chosenDate",input?.getSerializableExtra("chosenDate"))
+//    }
+
+    override fun createIntent(context: Context, input: Intent): Intent {
         return Intent(context, ValuteListActivity::class.java)
             .putExtra("my_input_key", input)
             .putExtra("chosenDate",input?.getSerializableExtra("chosenDate"))
@@ -17,10 +23,10 @@ class MySecondActivityContract : ActivityResultContract<Intent, ValuteInfo?>() {
         return intent?.getSerializableExtra("valuteInfo") as ValuteInfo?
     }
 
-    override fun getSynchronousResult(
+     fun getSynchronousResult(
         context: Context,
         input: Intent?
     ): SynchronousResult<ValuteInfo?>? {
-        return super.getSynchronousResult(context, input)
+        return super.getSynchronousResult(context, input as Intent)
     }
 }
