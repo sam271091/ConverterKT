@@ -92,11 +92,13 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.loadData()
 
-        collectLatestLifecycleFlow(viewModel.allBanksData){
-            it.onEach {
-                viewModel.loadBankBranches(it)
-            }
-        }
+//        collectLatestLifecycleFlow(viewModel.allBanksData){
+//            it.onEach {
+//                viewModel.loadBankBranchesGooglePlaces(it)
+//            }
+//        }
+
+        viewModel.loadBankBranches()
 
 
         setDatePresentation()

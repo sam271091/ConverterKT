@@ -106,6 +106,9 @@ fun getAllBanksData() : Flow<List<BankInfo>>
     @Query("DELETE FROM bankbranch WHERE bankCode == :bank")
     fun clearBranch(bank : String?)
 
+    @Query("DELETE FROM bankbranch")
+    fun clearBranches()
+
     @Query("SELECT * FROM bankbranch WHERE bankCode == :bank")
     fun getBranchesByBank(bank : String?) : Flow<List<BankBranch>>
 

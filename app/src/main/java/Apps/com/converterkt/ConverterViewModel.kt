@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import Apps.com.converterkt.api.ApiFactory
+import Apps.com.converterkt.api.BankBranchesAPIFactory
 import Apps.com.converterkt.api.BanksAPIFactory
 import Apps.com.converterkt.api.GoogleMapsApiFactory
 import Apps.com.converterkt.database.AppDatabase
@@ -76,7 +77,7 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
 
-    fun loadBankBranches(bankInfo:BankInfo){
+    fun loadBankBranchesGooglePlaces(bankInfo:BankInfo){
         val disposable = GoogleMapsApiFactory.apiService.getBankLocation(bankCode = bankInfo.bank)
             .subscribeOn(Schedulers.io())
             .delaySubscription(1,TimeUnit.SECONDS)
@@ -96,6 +97,35 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
                 var bankBranch = BankBranch(bankCode = bankInfo.bank, branchName = it.name, vicinity = it.vicinity,
                     lat = it.geometry.location.lat.toString(), lng = it.geometry.location.lng.toString())
                 db.converterDao().insertbankBranch(bankBranch)
+                }
+
+
+            },{
+                Log.d("ERROR_LOADING_BI",it.localizedMessage)
+            })
+    }
+
+
+    fun loadBankBranches(){
+        val disposable = BankBranchesAPIFactory.apiService.getBankLocation()
+            .subscribeOn(Schedulers.io())
+            .delaySubscription(1,TimeUnit.SECONDS)
+            .retry()
+            .subscribe({
+
+
+//                var bankLocationModel = it
+                var results = it
+
+                if (results.size != 0){
+                    db.converterDao().clearBranches()
+                }
+
+                results.onEach {
+
+                    var bankBranch = BankBranch(bankCode = it.bankCode, branchName = it.branchName, vicinity = it.vicinity,
+                        lat = it.lat.toString(), lng = it.lng.toString())
+                    db.converterDao().insertbankBranch(bankBranch)
                 }
 
 
