@@ -61,7 +61,7 @@ class current_valute_banks_data(val currency: Valute, var viewModel : ConverterV
 //
 //        })
 
-        collectLatestLifecycleFlow(viewModel.banksDataByValute(currency.code)){
+        collectLatestLifecycleFlow(viewModel.banksDataByValute(currency.code,false,false)){
             banksDataDetails = it.filter { it.buyCash != 0.0000 && it.sellCash != 0.0000 }
 
             createTableData(banksDataDetails,view)

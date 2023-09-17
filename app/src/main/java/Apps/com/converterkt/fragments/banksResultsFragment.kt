@@ -20,6 +20,7 @@ import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,6 +30,8 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -133,6 +136,9 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
     }
     @Composable
     fun bankInfoByValuteListingCap(){
+
+
+
         Row(modifier = Modifier
             .fillMaxWidth()
             .background(color = colorResource(id = R.color.labelTextColor))
@@ -146,15 +152,47 @@ class banksResultsFragment(var currValuteInfo: ValuteInfo?, var converterviewMod
             }
             Column(modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = stringResource(id = R.string.buycash_col_label),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold)
+//                Text(text = stringResource(id = R.string.buycash_col_label),
+//                    fontSize = 16.sp,
+//                    fontWeight = FontWeight.SemiBold)
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center) {
+                    ClickableText(text = AnnotatedString(stringResource(id = R.string.buycash_col_label)), onClick = {
+                        viewModel.buyCash_enabled = !viewModel.buyCash_enabled
+                        viewModel.sellCash_enabled = true
+                        viewModel.getBanksDataByValuteSortBuyCash()
+                    }, style = TextStyle(fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold))
+
+                    var buyCashPic =  if (viewModel.buyCash_enabled) R.drawable.arrowdown else R.drawable.arrowup
+
+                    AsyncImage(model = buyCashPic, contentDescription = stringResource(R.string.buy_cash_sort),
+                        modifier = Modifier
+                            .size(20.dp))
+                }
+
             }
             Column(modifier = Modifier.weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = stringResource(id = R.string.sellcash_col_label),
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.SemiBold)
+//                Text(text = stringResource(id = R.string.sellcash_col_label),
+//                    fontSize = 16.sp,
+//                    fontWeight = FontWeight.SemiBold)
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center) {
+                    ClickableText(text = AnnotatedString(stringResource(id = R.string.sellcash_col_label)), onClick = {
+                        viewModel.sellCash_enabled = !viewModel.sellCash_enabled
+                        viewModel.buyCash_enabled = true
+                        viewModel.getBanksDataByValuteSortSellCash()
+                    }, style = TextStyle(fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold))
+
+                    var sellCashPic =  if (viewModel.sellCash_enabled) R.drawable.arrowdown else R.drawable.arrowup
+
+                    AsyncImage(model = sellCashPic, contentDescription = stringResource(R.string.sell_cash_sort),
+                        modifier = Modifier
+                            .size(20.dp))
+                }
+
             }
         }
     }

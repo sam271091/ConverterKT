@@ -29,4 +29,6 @@
     <string name="title_activity_bank_branch">BankBranchActivity</string>
     <string name="bank_branches_list">Bank branches</string>
     <string name="Map">Map</string>
+    <string name="buy_cash_sort">Buy cash sort</string>
+    <string name="sell_cash_sort">Sell cash sort</string>
 </resources>

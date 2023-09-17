@@ -75,9 +75,26 @@ interface ConverterDao {
 fun getAllBanksData() : Flow<List<BankInfo>>
 
 
-    @Query("SELECT bank,bankName,buyCash,sellCash,bankLogo FROM BankInfo Where currencyCode = :valuteCode")
-//    fun getBanksDataByValute(valuteCode:String) : LiveData<List<BankInfo>>
-    fun getBanksDataByValute(valuteCode:String) : Flow<List<BankInfo>>
+//    @Query("SELECT bank,bankName,buyCash,sellCash,bankLogo FROM BankInfo Where currencyCode = :valuteCode")
+//    fun getBanksDataByValute(valuteCode:String) : Flow<List<BankInfo>>
+
+    @Query("SELECT bank,bankName,buyCash,sellCash,bankLogo FROM BankInfo Where currencyCode = :valuteCode ORDER BY " +
+            "CASE WHEN :buyCash_enabled THEN buyCash END DESC, " +
+            "CASE WHEN Not :buyCash_enabled THEN buyCash END ASC, " +
+            "CASE WHEN :sellCash_enabled THEN sellCash END DESC, " +
+            "CASE WHEN Not :sellCash_enabled THEN sellCash END ASC")
+    fun getBanksDataByValute(valuteCode:String,buyCash_enabled:Boolean,sellCash_enabled:Boolean) : Flow<List<BankInfo>>
+
+
+    @Query("SELECT bank,bankName,buyCash,sellCash,bankLogo FROM BankInfo Where currencyCode = :valuteCode ORDER BY " +
+            "CASE WHEN :buyCash_enabled THEN buyCash END DESC, " +
+            "CASE WHEN Not :buyCash_enabled THEN buyCash END ASC")
+    fun getBanksDataByValuteSortBuyCash(valuteCode:String,buyCash_enabled:Boolean) : Flow<List<BankInfo>>
+
+    @Query("SELECT bank,bankName,buyCash,sellCash,bankLogo FROM BankInfo Where currencyCode = :valuteCode ORDER BY " +
+            "CASE WHEN :sellCash_enabled THEN sellCash END DESC, " +
+            "CASE WHEN Not :sellCash_enabled THEN sellCash END ASC")
+    fun getBanksDataByValuteSortSellCash(valuteCode:String,sellCash_enabled:Boolean) : Flow<List<BankInfo>>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
