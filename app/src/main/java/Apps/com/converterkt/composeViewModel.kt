@@ -5,6 +5,7 @@ import Apps.com.converterkt.pojo.BankInfo
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,6 +20,8 @@ class composeViewModel(var converterviewModel : ConverterViewModel) : ViewModel(
       var searchQuery by mutableStateOf("")
       var bankName    by mutableStateOf("")
       var bankBranches by mutableStateOf(listOf<BankBranch>())
+      var buyCash_enabled by  mutableStateOf(true)
+      var sellCash_enabled by  mutableStateOf(true)
 
 
 //    lateinit var converterviewModel : ConverterViewModel
@@ -29,7 +32,31 @@ class composeViewModel(var converterviewModel : ConverterViewModel) : ViewModel(
 
      fun getBanksDataByValute(){
         viewModelScope.launch {
-            converterviewModel.banksDataByValute(searchQuery.toString())
+            converterviewModel.banksDataByValute(searchQuery.toString(),buyCash_enabled,sellCash_enabled)
+                .collect{result ->
+//                    state.banksDataDetails = result
+                    banksDataDetails = result
+
+//                    state = state.copy()
+                }
+        }
+    }
+
+    fun getBanksDataByValuteSortBuyCash(){
+        viewModelScope.launch {
+            converterviewModel.banksDataByValuteSortBuyCash(searchQuery.toString(),buyCash_enabled)
+                .collect{result ->
+//                    state.banksDataDetails = result
+                    banksDataDetails = result
+
+//                    state = state.copy()
+                }
+        }
+    }
+
+    fun getBanksDataByValuteSortSellCash(){
+        viewModelScope.launch {
+            converterviewModel.banksDataByValuteSortSellCash(searchQuery.toString(),sellCash_enabled)
                 .collect{result ->
 //                    state.banksDataDetails = result
                     banksDataDetails = result

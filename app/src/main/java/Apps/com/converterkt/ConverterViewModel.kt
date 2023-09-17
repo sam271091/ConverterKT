@@ -40,7 +40,16 @@ class ConverterViewModel(application: Application) : AndroidViewModel(applicatio
     val allBanksInfo = db.converterDao().getAllBankInfos()
     val allBanksData = db.converterDao().getAllBanksData()
 //    val banksDataByValute :(filter:String) -> LiveData<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
-    val banksDataByValute :(filter:String) -> Flow<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
+//    val banksDataByValute :(filter:String) -> Flow<List<BankInfo>> =  {db.converterDao().getBanksDataByValute(it)}
+
+    val banksDataByValute :(String,Boolean,Boolean) -> Flow<List<BankInfo>> =  {filterText:String,buyCash_enabled:Boolean,sellCash_enabled:Boolean -> db.converterDao().getBanksDataByValute(filterText,
+        buyCash_enabled = buyCash_enabled,sellCash_enabled = sellCash_enabled)}
+
+    val banksDataByValuteSortBuyCash :(String,Boolean) -> Flow<List<BankInfo>> =  {filterText:String,buyCash_enabled:Boolean -> db.converterDao().getBanksDataByValuteSortBuyCash(filterText,
+        buyCash_enabled = buyCash_enabled)}
+
+    val banksDataByValuteSortSellCash :(String,Boolean) -> Flow<List<BankInfo>> =  {filterText:String,sellCash_enabled:Boolean -> db.converterDao().getBanksDataByValuteSortSellCash(filterText,
+        sellCash_enabled = sellCash_enabled)}
 
     val bankBranchByBank :(filter:String) -> Flow<List<BankBranch>> =  {db.converterDao().getBranchesByBank(it)}
 
