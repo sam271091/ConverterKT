@@ -7,7 +7,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 object BanksAPIFactory {
 
-    private const val BASE_URL = "http://45.141.100.225/"
+    private const val BASE_URL = "http://64.23.129.171/"
 
     private val retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
