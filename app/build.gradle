@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "demo.com.converterkt"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 43
-        versionName "1.2.3.0"
+        versionName "1.2.3.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
