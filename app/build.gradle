@@ -160,7 +160,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
 
-    implementation 'com.google.android.gms:play-services-ads:20.6.0'
+    implementation 'com.google.android.gms:play-services-ads:21.0.0'
 
     // NEW
     androidTestImplementation "android.arch.persistence.room:testing:$room_version"
