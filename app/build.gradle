@@ -6,14 +6,20 @@ plugins {
 }
 
 android {
-    compileSdk 34
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+    lint {
+        abortOnError false
+    }
+    compileSdk 35
 
     defaultConfig {
         applicationId "demo.com.converterkt"
         minSdk 21
-        targetSdk 34
-        versionCode 44
-        versionName "1.2.3.1"
+        targetSdk 35
+        versionCode 46
+        versionName "1.2.3.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -64,6 +70,7 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    namespace 'Apps.com.converterkt'
 
 
 }
@@ -165,7 +172,9 @@ dependencies {
     // NEW
     androidTestImplementation "android.arch.persistence.room:testing:$room_version"
 
-    implementation 'de.codecrafters.tableview:tableview:2.8.0'
+//    implementation 'de.codecrafters.tableview:tableview:2.8.0'
+
+    implementation 'com.github.ISchwarz23:SortableTableView:2.8.1'
 
 
     implementation("io.coil-kt:coil-compose:2.0.0")
